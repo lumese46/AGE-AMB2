@@ -18,12 +18,12 @@
         "Name_of_component": "energy_component",
         "Component_atributes": [
             {
-                "name": "current_health",
+                "Name": "current_health",
                 "description": "health of agent",
                 "defaulty_value": "Name"
             },
             {
-                "name": "max_health",
+                "Name": "max_health",
                 "description": "max heath of the agent",
                 "defaulty_value": "45"
             }
