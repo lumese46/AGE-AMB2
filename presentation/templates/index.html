@@ -1,4 +1,6 @@
-<link rel="stylesheet" type="text/css" href="../static/styles.css" >
+<link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles.css')}}" >
+
+<!-- new material -->
 <title>Components page</title>
 
 <body>
@@ -27,6 +29,7 @@
     </main>
 </body>
 
+<!-- Old Material -->
 <script>
     async function getRequest(url = '') {
     const response = await fetch(url, {
