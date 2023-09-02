@@ -19,8 +19,8 @@ class CreateComponents:
         for i in range(len(self.POD)):
             # fetch POD data from dict
             POD_name = self.POD[i]["name"] 
-            POD_DefaultValue = self.POD[i]["DefaultValue"]
-            POD_Comment = self.POD[i]["Comment"]
+            POD_DefaultValue = self.POD[i]["defaulty_value"]
+            POD_Comment = self.POD[i]["description"]
 
             # fomulate code
             if (POD_DefaultValue == "NONE"):
