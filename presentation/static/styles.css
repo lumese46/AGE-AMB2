@@ -1,3 +1,28 @@
-body{
-    text-align: center;
+:root{
+    --bgclr: "#E7DFD8";
+    --fclr: "#000000";
+    --highlight: "#5E17EB";
+    --btnclr: "#231F20"
+
+}
+
+*,**,*::after, *::before{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    scroll-behavior: smooth;
+    font-family: Monospace;
+}
+nav{
+    border: 2px solid black;
+    display: flex;
+    flex-direction: row;
+}
+
+
+nav button{
+    width: 20%;
+    margin: 0 5%;
+    border: none;
+    background-color: var(--bgclr);
 }

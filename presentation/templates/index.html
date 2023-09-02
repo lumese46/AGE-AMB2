@@ -1,6 +1,31 @@
-<link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles.css')}}" >
-<h1>Index Page</h1>
+<link rel="stylesheet" type="text/css" href="../static/styles.css" >
+<title>Components page</title>
 
+<body>
+    <nav>
+        <button>Components</button>
+        <button>Agents</button>
+        <button>Systems</button>
+        <button>Model</button>
+    </nav>
+    <main>
+        <form action="POST">
+            <label for="Name_of_component">Name of Component</label>
+            <input type="text" name="Name_of_component" id="Name_of_component">
+            <label for="Component_attributes_form">Component Attributes</label>
+            <form action="add_attributes" id="Component_Attributes">
+                <label for="att_name">Name</label>
+                <input type="text" name="att_name" id="att_name">
+                <label for="att_description">Description</label>
+                <input type="text" name="att_description" id="att_description">
+                <label for="att_default_value">Value</label>
+                <input type="text" name="att_default_value" id="att_default_value">
+                <input type="submit" value="Add Attributes">
+            </form>
+            <input type="submit" value="Add Component">
+        </form>
+    </main>
+</body>
 
 <script>
     async function getRequest(url = '') {
