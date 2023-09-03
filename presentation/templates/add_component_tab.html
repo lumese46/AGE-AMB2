@@ -1,0 +1,21 @@
+{%extends "base.html"%}
+{%block title%}Component{%endblock%}
+
+{%block main%}
+    <form action="component_tab" method="post">
+        <label for="Name_of_component">Name of Component</label>
+        <input type="text" name="Name_of_component" id="Name_of_component">
+        <label for="Component_attributes_form">Component Attributes</label>
+        <div id="attributes">
+            <label for="att_name">Name</label>
+            <input type="text" name="att_name" id="att_name">
+            <label for="att_description">Description</label>
+            <input type="text" name="att_description" id="att_description">
+            <label for="att_default_value">Value</label>
+            <input type="text" name="att_default_value" id="att_default_value">
+            <!-- <button type="submit" href>Add attribute</button> -->
+            <input type="submit" name="submit_results" value="Add Attribute">
+        </div>
+        <input type="submit" name="submit_results"value="Add Component">
+    </form>
+{%endblock%}
