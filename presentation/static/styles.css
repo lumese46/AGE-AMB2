@@ -1,28 +1,58 @@
 :root{
-    --bgclr: "#E7DFD8";
-    --fclr: "#000000";
-    --highlight: "#5E17EB";
-    --btnclr: "#231F20"
+    --bgclr: #ece6e0;
+    --fclr: #000000;
+    --highlight: #5E17EB;
+    --btnclr:  #7749d400;
 
 }
 
-*,**,*::after, *::before{
+*{
     margin: 0;
     padding: 0;
     box-sizing: border-box;
     scroll-behavior: smooth;
     font-family: Monospace;
+    text-transform: uppercase;
+}
+body{
+    background-color: var(--bgclr);
+    border: 2px solid red;
+    height: 100vh;
+    padding: 2rem;
+    display: grid;
 }
 nav{
-    border: 2px solid black;
     display: flex;
     flex-direction: row;
+    height: 10%;
+    width: 100%;
+    border: 2px solid green;
+
 }
 
 
 nav button{
     width: 20%;
     margin: 0 5%;
+    background-color: var(--btnclr);
     border: none;
-    background-color: var(--bgclr);
+}
+
+main{
+    border: 2px solid orange;
+    width:80%;
+    position: relative;
+    margin: 2rem auto;
+    padding-top: 2rems;
+    height: 70%;
+}
+.form_title{
+    border: 2px solid purple;
+}
+.form_attributes{
+    border: 2px solid rgb(66, 11, 194);
+}
+.submit_component{
+    border: 2px solid rgb(255, 12, 182);
+
 }
