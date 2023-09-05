@@ -15,7 +15,7 @@
         ]
     },
     {
-        "Name_of_component": "energy_component",
+        "Name_of_component": "health_component",
         "Component_atributes": [
             {
                 "name": "current_health",

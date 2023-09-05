@@ -19,13 +19,13 @@ class simpleAgents(createAgents):
 
         # component data
         for i in range(len(self.Component)):
-            Component_classname = self.Component[i]["classname"]
-            POD_names_array = self.Component[i]["POD_names_array"]
-            componentString = "        self.add_component(\n" + f"            {Component_classname}(\n" + "                self, model"
-            for l in range(len(POD_names_array)):
-                componentString = componentString + f", {POD_names_array[l]}"
+            Name_of_component = self.Component[i]["Name_of_component"]
+            Names_of_component_atributes = self.Component[i]["Names_of_component_atributes"]
+            componentString = "        self.add_component(\n" + f"            {Name_of_component}(\n" + "                self, model"
+            for l in range(len(Names_of_component_atributes)):
+                componentString = componentString + f", {Names_of_component_atributes[l]}"
                 
-                initString = initString + f", {POD_names_array[l]}"
+                initString = initString + f", {Names_of_component_atributes[l]}"
             add_componentStrings.append( componentString + "\n            )\n" + "        )\n")
         initString = initString + "):\n"
 
