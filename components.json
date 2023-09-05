@@ -30,17 +30,32 @@
         ]
     },
     {
-        "Name_of_component": "",
+        "Name_of_component": "eds",
         "Component_attributes": [
             {
-                "name": "",
-                "description": "",
-                "default_value": ""
+                "name": "ds",
+                "description": "f",
+                "default_value": "gg"
             },
             {
-                "name": "",
-                "description": "",
-                "default_value": ""
+                "name": "ds",
+                "description": "f",
+                "default_value": "gg"
+            }
+        ]
+    },
+    {
+        "Name_of_component": "eds",
+        "Component_attributes": [
+            {
+                "name": "ds",
+                "description": "f",
+                "default_value": "gg"
+            },
+            {
+                "name": "ds",
+                "description": "f",
+                "default_value": "gg"
             }
         ]
     },
@@ -71,141 +86,6 @@
                 "name": "",
                 "description": "",
                 "default_value": ""
-            }
-        ]
-    },
-    {
-        "Name_of_component": "",
-        "Component_attributes": [
-            {
-                "name": "",
-                "description": "",
-                "default_value": ""
-            },
-            {
-                "name": "",
-                "description": "",
-                "default_value": ""
-            }
-        ]
-    },
-    {
-        "Name_of_component": "",
-        "Component_attributes": [
-            {
-                "name": "",
-                "description": "",
-                "default_value": ""
-            },
-            {
-                "name": "",
-                "description": "",
-                "default_value": ""
-            }
-        ]
-    },
-    {
-        "Name_of_component": "",
-        "Component_attributes": [
-            {
-                "name": "",
-                "description": "",
-                "default_value": ""
-            },
-            {
-                "name": "",
-                "description": "",
-                "default_value": ""
-            }
-        ]
-    },
-    {
-        "Name_of_component": "",
-        "Component_attributes": [
-            {
-                "name": "",
-                "description": "",
-                "default_value": ""
-            },
-            {
-                "name": "",
-                "description": "",
-                "default_value": ""
-            }
-        ]
-    },
-    {
-        "Name_of_component": "",
-        "Component_attributes": [
-            {
-                "name": "",
-                "description": "",
-                "default_value": ""
-            },
-            {
-                "name": "",
-                "description": "",
-                "default_value": ""
-            }
-        ]
-    },
-    {
-        "Name_of_component": "hb",
-        "Component_attributes": [
-            {
-                "name": "n",
-                "description": "n",
-                "default_value": "nnm"
-            },
-            {
-                "name": "n",
-                "description": "n",
-                "default_value": "nnm"
-            }
-        ]
-    },
-    {
-        "Name_of_component": "hb",
-        "Component_attributes": [
-            {
-                "name": "n",
-                "description": "n",
-                "default_value": "nnm"
-            },
-            {
-                "name": "n",
-                "description": "n",
-                "default_value": "nnm"
-            }
-        ]
-    },
-    {
-        "Name_of_component": "hb",
-        "Component_attributes": [
-            {
-                "name": "hbjb",
-                "description": "bv ",
-                "default_value": "nnmbn"
-            },
-            {
-                "name": "hbjb",
-                "description": "bv ",
-                "default_value": "nnmbn"
-            }
-        ]
-    },
-    {
-        "Name_of_component": "hb",
-        "Component_attributes": [
-            {
-                "name": "hbjb",
-                "description": "bv ",
-                "default_value": "nnmbn"
-            },
-            {
-                "name": "hbjb",
-                "description": "bv ",
-                "default_value": "nnmbn"
             }
         ]
     }

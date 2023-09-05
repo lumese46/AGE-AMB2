@@ -4,9 +4,21 @@ app = Flask(__name__)
 components = []
 attributes = []
 
-@app.route("/",)
+@app.route("/", methods=["GET","POST"])
 def home():
-    return render_template("add_component_tab.html")
+    if(request.method=="POST"): 
+        match request.form['browse']:
+            case "Components":
+                return render_template("add_component_tab.html")
+            case "Agents":
+                return render_template("add_agent_tab.html")
+            case "Systems":
+                return render_template("add_system_tab.html")
+            case "Models":
+                return render_template("add_component_tab.html")
+    else:
+        return(render_template("base.html"))
+    
 
 @app.route("/component_tab", methods=["POST", "GET"])
 def add_components():
