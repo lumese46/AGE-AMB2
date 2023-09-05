@@ -1,0 +1,48 @@
+<link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles.css')}}" >
+
+<title>{%block title%}{%endblock%}</title>
+
+<body>
+    <nav>
+        <form action="/" method="post" class="nav">
+            <input type="submit" name="browse" value="Components">
+            <input type="submit" name="browse" value="Agents">
+            <input type="submit" name="browse" value="Systems">
+            <input type="submit" name="browse" value="Models">
+        </form>
+        <!-- <button acti>Components</button>
+        <button>Agents</button>
+        <button>Systems</button>
+        <button>Model</button> -->
+    </nav>
+    <main>
+        <section class="input_fields_section">
+            {%block input_fields%}
+            {%endblock%}
+        </section>
+        <section class="output_window ">
+            {%block output_window%}
+            {%endblock%}
+        </section>
+    </main>
+</body>
+
+<script>
+    async function getRequest(url = '') {
+    const response = await fetch(url, {
+        method: 'GET',
+        cache: 'no-cache'
+    })
+    return response.json()
+}
+document.addEventListener('DOMContentLoaded', function () {
+    let url = document.location
+    let route = "/flaskwebgui-keep-server-alive"
+    let interval_request = 3 * 1000 //sec
+    function keep_alive_server() {
+        getRequest(url + route)
+            .then(data => console.log(data))
+    }
+    setInterval(keep_alive_server, interval_request)()
+})
+</script>

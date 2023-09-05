@@ -1,0 +1,41 @@
+{%extends "base.html"%}
+{%block title%}Component{%endblock%}
+
+{%block input_fields%}
+    <form action="component_tab" method="post">
+        <section class="form_title">
+            <label for="Name_of_component">Name of Component</label>
+            <input type="text" name="Name_of_component" id="Name_of_component">
+        </section>
+        <section class="form_attributes">
+            <label for="Component_attributes_form" id="attributes_title">Component Attributes</label>
+                <div id="attribute">
+                    <label for="att_name">Name</label>
+                    <input type="text" name="att_name" id="att_name">
+                </div>
+                <div id="attribute">
+                    <label for="att_description">Description</label>
+                    <input type="text" name="att_description" id="att_description">
+                </div>
+                <div id="attribute">
+                    <label for="att_default_value">Default Value</label>
+                    <input type="text" name="att_default_value" id="att_default_value">
+                </div>
+                <!-- <button type="submit" href>Add attribute</button> -->
+                <div class="add_attribute">
+                    <input type="submit"  name="submit_results" id ="add_attribute_button" value="+">
+                </div>
+        </section>
+        <section class="submit_component">
+            <input type="submit" name="submit_results" id="submit_button" value="Add Component">
+        </section>
+    </form>
+{%endblock%}
+{%block output_window%}
+    <h2 class="title">My Components</h2>
+    <div class="components">
+        {%for i in range(3)%}
+            <p>Component {{i}}</p>
+        {%endfor%}
+    </div>
+{%endblock%}
