@@ -26,7 +26,6 @@ def add_components():
                      "Component_attributes":[]
                      }
         component_atts = []
-
         #get input from user
         name_of_component = request.form["Name_of_component"]
         component["Name_of_component"]=name_of_component
@@ -111,17 +110,14 @@ def add_agent():
         match(request.form["add_to_agent"]):
             case("Add Components"):
                 add_component_to_agent(agent,"Energy")
+            case("Add agent"):
+                add_agent(agent)
+
         
         print(agent)
     return (render_template("add_agent_tab.html"))
 
-def add_component_to_agent(agent, component_name):
-    with open('../data/components.json') as f:
-        components = f
-    for i in components:
-        if i["Name_of_component"]==component_name:
-            for agent in 
-    
+
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0', debug=True)
