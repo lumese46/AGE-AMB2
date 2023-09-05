@@ -110,7 +110,7 @@ def add_agent():
 
         match(request.form["add_to_agent"]):
             case("Add Components"):
-                add_component_to_agent(agent_name,class_component)
+                add_component_to_agent(agent,"Energy")
         
         print(agent)
     return (render_template("add_agent_tab.html"))
