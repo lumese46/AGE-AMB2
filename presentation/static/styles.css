@@ -88,9 +88,7 @@ form input[type="text"]{
     margin-bottom: 1rem;
    
 }
-.form_attributes{
-    /* border: 2px solid rgb(66, 11, 194); */
-}
+
 
 #attribute{
     display: grid;
