@@ -1,1 +1,32 @@
 {%extends "base.html"%}
+{%block title%}Agents{%endblock%}
+{%block input_fields%}
+<form action="/agents" method="post">
+    <label for="name">Name</label>
+    <input type="text" name="agent_name">
+    <label for="type">Type</label>
+    <input type="text" name="agent_type">
+    <label for="class_component">class component</label>
+    <input type="text" name="agent_class_name">
+    <input type="submit" name="add_to_agent" value="Add Components">
+
+    <input type="submit" name="add_to_agent" value="Add Agent">
+</form>
+{%endblock%}
+{%block input_fields%}
+    <form action="/add_agent" method="post">
+        <label for="name">Name</label>
+        <input type="text" name="Agent_name">
+        <label for="type">Type</label>
+        <div class="dropdown">
+            <div class="dropdown_content">
+                <a href="">Complex</a>
+            </div>
+
+        </div>
+        <input type="submit" name="component_type">
+
+        
+    </form>
+<p>Hello from agents</p>
+{%endblock%}
