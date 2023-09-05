@@ -3,7 +3,7 @@ import json
 app = Flask(__name__)
 components = []
 attributes = []
-
+agent ={}
 @app.route("/", methods=["GET","POST"])
 def home():
     if(request.method=="POST"): 
@@ -94,9 +94,34 @@ def create_json(contents):
      with open("components.json", "w") as outfile:
         outfile.write(jsonObj)
 
-@app.route("/agent_tab", methods=["POST", "GET"])
+@app.route("/agents", methods=["POST", "GET"])
 def add_agent():
-    return ""
+    agent = {
+        "Name_of_agent": "",
+        "Class_component_name":"",
+        "Components":[],
+        "Type": "",
+        }
+    if(request.method=="POST"):
+        agent["Name_of_agent"] = request.form["agent_name"]
+        agent["Type"] = request.form["agent_type"]
+        agent["Components"].append("Energy")
+        agent["Class_component_name"] = request.form["agent_class_name"]
+
+        match(request.form["add_to_agent"]):
+            case("Add Components"):
+                add_component_to_agent(agent_name,class_component)
+        
+        print(agent)
+    return (render_template("add_agent_tab.html"))
+
+def add_component_to_agent(agent, component_name):
+    with open('../data/components.json') as f:
+        components = f
+    for i in components:
+        if i["Name_of_component"]==component_name:
+            for agent in 
+    
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0', debug=True)

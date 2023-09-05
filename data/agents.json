@@ -1,7 +1,15 @@
 [
     {
     "Name_of_agent":"",
-    "components":["Name_of_component"]
+    "components":["Name_of_component"],
+    "type": "",
+    "Class_component_name":""
+    },
+    {
+        "Name_of_agent":"",
+        "components":["Name_of_component"],
+        "type": "",
+        "Class_component_name":""
     }
 
 ]
