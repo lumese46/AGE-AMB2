@@ -1,0 +1,92 @@
+[
+    {
+        "Name_of_component": "",
+        "Component_attributes": [
+            {
+                "name": "",
+                "description": "",
+                "default_value": ""
+            },
+            {
+                "name": "",
+                "description": "",
+                "default_value": ""
+            }
+        ]
+    },
+    {
+        "Name_of_component": "",
+        "Component_attributes": [
+            {
+                "name": "",
+                "description": "",
+                "default_value": ""
+            },
+            {
+                "name": "",
+                "description": "",
+                "default_value": ""
+            }
+        ]
+    },
+    {
+        "Name_of_component": "eds",
+        "Component_attributes": [
+            {
+                "name": "ds",
+                "description": "f",
+                "default_value": "gg"
+            },
+            {
+                "name": "ds",
+                "description": "f",
+                "default_value": "gg"
+            }
+        ]
+    },
+    {
+        "Name_of_component": "eds",
+        "Component_attributes": [
+            {
+                "name": "ds",
+                "description": "f",
+                "default_value": "gg"
+            },
+            {
+                "name": "ds",
+                "description": "f",
+                "default_value": "gg"
+            }
+        ]
+    },
+    {
+        "Name_of_component": "",
+        "Component_attributes": [
+            {
+                "name": "",
+                "description": "",
+                "default_value": ""
+            },
+            {
+                "name": "",
+                "description": "",
+                "default_value": ""
+            }
+        ]
+    },
+    {
+        "Name_of_component": "",
+        "Component_attributes": [
+            {
+                "name": "",
+                "description": "",
+                "default_value": ""
+            },
+            {
+                "name": "",
+                "description": "",
+                "default_value": ""
+            }
+        ]
+    }
+]
