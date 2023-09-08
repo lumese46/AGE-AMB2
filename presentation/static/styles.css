@@ -95,6 +95,9 @@ form input[type="text"]{
     grid-template-columns: 3fr 1fr;
     padding: 0.4rem .8rem;
 }
+.input_fields_section{
+    object-fit: cover;
+}
 
 input[type="submit"]{
     background:none;
@@ -113,6 +116,7 @@ input[type="submit"]{
     color: white;
     height: 90%;
     margin-left: 5%;
+    object-fit: cover;
 }
 
 .output_window .title{

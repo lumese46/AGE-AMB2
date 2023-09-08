@@ -33,7 +33,7 @@ component = {
 
 def add_component_to_agent(agent, component_name):
     agents=[]
-    with open (".,/data/agents.json") as agents_file:
+    with open ("../data/agents.json") as agents_file:
         agents = json.dumps(agents_file)
     print (agents)
     # with open('components.json') as f:

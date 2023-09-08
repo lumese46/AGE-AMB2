@@ -115,7 +115,7 @@ def add_agent():
                 AgentHelper.add_agent(agent)
 
         
-        print(agent)
+        print(request.form)
     return (render_template("add_agent_tab.html"))
 
 
