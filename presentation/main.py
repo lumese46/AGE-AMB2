@@ -1,5 +1,6 @@
 from flask import Flask, render_template, redirect, request, url_for
 import json
+import agentMethods as AgentHelper
 app = Flask(__name__)
 components = []
 attributes = []
@@ -44,7 +45,7 @@ def add_components():
         add_component(component, components) 
 
         #adding json file
-        create_json(components)       
+        AgentHelper.create_json(components, "components")       
         return render_template("add_component_tab.html")
 
 
@@ -88,9 +89,9 @@ def add_component(component, components):
      components.append(component)
 
 
-def create_json(contents):
+def create_json(contents,name):
      jsonObj = json.dumps(contents , indent=4)
-     with open("components.json", "w") as outfile:
+     with open(f"{name}.json", "w") as outfile:
         outfile.write(jsonObj)
 
 @app.route("/agents", methods=["POST", "GET"])
@@ -109,9 +110,9 @@ def add_agent():
 
         match(request.form["add_to_agent"]):
             case("Add Components"):
-                add_component_to_agent(agent,"Energy")
+                AgentHelper.add_component_to_agent(agent,"Energy")
             case("Add agent"):
-                add_agent(agent)
+                AgentHelper.add_agent(agent)
 
         
         print(agent)
