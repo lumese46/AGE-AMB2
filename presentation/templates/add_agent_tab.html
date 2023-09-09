@@ -1,29 +1,23 @@
 {%extends "base.html"%}
 {%block title%}Agents{%endblock%}
 {%block input_fields%}
-<link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='agent_styles.css')}}" >
+<!-- <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='agent_styles.css')}}" > -->
 
 <form action="/agents" method="post" class="agents_form">
-    <section class="agent_data">
-        <div class="agent_data_input">
-            <label for="name">Name</label>
-            <input type="text" name="agent_name">
-        </div>
-        <div class="agent_data_input">
-            <label for="type">Type</label>
-            <input type="text" name="agent_type">
-        </div>
-        <div class="agent_data_input">
-            <label for="class_component">class component</label>
-            <input type="text" name="agent_class_name">
-        </div>
+    <section class="form_title">
+        <label for="name">Name</label>
+        <input type="text" name="agent_name" id="agent_name">
+        <label for="type">Type</label>
+        <input type="text" name="agent_type" id="agent_type">
+        <label for="class_component">class component</label>
+        <input type="text" name="agent_class_name">
     </section>
-    <section class="agent_components">
+    <section class="form_attributes">
         <label for="components" class="components_title">Select components to be associated with this agent</label>
         <div class="checkbox_section">
             {%for i in range (70)%}
             <div id="checkbox_input">
-                <input type="checkbox" name="comp"+{{i}} id="" value="comp{{i}}">
+                <input type="checkbox" name="component_to_add" id="" value="comp{{i}}">
                 <label for="comp1">Component {{i}}</label>
             </div>
             {%endfor%}

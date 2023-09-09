@@ -18,7 +18,7 @@ def home():
             case "Models":
                 return render_template("add_component_tab.html")
     else:
-        return(render_template("base.html"))
+        return(render_template("add_component_tab.html"))
     
 
 @app.route("/component_tab", methods=["POST", "GET"])
@@ -94,6 +94,7 @@ def create_json(contents,name):
      with open(f"{name}.json", "w") as outfile:
         outfile.write(jsonObj)
 
+############################################################INDEX ROUTES#############################################################
 @app.route("/agents", methods=["POST", "GET"])
 def add_agent():
     agent = {
@@ -102,23 +103,7 @@ def add_agent():
         "Components":[],
         "Type": "",
         }
-    if(request.method=="POST"):
-        agent["Name_of_agent"] = request.form["agent_name"]
-        agent["Type"] = request.form["agent_type"]
-        agent["Components"].append("Energy")
-        agent["Class_component_name"] = request.form["agent_class_name"]
-
-        match(request.form["add_to_agent"]):
-            case("Add Components"):
-                AgentHelper.add_component_to_agent(agent,"Energy")
-            case("Add agent"):
-                AgentHelper.add_agent(agent)
-
-        
-        print(request.form)
     return (render_template("add_agent_tab.html"))
-
-
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0', debug=True)

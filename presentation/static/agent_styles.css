@@ -1,5 +1,6 @@
 
 .agent_data_input{
+    border: 2px solid green;
     display: grid;
     grid-template-columns: 3fr 1fr;
 }
@@ -8,6 +9,13 @@
    text-decoration-thickness: 2px;
    padding-top: 10rem;
 }
+
+.agent_data_input input[type="text"]{
+    border: 2px solid red;
+    width: 100%;
+    overflow: hidden;
+}
+
 .checkbox_section{
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -18,6 +26,7 @@
     overflow: auto;
     
 }
+
 ::-webkit-scrollbar {
     width: 2px;
 }
@@ -35,3 +44,16 @@
     grid-template-columns: 1fr 3fr;
     margin: .2rem;
 }
+
+/* @media screen and (min-width: 800px) {
+    .checkbox_section{
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        /* border: 2px solid blueviolet; */
+        /* width: 100%;
+        margin-top: 1rem;
+        max-height: 8rem;
+        overflow: auto;
+        
+    }    
+} */ 
