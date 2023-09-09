@@ -1,1 +1,24 @@
 {%extends "base.html"%}
+{%block title%}System{%endblock%}
+{%block input_fields%}
+<form action="/systems" method="post">
+    <section class="form_title">
+        <label for="sys_name">System name</label>
+        <input type="text" name="sys_name" id="sys_name">
+    </section>
+    <section class="form_attributes">
+        <textarea  name="editor" class="text_editor"> #add python code here</textarea>
+    </section>
+    <section class="submit">
+        <input type="submit" value="Save System">
+    </section>
+</form>
+{%endblock%}
+{%block output_window%}
+    <h2 class="title">My Systems</h2>
+    <div class="components">
+        {%for i in all_systems%}
+            <p>{{i}}</p>
+        {%endfor%}
+    </div>
+{%endblock%}

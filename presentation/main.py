@@ -98,5 +98,20 @@ def add_agent():
     return render_template("add_agent_tab.html",all_components=helperMethods.get_components_by_name("component"), all_agents=helperMethods.get_components_by_name("agent"), agent_type=comp_type)
 
 
+######################################## Systems Tab #######################################################################################################################################################
+@app.route("/systems", methods=["POST","GET"])
+def add_system():
+    system = {
+        "Name_of_system":"",
+        "code": ""
+
+    }
+    print("Systems hello")
+    if request.method=="POST":
+        system["Name_of_system"] = request.form["sys_name"]
+        system["code"]=request.form["editor"]
+        helperMethods.add_to_json(system, "system")
+    return render_template("add_system_tab.html",all_systems=helperMethods.get_components_by_name("system"))
+
 if __name__ == "__main__":
     app.run(host='0.0.0.0', debug=True)

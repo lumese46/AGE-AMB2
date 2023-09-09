@@ -196,3 +196,13 @@ input[type="submit"]{
 #submit_agent{
     align-self: center;
 }
+
+
+/* system tab styles */
+.text_editor{
+    width: 100%;
+    height: 100%;
+    background-color: #000000;
+    color: rgb(43, 255, 0);
+    align-items: start;
+}
