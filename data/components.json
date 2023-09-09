@@ -1,31 +1,131 @@
 [
     {
-        "Name_of_component": "energy_component",
-        "Component_atributes": [
+        "Name_of_component": "09873645",
+        "Component_attributes": [
             {
-                "name": "speed",
-                "description": "speed of car",
-                "default_value": "NONE"
+                "name": "76543e2",
+                "description": "876543",
+                "default_value": "876543"
             },
             {
-                "name": "dirrection",
-                "description": "direction of car",
-                "default_value": "NONE"
+                "name": "yutre",
+                "description": "8765ytr",
+                "default_value": "kujyht"
             }
         ]
     },
     {
-        "Name_of_component": "health_component",
-        "Component_atributes": [
+        "Name_of_component": "$%^",
+        "Component_attributes": [
             {
-                "name": "current_health",
-                "description": "health of agent",
-                "default_value": "NONE"
+                "name": "%^&",
+                "description": "%^&",
+                "default_value": "$%^&"
+            }
+        ]
+    },
+    {
+        "Name_of_component": "3",
+        "Component_attributes": [
+            {
+                "name": "4",
+                "description": "r",
+                "default_value": "6"
+            }
+        ]
+    },
+    {
+        "Name_of_component": "comp_name",
+        "Component_attributes": [
+            {
+                "name": "at_name",
+                "description": "f",
+                "default_value": "at_val"
+            }
+        ]
+    },
+    {
+        "Name_of_component": "tg",
+        "Component_attributes": [
+            {
+                "name": "tgrff",
+                "description": "fdv",
+                "default_value": "trh"
+            }
+        ]
+    },
+    {
+        "Name_of_component": "yt",
+        "Component_attributes": [
+            {
+                "name": "yum[",
+                "description": "7j",
+                "default_value": "c6p79"
+            }
+        ]
+    },
+    {
+        "Name_of_component": "&*^%#$%^&*(&^",
+        "Component_attributes": [
+            {
+                "name": "yum[",
+                "description": "7j",
+                "default_value": "c6p79"
             },
             {
-                "name": "max_health",
-                "description": "max heath of the agent",
-                "default_value": "45"
+                "name": "_)(*&^%$#@$%^&",
+                "description": "(*&^%$#",
+                "default_value": "()*&^%$#"
+            }
+        ]
+    },
+    {
+        "Name_of_component": "",
+        "Component_attributes": [
+            {
+                "name": "",
+                "description": "",
+                "default_value": ""
+            }
+        ]
+    },
+    {
+        "Name_of_component": "",
+        "Component_attributes": [
+            {
+                "name": "",
+                "description": "",
+                "default_value": ""
+            }
+        ]
+    },
+    {
+        "Name_of_component": "",
+        "Component_attributes": [
+            {
+                "name": "",
+                "description": "",
+                "default_value": ""
+            }
+        ]
+    },
+    {
+        "Name_of_component": "",
+        "Component_attributes": [
+            {
+                "name": "",
+                "description": "",
+                "default_value": ""
+            }
+        ]
+    },
+    {
+        "Name_of_component": "new",
+        "Component_attributes": [
+            {
+                "name": "one",
+                "description": "",
+                "default_value": ""
             }
         ]
     }

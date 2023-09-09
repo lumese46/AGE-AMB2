@@ -1,16 +1,23 @@
 from flask import Flask, render_template, redirect, request, url_for
 import json
-import agentMethods as AgentHelper
+import helperMethods
 app = Flask(__name__)
 components = []
+component ={"Name_of_component":"",
+            "Component_attributes":[]
+            }
 attributes = []
 agent ={}
+
+
+################################################ Home ################################################
+
 @app.route("/", methods=["GET","POST"])
 def home():
     if(request.method=="POST"): 
         match request.form['browse']:
             case "Components":
-                return render_template("add_component_tab.html")
+                return render_template("add_component_tab.html", savedComp={})
             case "Agents":
                 return render_template("add_agent_tab.html")
             case "Systems":
@@ -21,80 +28,45 @@ def home():
         return(render_template("add_component_tab.html"))
     
 
+################################################ Components ################################################
+
+
 @app.route("/component_tab", methods=["POST", "GET"])
 def add_components():
-        component ={"Name_of_component":"",
-                     "Component_attributes":[]
-                     }
-        component_atts = []
         #get input from user
-        name_of_component = request.form["Name_of_component"]
-        component["Name_of_component"]=name_of_component
-
-        #add later
-        # get_user_input(request.form)
-        att_desc = request.form["att_description"]
-        att_name =request.form["att_name"]
-        att_val = request.form["att_default_value"]
-
-        #adding attributes
-        add_attributes(component, att_name,  att_desc, att_val)
-        add_attributes(component, att_name,  att_desc, att_val)
-        print(component)
-        add_component(component, components)
-        add_component(component, components) 
-
-        #adding json file
-        AgentHelper.create_json(components, "components")       
-        return render_template("add_component_tab.html")
-
-
-
-    #     if (name_of_component!=""):
-    #         component["Name_of_component"] = name_of_component
-    #         component["Attributes"] = component_atts
-    #     if (request.form["submit_results"]=="Add Component"):
-    #         if(component["Name_of_component"]):
-    #             print (f'name_of_component {component["Name_of_component"]} \nWith attributes {component["Attributes"]} \nto be added in components {components}')
-    #             return redirect(url_for("home"))
-    #             print("Can't append a component of empty name")
-    #     elif (request.form["submit_results"]=="Add Attribute"):
-    #         attribute = {}
-    #         att_name =request.form["att_name"]
-    #         if(att_name!=""):
-    #             attribute["name"]=att_name
-    #             att_desc = request.form["att_description"]
-    #             attribute["description"]=att_desc
-    #             att_val = request.form["att_default_value"]
-    #             if(att_val==""):
-    #                 att_val = "NONE"
-    #             attribute["default_value"] = att_val
-    #             attributes.append(attribute)
-    #             component_atts.append(attribute)
-    #             print(f"{attribute}")
-    #         else:
-    #             print("Attribute name empty attribute not added to component")
-    # else:
+        component_name = request.form["Name_of_component"]
+        component["Name_of_component"]=request.form["Name_of_component"]
+        button_clicked = request.form["submit_results"]
+        match (button_clicked):
+            case "Add attribute":
+                attributes.append(helperMethods.add_attributes(
+                request.form["att_name"],
+                request.form["att_description"],
+                request.form["att_default_value"]
+                )
+                )
+            case "Add component":
+                #add last attribute
+                attributes.append(helperMethods.add_attributes(
+                request.form["att_name"],
+                request.form["att_description"],
+                request.form["att_default_value"]
+                )
+                )
+                all_atts = attributes
+                component["Component_attributes"]=all_atts #assign attributes to components
+                helperMethods.add_to_json(component, "components") #add component to json
+                attributes.clear()
+                component_name=""
+                
+        return render_template("add_component_tab.html", compName=component_name, all_components=helperMethods.get_components())
 
 
-# @app.route("/add_attributes", methods= ["POST", "GET"])
-def add_attributes(component, att_name,  att_desc, att_val):
-    attribute = {}
-    attribute["name"]=att_name
-    attribute["description"]=att_desc
-    attribute["default_value"]=att_val
-    component["Component_attributes"].append(attribute)
-
-def add_component(component, components):
-     components.append(component)
 
 
-def create_json(contents,name):
-     jsonObj = json.dumps(contents , indent=4)
-     with open(f"{name}.json", "w") as outfile:
-        outfile.write(jsonObj)
 
-############################################################INDEX ROUTES#############################################################
+############################################################AGENT ROUTES#############################################################
+
 @app.route("/agents", methods=["POST", "GET"])
 def add_agent():
     agent = {
@@ -103,7 +75,16 @@ def add_agent():
         "Components":[],
         "Type": "",
         }
+    agents = helperMethods.read_json("agents")
     return (render_template("add_agent_tab.html"))
+
+def read_json():
+    result = []
+    with open("./data/agents.json") as jfile:
+        result = json.load(jfile)
+
+    return result
+
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0', debug=True)

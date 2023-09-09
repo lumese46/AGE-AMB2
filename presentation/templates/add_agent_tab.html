@@ -17,7 +17,7 @@
         <div class="checkbox_section">
             {%for i in range (70)%}
             <div id="checkbox_input">
-                <input type="checkbox" name="component_to_add" id="" value="comp{{i}}">
+                <input type="checkbox" name="component_to_add" id={{i}} value="comp{{i}}">
                 <label for="comp1">Component {{i}}</label>
             </div>
             {%endfor%}
