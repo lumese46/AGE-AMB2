@@ -24,7 +24,7 @@ def home():
             case "Components":
                 return render_template("add_component_tab.html", savedComp={})
             case "Agents":
-                return render_template("add_agent_tab.html", all_components=helperMethods.get_components_by_name())
+                return render_template("add_agent_tab.html", all_components=helperMethods.get_components_by_name("component"))
             case "Systems":
                 return render_template("add_system_tab.html")
             case "Models":
@@ -60,11 +60,11 @@ def add_components():
                 )
                 all_atts = attributes
                 component["Component_attributes"]=all_atts #assign attributes to components
-                helperMethods.add_to_json(component, "components") #add component to json
+                helperMethods.add_to_json(component, "component") #add component to json
                 attributes.clear()
                 component_name=""
                 
-        return render_template("add_component_tab.html", compName=component_name, all_components=helperMethods.get_components_by_name())
+        return render_template("add_component_tab.html", compName=component_name, all_components=helperMethods.get_components_by_name("component"), all_agents = helperMethods.get_components_by_name("agent"))
 
 
 
@@ -79,10 +79,10 @@ def add_agent():
     match agent_action:
         case "Add Agent":
             agent["Name_of_agent"] = request.form["agent_name"]
-            agent["Type"] = request.form["agent_type"]
+            agent["Type"] = comp_type
             agent["Class_component_name"] = request.form["agent_class_componet_name"]
             agent["Components"] = helperMethods.get_all_components(request.form.getlist("component_to_add")) #get detailed components using their names 
-            helperMethods.add_to_json(agent,"agents")
+            helperMethods.add_to_json(agent,"agent")
             #clear screen
             comp_type = "simple"
 
@@ -94,8 +94,8 @@ def add_agent():
             print(agent_action)
 
 
-    agents = helperMethods.read_json("agents")
-    return render_template("add_agent_tab.html", all_components=helperMethods.get_components_by_name(), agent_type=comp_type)
+    agents = helperMethods.read_json("agent")
+    return render_template("add_agent_tab.html",all_components=helperMethods.get_components_by_name("component"), all_agents=helperMethods.get_components_by_name("agent"), agent_type=comp_type)
 
 
 if __name__ == "__main__":

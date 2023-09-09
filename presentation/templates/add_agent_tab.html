@@ -33,3 +33,11 @@
     <input type="submit" id="submit_agent" name="add_to_agent" value="Add Agent">
 </form>
 {%endblock%}
+{%block output_window%}
+    <h2 class="title">My Agents</h2>
+    <div class="components">
+        {%for i in all_agents%}
+            <p>{{i}}</p>
+        {%endfor%}
+    </div>
+{%endblock%}

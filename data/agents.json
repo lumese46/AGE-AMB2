@@ -58,5 +58,32 @@
         "Class_component_name": "",
         "Components": [],
         "Type": ""
+    },
+    {
+        "Name_of_agent": "cfgf",
+        "Class_component_name": "nbvbn",
+        "Components": [
+            {
+                "Name_of_component": "876",
+                "Component_attributes": [
+                    {
+                        "name": "7865",
+                        "description": "654",
+                        "default_value": "56"
+                    }
+                ]
+            },
+            {
+                "Name_of_component": "comp_name",
+                "Component_attributes": [
+                    {
+                        "name": "at_name",
+                        "description": "at_desc",
+                        "default_value": "at_val"
+                    }
+                ]
+            }
+        ],
+        "Type": "simple"
     }
 ]
