@@ -75,18 +75,27 @@ def add_components():
 @app.route("/agents", methods=["POST", "GET"])
 def add_agent():
     agent_action = request.form["add_to_agent"]
+    comp_type = "simple"
     match agent_action:
-        case "Add Components":
-            agent["Components"]=request.form.getlist("component_to_add")   #add components to agent
         case "Add Agent":
             agent["Name_of_agent"] = request.form["agent_name"]
             agent["Type"] = request.form["agent_type"]
             agent["Class_component_name"] = request.form["agent_class_componet_name"]
             agent["Components"] = helperMethods.get_all_components(request.form.getlist("component_to_add")) #get detailed components using their names 
             helperMethods.add_to_json(agent,"agents")
+            #clear screen
+            comp_type = "simple"
+
+        case "Simple":
+            comp_type = "simple"
+            print(agent_action)
+        case "Complex":
+            comp_type = "complex"
+            print(agent_action)
+
 
     agents = helperMethods.read_json("agents")
-    return render_template("add_agent_tab.html", all_components=helperMethods.get_components_by_name())
+    return render_template("add_agent_tab.html", all_components=helperMethods.get_components_by_name(), agent_type=comp_type)
 
 
 if __name__ == "__main__":

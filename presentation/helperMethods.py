@@ -38,7 +38,6 @@ def get_all_components(component_names: list):
     for comp in components_from_file:
         if comp["Name_of_component"] in component_names:
             results.append(comp)
-            print("founds")
         else:
             pass
     return results
