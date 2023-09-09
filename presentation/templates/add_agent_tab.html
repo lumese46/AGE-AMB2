@@ -9,16 +9,16 @@
         <input type="text" name="agent_name" id="agent_name">
         <label for="type">Type</label>
         <input type="text" name="agent_type" id="agent_type">
-        <label for="class_component">class component</label>
-        <input type="text" name="agent_class_name">
+        <label for="class_component">class component name</label>
+        <input type="text" name="agent_class_componet_name">
     </section>
     <section class="form_attributes">
         <label for="components" class="components_title">Select components to be associated with this agent</label>
         <div class="checkbox_section">
-            {%for i in range (70)%}
+            {%for i in all_components%}
             <div id="checkbox_input">
-                <input type="checkbox" name="component_to_add" id={{i}} value="comp{{i}}">
-                <label for="comp1">Component {{i}}</label>
+                <input type="checkbox" name="component_to_add" id={{i}} value="{{i}}">
+                <label for="comp1">{{i}}</label>
             </div>
             {%endfor%}
         </div>

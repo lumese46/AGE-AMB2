@@ -7,7 +7,12 @@ component ={"Name_of_component":"",
             "Component_attributes":[]
             }
 attributes = []
-agent ={}
+agent = {
+        "Name_of_agent": "",
+        "Class_component_name":"",
+        "Components":[],
+        "Type": "",
+        }
 
 
 ################################################ Home ################################################
@@ -19,7 +24,7 @@ def home():
             case "Components":
                 return render_template("add_component_tab.html", savedComp={})
             case "Agents":
-                return render_template("add_agent_tab.html")
+                return render_template("add_agent_tab.html", all_components=helperMethods.get_components_by_name())
             case "Systems":
                 return render_template("add_system_tab.html")
             case "Models":
@@ -59,7 +64,7 @@ def add_components():
                 attributes.clear()
                 component_name=""
                 
-        return render_template("add_component_tab.html", compName=component_name, all_components=helperMethods.get_components())
+        return render_template("add_component_tab.html", compName=component_name, all_components=helperMethods.get_components_by_name())
 
 
 
@@ -69,21 +74,19 @@ def add_components():
 
 @app.route("/agents", methods=["POST", "GET"])
 def add_agent():
-    agent = {
-        "Name_of_agent": "",
-        "Class_component_name":"",
-        "Components":[],
-        "Type": "",
-        }
+    agent_action = request.form["add_to_agent"]
+    match agent_action:
+        case "Add Components":
+            agent["Components"]=request.form.getlist("component_to_add")   #add components to agent
+        case "Add Agent":
+            agent["Name_of_agent"] = request.form["agent_name"]
+            agent["Type"] = request.form["agent_type"]
+            agent["Class_component_name"] = request.form["agent_class_componet_name"]
+            agent["Components"] = helperMethods.get_all_components(request.form.getlist("component_to_add")) #get detailed components using their names 
+            helperMethods.add_to_json(agent,"agents")
+
     agents = helperMethods.read_json("agents")
-    return (render_template("add_agent_tab.html"))
-
-def read_json():
-    result = []
-    with open("./data/agents.json") as jfile:
-        result = json.load(jfile)
-
-    return result
+    return render_template("add_agent_tab.html", all_components=helperMethods.get_components_by_name())
 
 
 if __name__ == "__main__":
