@@ -1,14 +1,14 @@
 {%extends "base.html"%}
 {%block title%}Component{%endblock%}
-
+{%block highlight_comp%}style="color:#5E17EB;"{%endblock%}
 {%block input_fields%}
     <form action="component_tab" method="post">
         <section class="form_title">
-            <label for="Name_of_component">Name of Component</label>
-            <input type="text" name="Name_of_component" id="Name_of_component">
+                <label for="Name_of_component">Name of Component</label>
+                <input type="text" name="Name_of_component" id="Name_of_component" value={{compName}}>
         </section>
         <section class="form_attributes">
-            <label for="Component_attributes_form" id="attributes_title">Component Attributes</label>
+            <label for="Component_attributes_form" id="inner_title">Component Attributes</label>
                 <div id="attribute">
                     <label for="att_name">Name</label>
                     <input type="text" name="att_name" id="att_name">
@@ -27,15 +27,15 @@
                 </div>
         </section>
         <section class="submit_component">
-            <input type="submit" name="submit_results" id="submit_button" value="Add Component">
+            <input type="submit" name="submit_results" id="submit_button" value="Add component">
         </section>
     </form>
 {%endblock%}
 {%block output_window%}
     <h2 class="title">My Components</h2>
     <div class="components">
-        {%for i in range(3)%}
-            <p>Component {{i}}</p>
+        {%for i in all_components%}
+            <p>{{i}}</p>
         {%endfor%}
     </div>
 {%endblock%}

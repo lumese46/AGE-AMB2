@@ -1,31 +1,251 @@
 [
     {
-        "Name_of_component": "energy_component",
-        "Component_atributes": [
+        "Name_of_component": "876",
+        "Component_attributes": [
             {
-                "name": "speed",
-                "description": "speed of car",
-                "default_value": "NONE"
-            },
-            {
-                "name": "dirrection",
-                "description": "direction of car",
-                "default_value": "NONE"
+                "name": "7865",
+                "description": "654",
+                "default_value": "56"
             }
         ]
     },
     {
-        "Name_of_component": "health_component",
-        "Component_atributes": [
+        "Name_of_component": "comp_name",
+        "Component_attributes": [
             {
-                "name": "current_health",
-                "description": "health of agent",
-                "default_value": "NONE"
+                "name": "at_name",
+                "description": "at_desc",
+                "default_value": "at_val"
+            }
+        ]
+    },
+    {
+        "Name_of_component": "comp_name",
+        "Component_attributes": [
+            {
+                "name": "at_name",
+                "description": "at_desc",
+                "default_value": "at_val"
+            }
+        ]
+    },
+    {
+        "Name_of_component": "dfv",
+        "Component_attributes": [
+            {
+                "name": "#$%",
+                "description": "f",
+                "default_value": "dfb"
+            }
+        ]
+    },
+    {
+        "Name_of_component": "comp_nredfewame",
+        "Component_attributes": [
+            {
+                "name": "at_name",
+                "description": "#$%",
+                "default_value": "56"
+            }
+        ]
+    },
+    {
+        "Name_of_component": "comp_nredfewame",
+        "Component_attributes": [
+            {
+                "name": "at_name",
+                "description": "#$%",
+                "default_value": "56"
+            }
+        ]
+    },
+    {
+        "Name_of_component": "",
+        "Component_attributes": [
+            {
+                "name": "",
+                "description": "",
+                "default_value": ""
             },
             {
-                "name": "max_health",
-                "description": "max heath of the agent",
-                "default_value": "45"
+                "name": "",
+                "description": "",
+                "default_value": ""
+            },
+            {
+                "name": "",
+                "description": "",
+                "default_value": ""
+            },
+            {
+                "name": "",
+                "description": "",
+                "default_value": ""
+            },
+            {
+                "name": "",
+                "description": "",
+                "default_value": ""
+            },
+            {
+                "name": "",
+                "description": "",
+                "default_value": ""
+            },
+            {
+                "name": "",
+                "description": "",
+                "default_value": ""
+            },
+            {
+                "name": "",
+                "description": "",
+                "default_value": ""
+            },
+            {
+                "name": "",
+                "description": "",
+                "default_value": ""
+            },
+            {
+                "name": "",
+                "description": "",
+                "default_value": ""
+            },
+            {
+                "name": "",
+                "description": "",
+                "default_value": ""
+            },
+            {
+                "name": "",
+                "description": "",
+                "default_value": ""
+            },
+            {
+                "name": "",
+                "description": "",
+                "default_value": ""
+            },
+            {
+                "name": "",
+                "description": "",
+                "default_value": ""
+            },
+            {
+                "name": "",
+                "description": "",
+                "default_value": ""
+            },
+            {
+                "name": "",
+                "description": "",
+                "default_value": ""
+            },
+            {
+                "name": "",
+                "description": "",
+                "default_value": ""
+            },
+            {
+                "name": "",
+                "description": "",
+                "default_value": ""
+            },
+            {
+                "name": "",
+                "description": "",
+                "default_value": ""
+            },
+            {
+                "name": "",
+                "description": "",
+                "default_value": ""
+            },
+            {
+                "name": "",
+                "description": "",
+                "default_value": ""
+            },
+            {
+                "name": "",
+                "description": "",
+                "default_value": ""
+            },
+            {
+                "name": "",
+                "description": "",
+                "default_value": ""
+            }
+        ]
+    },
+    {
+        "Name_of_component": "",
+        "Component_attributes": [
+            {
+                "name": "",
+                "description": "",
+                "default_value": ""
+            }
+        ]
+    },
+    {
+        "Name_of_component": "",
+        "Component_attributes": [
+            {
+                "name": "",
+                "description": "",
+                "default_value": ""
+            },
+            {
+                "name": "",
+                "description": "",
+                "default_value": ""
+            },
+            {
+                "name": "",
+                "description": "",
+                "default_value": ""
+            },
+            {
+                "name": "",
+                "description": "",
+                "default_value": ""
+            }
+        ]
+    },
+    {
+        "Name_of_component": "",
+        "Component_attributes": [
+            {
+                "name": "",
+                "description": "",
+                "default_value": ""
+            },
+            {
+                "name": "",
+                "description": "",
+                "default_value": ""
+            },
+            {
+                "name": "",
+                "description": "",
+                "default_value": ""
+            }
+        ]
+    },
+    {
+        "Name_of_component": "",
+        "Component_attributes": [
+            {
+                "name": "",
+                "description": "",
+                "default_value": ""
+            },
+            {
+                "name": "",
+                "description": "",
+                "default_value": ""
             }
         ]
     }
