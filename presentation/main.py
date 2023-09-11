@@ -22,13 +22,13 @@ def home():
     if(request.method=="POST"): 
         match request.form['browse']:
             case "Components":
-                return render_template("add_component_tab.html", savedComp={})
+                return render_template("add_component_tab.html", all_components=helperMethods.get_components_by_name("component"))
             case "Agents":
-                return render_template("add_agent_tab.html", all_components=helperMethods.get_components_by_name("component"))
+                return render_template("add_agent_tab.html", all_components=helperMethods.get_components_by_name("component"),all_agents = helperMethods.get_components_by_name("agent"))
             case "Systems":
-                return render_template("add_system_tab.html")
+                return render_template("add_system_tab.html",all_systems=helperMethods.get_components_by_name("system"),all_agents = helperMethods.get_components_by_name("agent"))
             case "Models":
-                return render_template("add_component_tab.html")
+                return render_template("add_model_tab.html", all_components=helperMethods.get_components_by_name("component"),all_agents = helperMethods.get_components_by_name("agent"), all_systems=helperMethods.get_components_by_name("system"))
     else:
         return(render_template("add_component_tab.html"))
     
@@ -106,7 +106,6 @@ def add_system():
         "code": ""
 
     }
-    print("Systems hello")
     if request.method=="POST":
         system["Name_of_system"] = request.form["sys_name"]
         system["code"]=request.form["editor"]

@@ -6,9 +6,9 @@
 <body>
     <nav>
         <form action="/" method="post" class="nav">
-            <input type="submit" name="browse" value="Components">
-            <input type="submit" name="browse" value="Agents">
-            <input type="submit" name="browse" value="Systems">
+            <input type="submit" name="browse" value="Components" {%block highlight_comp%}{%endblock%}>
+            <input type="submit" name="browse" value="Agents" {%block highlight_agent%}{%endblock%}>
+            <input type="submit" name="browse" value="Systems" {%block highlight_system%}{%endblock%}>
             <input type="submit" name="browse" value="Models">
         </form>
     </nav>

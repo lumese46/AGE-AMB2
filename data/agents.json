@@ -85,5 +85,94 @@
             }
         ],
         "Type": "simple"
+    },
+    {
+        "Name_of_agent": "test",
+        "Class_component_name": "bhv",
+        "Components": [
+            {
+                "Name_of_component": "876",
+                "Component_attributes": [
+                    {
+                        "name": "7865",
+                        "description": "654",
+                        "default_value": "56"
+                    }
+                ]
+            },
+            {
+                "Name_of_component": "dfv",
+                "Component_attributes": [
+                    {
+                        "name": "#$%",
+                        "description": "f",
+                        "default_value": "dfb"
+                    }
+                ]
+            }
+        ],
+        "Type": "simple"
+    },
+    {
+        "Name_of_agent": "",
+        "Class_component_name": "",
+        "Components": [],
+        "Type": "simple"
+    },
+    {
+        "Name_of_agent": "cfgf",
+        "Class_component_name": "",
+        "Components": [
+            {
+                "Name_of_component": "876",
+                "Component_attributes": [
+                    {
+                        "name": "7865",
+                        "description": "654",
+                        "default_value": "56"
+                    }
+                ]
+            }
+        ],
+        "Type": "simple"
+    },
+    {
+        "Name_of_agent": "complextest",
+        "Class_component_name": "complex class",
+        "Components": [
+            {
+                "Name_of_component": "comp_name",
+                "Component_attributes": [
+                    {
+                        "name": "at_name",
+                        "description": "at_desc",
+                        "default_value": "at_val"
+                    }
+                ]
+            },
+            {
+                "Name_of_component": "comp_name",
+                "Component_attributes": [
+                    {
+                        "name": "at_name",
+                        "description": "at_desc",
+                        "default_value": "at_val"
+                    }
+                ]
+            }
+        ],
+        "Type": "simple"
+    },
+    {
+        "Name_of_agent": "",
+        "Class_component_name": "",
+        "Components": [],
+        "Type": "simple"
+    },
+    {
+        "Name_of_agent": "",
+        "Class_component_name": "",
+        "Components": [],
+        "Type": "simple"
     }
 ]
