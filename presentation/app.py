@@ -1,6 +1,7 @@
 from flask import Flask, render_template, redirect, request, url_for
-import json
 import helperMethods
+
+
 app = Flask(__name__)
 components = []
 component ={"Name_of_component":"",
@@ -11,9 +12,10 @@ agent = {
         "Name_of_agent": "",
         "Class_component_name":"",
         "Components":[],
-        "Type": "",
+        "Type_of_agent": "",
         }
 
+comp_type = "SIMPLE"
 
 ################################################ Home ################################################
 
@@ -75,27 +77,31 @@ def add_components():
 @app.route("/agents", methods=["POST", "GET"])
 def add_agent():
     agent_action = request.form["add_to_agent"]
-    comp_type = "simple"
+    global comp_type
+    name=request.form["agent_name"]
     match agent_action:
         case "Add Agent":
-            agent["Name_of_agent"] = request.form["agent_name"]
-            agent["Type"] = comp_type
+            agent["Name_of_agent"] = name
+            agent["Type_of_agent"] = comp_type
             agent["Class_component_name"] = request.form["agent_class_componet_name"]
-            agent["Components"] = helperMethods.get_all_components(request.form.getlist("component_to_add")) #get detailed components using their names 
+            components_to_add_by_name = (request.form.getlist("component_to_add")) #get detailed components using their names 
+            components_summary = helperMethods.get_components_summary(components_to_add_by_name)    #get component summary list
+            agent["Components"].append(components_summary)
             helperMethods.add_to_json(agent,"agent")
+            agent["Components"].clear()
+            name=""
             #clear screen
-            comp_type = "simple"
-
         case "Simple":
-            comp_type = "simple"
+            comp_type = "SIMPLE"
             print(agent_action)
+
         case "Complex":
-            comp_type = "complex"
+            comp_type = "COMPLEX"
             print(agent_action)
 
 
     agents = helperMethods.read_json("agent")
-    return render_template("add_agent_tab.html",all_components=helperMethods.get_components_by_name("component"), all_agents=helperMethods.get_components_by_name("agent"), agent_type=comp_type)
+    return render_template("add_agent_tab.html", agent_name=name,all_components=helperMethods.get_components_by_name("component"), all_agents=helperMethods.get_components_by_name("agent"), agent_type=comp_type)
 
 
 ######################################## Systems Tab #######################################################################################################################################################
@@ -104,13 +110,29 @@ def add_system():
     system = {
         "Name_of_system":"",
         "code": ""
-
     }
+    dummyCode = ""
     if request.method=="POST":
-        system["Name_of_system"] = request.form["sys_name"]
-        system["code"]=request.form["editor"]
-        helperMethods.add_to_json(system, "system")
-    return render_template("add_system_tab.html",all_systems=helperMethods.get_components_by_name("system"))
+        name=request.form["sys_name"]
+        action=request.form["submit_code"]
+        match(action):
+            case "Create system":
+                system["Name_of_system"] = request.form["sys_name"]
+                print ("system created")
+                dummyCode = ("#dummy code will go here")
+            case "Save system":
+                #Write system to json
+                system["code"]=request.form["editor_code"]
+                
+                helperMethods.add_to_json(system, "system")
+                print("system saved")
+            case "Run":
+                print(dummyCode)
+    return render_template("add_system_tab.html",all_systems=helperMethods.get_components_by_name("system"), sys_name=name, sys_code =dummyCode)
+
+
+# def run_me():
+#         app.run(host='0.0.0.0', debug=True)
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0', debug=True)

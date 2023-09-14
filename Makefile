@@ -7,7 +7,7 @@ venv:install
 	python3 -m venv venv
 
 compile:
-	python3 main.py
+	python3 ./presentation/main.py
 	xdg-open 
 	
 

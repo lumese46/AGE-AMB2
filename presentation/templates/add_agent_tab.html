@@ -1,39 +1,45 @@
 {%extends "base.html"%}
-{%block title%}Agents{%endblock%}
+
+{%block title%}
+    Agents
+{%endblock%}
+
+{%block stylesheet%}
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles.css')}}" >
+{%endblock%}
+
 {%block highlight_agent%}style="color:#5E17EB;"{%endblock%}
 
 {%block input_fields%}
-
-<form action="/agents" method="post" class="agents_form">
-    <section class="form_title">
-        <label for="name">Name</label>
-        <input type="text" name="agent_name" id="agent_name">
-        <label for="type">Type</label>
-        <div class="dropdown">
-            <label class="dropbtn">{{agent_type}}</label>
-            <div class="dropdown-content">
-                <input type="submit" name="add_to_agent" id="agent_type" value="Simple">
-                <input type="submit" name="add_to_agent" id="agent_type" value="Complex">
+    <form action="/agents" method="post" class="agents_form">
+        <section class="form_title">
+            <label for="name">Name</label>
+            <input type="text" name="agent_name" id="agent_name" required value="{{agent_name}}">
+            <label for="type">Type*</label>
+            <div class="dropdown">
+                <label class="dropbtn">{{agent_type}}</label>
+                <div class="dropdown-content">
+                    <input type="submit" name="add_to_agent" id="agent_type" value="Simple">
+                    <input type="submit" name="add_to_agent" id="agent_type" value="Complex">
+                </div>
             </div>
-          </div>
-        <label for="class_component" class={{agent_type}}>class component name</label>
-        <input type="text" class="{{agent_type}}" name="agent_class_componet_name">
-    </section>
-    <section class="form_attributes">
-        <label for="components" id="inner_title" >Select components to be associated with this agent</label>
-        <div class="checkbox_section">
-            {%for i in all_components%}
-            <div id="checkbox_input">
-                <input type="checkbox" name="component_to_add" id={{i}} value="{{i}}">
-                <label for="comp1">{{i}}</label>
+            <label for="class_component" class={{agent_type}}>class component name</label>
+            <input type="text" class="{{agent_type}}" name="agent_class_componet_name">
+        </section>
+        <section class="form_attributes">
+            <label for="components" id="inner_title" >Select components to be associated with this agent</label>
+            <div class="checkbox_section">
+                {%for i in all_components%}
+                <div id="checkbox_input">
+                    <input type="checkbox" name="component_to_add" id={{i}} value="{{i}}">
+                    <label for="comp1">{{i}}</label>
+                </div>
+                {%endfor%}
             </div>
-            {%endfor%}
-        </div>
-    </section>
-    <!-- <input type="submit" name="add_to_agent" value="Add Components"> -->
-
-    <input type="submit" id="submit_agent" name="add_to_agent" value="Add Agent">
-</form>
+        </section>
+        <!-- <input type="submit" name="add_to_agent" value="Add Components"> -->
+        <input type="submit" id="submit_agent" name="add_to_agent" value="Add Agent">
+    </form>
 {%endblock%}
 {%block output_window%}
     <h2 class="title">My Agents</h2>

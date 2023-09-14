@@ -1,17 +1,27 @@
 {%extends "base.html"%}
-{%block title%}Component{%endblock%}
-{%block highlight_comp%}style="color:#5E17EB;"{%endblock%}
+
+{%block title%}
+    Component
+{%endblock%}
+
+{%block stylesheet%}
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles.css')}}" >
+{%endblock%}
+
+{%block highlight_comp%}
+    style="color:#5E17EB;"
+{%endblock%}
 {%block input_fields%}
     <form action="component_tab" method="post">
         <section class="form_title">
                 <label for="Name_of_component">Name of Component</label>
-                <input type="text" name="Name_of_component" id="Name_of_component" value={{compName}}>
+                <input required type="text" name="Name_of_component" id="Name_of_component" value={{compName}} >
         </section>
         <section class="form_attributes">
             <label for="Component_attributes_form" id="inner_title">Component Attributes</label>
                 <div id="attribute">
                     <label for="att_name">Name</label>
-                    <input type="text" name="att_name" id="att_name">
+                    <input type="text" name="att_name" id="att_name" required>
                 </div>
                 <div id="attribute">
                     <label for="att_description">Description</label>

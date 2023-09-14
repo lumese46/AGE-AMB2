@@ -1,178 +1,171 @@
 [
     {
-        "Name_of_agent": "test",
-        "Class_component_name": "del",
+        "Name_of_agent": "Sheep",
+        "Class_component_name": "energy_component",
+        "Type_of_agent": "COMPLEX",
         "Components": [
             {
-                "Name_of_component": "3",
-                "Component_attributes": [
-                    {
-                        "name": "4",
-                        "description": "r",
-                        "default_value": "6"
-                    }
+                "Name_of_component": "EnergyComponent",
+                "Names_of_component_atributes": [
+                    "speed",
+                    "dirrection"
                 ]
             },
             {
-                "Name_of_component": "comp_name",
-                "Component_attributes": [
-                    {
-                        "name": "at_name",
-                        "description": "f",
-                        "default_value": "at_val"
-                    }
-                ]
-            },
-            {
-                "Name_of_component": "comp_name",
-                "Component_attributes": [
-                    {
-                        "name": "at_name",
-                        "description": "at_desc",
-                        "default_value": "at_val"
-                    },
-                    {
-                        "name": "",
-                        "description": "",
-                        "default_value": ""
-                    }
+                "Name_of_component": "health_component",
+                "Names_of_component_atributes": [
+                    "current_health",
+                    "max_health"
                 ]
             }
-        ],
-        "Type": "complex"
+        ]
     },
     {
-        "Name_of_agent": "",
-        "Class_component_name": "",
-        "Components": [],
-        "Type": ""
-    },
-    {
-        "Name_of_agent": "",
-        "Class_component_name": "",
-        "Components": [],
-        "Type": ""
-    },
-    {
-        "Name_of_agent": "",
-        "Class_component_name": "",
-        "Components": [],
-        "Type": ""
-    },
-    {
-        "Name_of_agent": "cfgf",
-        "Class_component_name": "nbvbn",
+        "Name_of_agent": "Sheep",
+        "Class_component_name": "energy_component",
+        "Type_of_agent": "SIMPLE",
         "Components": [
             {
-                "Name_of_component": "876",
-                "Component_attributes": [
-                    {
-                        "name": "7865",
-                        "description": "654",
-                        "default_value": "56"
-                    }
+                "Name_of_component": "EnergyComponent",
+                "Names_of_component_atributes": [
+                    "speed",
+                    "dirrection"
                 ]
             },
             {
-                "Name_of_component": "comp_name",
-                "Component_attributes": [
-                    {
-                        "name": "at_name",
-                        "description": "at_desc",
-                        "default_value": "at_val"
-                    }
+                "Name_of_component": "health_component",
+                "Names_of_component_atributes": [
+                    "current_health",
+                    "max_health"
                 ]
             }
-        ],
-        "Type": "simple"
+        ]
     },
     {
-        "Name_of_agent": "test",
+        "Name_of_agent": "TEST2",
+        "Class_component_name": "AGENT CLASS",
+        "Components": [
+            [
+                {
+                    "Name_of_component": "test",
+                    "Names_of_component_atributes": [
+                        "at_name",
+                        "#$%"
+                    ]
+                }
+            ]
+        ],
+        "Type_of_agent": "SIMPLE"
+    },
+    {
+        "Name_of_agent": "TEST2",
+        "Class_component_name": "AGENT CLASS",
+        "Components": [
+            [
+                {
+                    "Name_of_component": "test",
+                    "Names_of_component_atributes": [
+                        "at_name",
+                        "#$%"
+                    ]
+                }
+            ]
+        ],
+        "Type_of_agent": "SIMPLE"
+    },
+    {
+        "Name_of_agent": "TEST4",
         "Class_component_name": "bhv",
         "Components": [
-            {
-                "Name_of_component": "876",
-                "Component_attributes": [
-                    {
-                        "name": "7865",
-                        "description": "654",
-                        "default_value": "56"
-                    }
-                ]
-            },
-            {
-                "Name_of_component": "dfv",
-                "Component_attributes": [
-                    {
-                        "name": "#$%",
-                        "description": "f",
-                        "default_value": "dfb"
-                    }
-                ]
-            }
+            [
+                {
+                    "Name_of_component": "test",
+                    "Names_of_component_atributes": [
+                        "at_name",
+                        "#$%"
+                    ]
+                }
+            ]
         ],
-        "Type": "simple"
+        "Type_of_agent": "COMPLEX"
     },
     {
-        "Name_of_agent": "",
+        "Name_of_agent": "TEST5",
         "Class_component_name": "",
-        "Components": [],
-        "Type": "simple"
+        "Components": [
+            [
+                {
+                    "Name_of_component": "876",
+                    "Names_of_component_atributes": [
+                        "7865"
+                    ]
+                }
+            ]
+        ],
+        "Type_of_agent": "SIMPLE"
     },
     {
         "Name_of_agent": "cfgf",
+        "Class_component_name": "bhv",
+        "Components": [
+            [
+                {
+                    "Name_of_component": "test",
+                    "Names_of_component_atributes": [
+                        "at_name",
+                        "#$%"
+                    ]
+                }
+            ]
+        ],
+        "Type_of_agent": "COMPLEX"
+    },
+    {
+        "Name_of_agent": "cfgf",
+        "Class_component_name": "bhv",
+        "Components": [
+            [
+                {
+                    "Name_of_component": "test",
+                    "Names_of_component_atributes": [
+                        "at_name",
+                        "#$%"
+                    ]
+                }
+            ]
+        ],
+        "Type_of_agent": "SIMPLE"
+    },
+    {
+        "Name_of_agent": "cfgf",
+        "Class_component_name": "bhv",
+        "Components": [
+            [
+                {
+                    "Name_of_component": "test",
+                    "Names_of_component_atributes": [
+                        "at_name",
+                        "#$%"
+                    ]
+                }
+            ]
+        ],
+        "Type_of_agent": "SIMPLE"
+    },
+    {
+        "Name_of_agent": "bnmbnmb",
         "Class_component_name": "",
         "Components": [
-            {
-                "Name_of_component": "876",
-                "Component_attributes": [
-                    {
-                        "name": "7865",
-                        "description": "654",
-                        "default_value": "56"
-                    }
-                ]
-            }
+            []
         ],
-        "Type": "simple"
+        "Type_of_agent": "SIMPLE"
     },
     {
-        "Name_of_agent": "complextest",
-        "Class_component_name": "complex class",
+        "Name_of_agent": "kljcvb",
+        "Class_component_name": "",
         "Components": [
-            {
-                "Name_of_component": "comp_name",
-                "Component_attributes": [
-                    {
-                        "name": "at_name",
-                        "description": "at_desc",
-                        "default_value": "at_val"
-                    }
-                ]
-            },
-            {
-                "Name_of_component": "comp_name",
-                "Component_attributes": [
-                    {
-                        "name": "at_name",
-                        "description": "at_desc",
-                        "default_value": "at_val"
-                    }
-                ]
-            }
+            []
         ],
-        "Type": "simple"
-    },
-    {
-        "Name_of_agent": "",
-        "Class_component_name": "",
-        "Components": [],
-        "Type": "simple"
-    },
-    {
-        "Name_of_agent": "",
-        "Class_component_name": "",
-        "Components": [],
-        "Type": "simple"
+        "Type_of_agent": "SIMPLE"
     }
 ]

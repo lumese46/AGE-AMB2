@@ -223,3 +223,9 @@ input[type="submit"]:focus{
     color: rgb(43, 255, 0);
     align-items: start;
 }
+
+#generate_code_button{
+    color:green;
+    margin: 1rem;
+    
+}

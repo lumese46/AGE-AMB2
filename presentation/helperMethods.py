@@ -1,5 +1,4 @@
 import json
-
 def read_json(fname):
     result = []
     try:
@@ -41,7 +40,22 @@ def get_all_components(component_names: list):
         else:
             pass
     return results
-            # print(f"{comp['Name_of_component']} not in {components_from_file}")
-    # for name in component_names:
-    #     if name in components_from_file["Name_of_component"]:
-    #         print()
+
+def get_components_summary(compList):
+    results = []
+    
+    components_from_file =read_json("component")   #read components json file
+    for comp in components_from_file:
+        comp_summary = {
+            "Name_of_component":comp["Name_of_component"],
+            "Names_of_component_atributes": []
+        }
+        if comp["Name_of_component"] in compList:
+            for comp_att in comp["Component_attributes"]:
+                comp_summary["Names_of_component_atributes"].append(comp_att["name"])
+            results.append(comp_summary)
+           
+        else:
+            pass
+    print("Summary created")
+    return results
