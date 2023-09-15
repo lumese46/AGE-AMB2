@@ -41,3 +41,4 @@ class complexAgents(createAgents):
         codeString = codeString + "        # Create agent id\n" + agent_idString + superString
         codeString = codeString + "        # Add Energy Component\n" + addString + counterString
         return codeString
+    

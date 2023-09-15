@@ -1,14 +1,13 @@
- 
-class DataCollector(Collectors.Collector):
-    def __init__(self, id: str, model):
-        super().__init__(id, model)
-        self.records = {'ORATILE':[], 'LUMESE':[], }
-     # Count ORATILE
-        self.records['ORATILE'].append(
-             len(self.model.environment.get_agents(tag=Tags.ORATILE))
-            )
+agent = {
+        "Name_of_agent": "",      
+        "Class_component_name":"",
+        "Components":[],
+        "Type": "",
+        }
 
-     # Count LUMESE
-        self.records['LUMESE'].append(
-             len(self.model.environment.get_agents(tag=Tags.LUMESE))      
-            )
+
+agent = {
+        "Name_of_agent": "",
+        "Class_component_name":"",
+        "Components":[],
+}
