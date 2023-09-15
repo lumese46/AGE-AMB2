@@ -30,11 +30,61 @@ Agents =  [
         {
             "Name_of_agent": "Sheep",
             "number_of_agents": "init_sheep"
+        },
+        {
+            "Name_of_agent": "Wolf",
+            "number_of_agents": "init_wolf"
+        }
+    ]
+environment =  "GRIDWORLD"
+systems =  [
+        {
+            "Name_of_system": "MovementSystem",
+            "system_variables": []
+        },
+        {
+            "Name_of_system": "ResourceConsumptionSystem",
+            "system_variables": [
+                "regrow_rate"
+            ]
+        },
+        {
+            "Name_of_system": "BirthSystem",
+            "system_variables": []
+        },
+        {
+            "Name_of_system": "DeathSystem",
+            "system_variables": []
         }
     ]
 
-def addAgents():
+
+
+def  addSystems(systems):
     pass
+
+
+def addEnvironment(environment):
+
+    if environment == "GRIDWORLD":
+        codeString = "      self.environment = GridWorld(self, size, size)"
+    return codeString
+
+
+def addAgents(Agents):
+    codeString = ""
+    for i in range(len(Agents)):
+        Name_of_agent = Agents[i]["Name_of_agent"]
+        number_of_agents = Agents[i]["number_of_agents"]
+        stringFor = f"        for _ in range({number_of_agents}):\n"
+        stringSelf = f"            self.environment.add_agent(\n"
+        stringAgent = f"                {Name_of_agent}(self),\n"
+        stringXpos = f"                x_pos = self.random.randint(0, size - 1),\n"
+        stringYpos = f"                y_pos = self.random.randint(0, size - 1)\n"
+        stringend = f"            )\n"
+        codeString = codeString + stringFor + stringSelf + stringAgent + stringXpos + stringYpos + stringend
+
+    return codeString
 
 
 def  addClassComponents(class_components):
@@ -72,3 +122,5 @@ def inputPrameters(input_parameters):
     return codeString
 #print(inputPrameters(input_parameters))
 #print(addClassComponents(class_components))
+#print(addAgents(Agents))
+#print(addEnvironment(environment))

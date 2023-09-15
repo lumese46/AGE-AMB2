@@ -32,10 +32,22 @@
     "environment": "GRIDWORLD",
     "systems": [
         {
-            "Name_of_system": "LUMESE",
-            "system_variables_from_input_parameters": [
-                ""
+            "Name_of_system": "MovementSystem",
+            "system_variables": []
+        },
+        {
+            "Name_of_system": "ResourceConsumptionSystem",
+            "system_variables": [
+                "regrow_rate"
             ]
+        },
+        {
+            "Name_of_system": "BirthSystem",
+            "system_variables": []
+        },
+        {
+            "Name_of_system": "DeathSystem",
+            "system_variables": []
         }
     ]
 }
