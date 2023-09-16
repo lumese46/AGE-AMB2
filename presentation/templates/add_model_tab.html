@@ -14,21 +14,26 @@
     </nav>
     <main>
         <section class="model_input_fields">
-            <form action="/add_model" class="model_title_section">
+            <form action="model" method="post">
                     <label for="model_name">Name</label>
-                    <input type="text" required>
-                    <p>or</p>
+                    <input type="text" name="model_name" required>
+                    <section class="input_parameters">
+                        <br>
+                        <section >
+                            <label for="input_parameters">Add input parameters</label>
+                        </section>
+                        <label for="name_of_model">Name</label>
+                        <input type="text" name="name" id="">
+                        <br>
+                        <label for="name_of_model">Data type</label>
+                        <input type="text" name="data_type" id="">
+                        <input type="submit" name="submit_action" value ="Save input parameters">
+                    </section>
+                    <!-- <p>or</p>
                     <label for="model_file" class="upload_button">
                         <input type="file" name="model_file" id="model_file" >
                         upload a .py file
-                    </label>
-            </form>
-        </section>
-        <section class="model_configuration">
-            <form action="model_data">
-                <section class="components">
-
-                </section>
+                    </label> -->
             </form>
         </section>
     </main>

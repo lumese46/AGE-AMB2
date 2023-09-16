@@ -1,0 +1,53 @@
+{
+    "input_parameters": [
+        {
+            "name": "seed",
+            "dataType": "int"
+        }
+    ],
+    "class_components": [
+        {
+            "Name_of_agent": "Sheep",
+            "Name_of_component": "SpeciesComponent",
+            "component_atributes_names": [
+                "sheep_gain",
+                "sheep_reproduce"
+            ]
+        },
+        {
+            "Name_of_agent": "Wolf",
+            "Name_of_component": "SpeciesComponent",
+            "component_atributes_names": [
+                "wolf_gain",
+                "wolf_reproduce"
+            ]
+        }
+    ],
+    "Agents": [
+        {
+            "Name_of_agent": "Sheep",
+            "number_of_agents_from_input_parameters": "init_sheep"
+        }
+    ],
+    "environment": "GRIDWORLD",
+    "systems": [
+        {
+            "Name_of_system": "MovementSystem",
+            "system_variables": []
+        },
+        {
+            "Name_of_system": "ResourceConsumptionSystem",
+            "system_variables": [
+                "regrow_rate"
+            ]
+        },
+        {
+            "Name_of_system": "BirthSystem",
+            "system_variables": []
+        },
+        {
+            "Name_of_system": "DeathSystem",
+            "system_variables": []
+        }
+    ]
+}

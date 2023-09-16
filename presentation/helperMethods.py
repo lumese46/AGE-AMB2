@@ -24,6 +24,7 @@ def add_attributes(att_name,  att_desc, att_val):
     attribute["default_value"]=att_val
     return attribute
 
+#get all components by name (ie all components, agents, systems and environments)
 def get_components_by_name(fname):
     saved_comps= read_json(fname)
     results =[]
@@ -31,19 +32,19 @@ def get_components_by_name(fname):
         results.append(comp[f"Name_of_{fname}"])
     return results
 
-def get_all_components(component_names: list):
+#give component name, get component with it's attributes
+def get_component(component_name):
     results = []
     components_from_file =read_json("component")   #read components json file
     for comp in components_from_file:
-        if comp["Name_of_component"] in component_names:
+        if comp["Name_of_component"] == component_name:
             results.append(comp)
-        else:
-            pass
+            break
     return results
 
+#give a list of components you want a summary of (that being the name and all the names of the attributes) and get the summary of them in an array
 def get_components_summary(compList):
     results = []
-    
     components_from_file =read_json("component")   #read components json file
     for comp in components_from_file:
         comp_summary = {
@@ -54,7 +55,6 @@ def get_components_summary(compList):
             for comp_att in comp["Component_attributes"]:
                 comp_summary["Names_of_component_atributes"].append(comp_att["name"])
             results.append(comp_summary)
-           
         else:
             pass
     print("Summary created")

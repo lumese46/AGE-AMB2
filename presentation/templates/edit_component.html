@@ -42,11 +42,11 @@
     </form>
 {%endblock%}
 {%block output_window%}
-    <h2 class="title">My Components</h2>
-    <form action="component_tab" method="post">
+    <h2 class="title">My Attributes</h2>
+    <form action="edit_component" method="post">
         <div class="components">
-            {%for i in all_components%}
-                <input type="submit" name="submit_results" id="" value={{i}}>
+            {%for i in all_attributes%}
+                <input type="submit" name="edit_attribute" id="" value={{i}}>
                 <!-- <p>{{i}}</p> -->
             {%endfor%}
         </div>

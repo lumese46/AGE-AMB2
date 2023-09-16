@@ -2,7 +2,9 @@
     --bgclr: #ece6e0;
     --fclr: #000000;
     --highlight: #5E17EB;
+    --highlight_light: #5e17eb62;
     --btnclr:  #231F20;
+    --editclr: #4AFF00
 
 }
 
@@ -12,7 +14,7 @@
     box-sizing: border-box;
     scroll-behavior: smooth;
     font-family: Monospace;
-    text-transform: uppercase;
+    text-transform: none;
     font-weight: bold;
 }
 body{
@@ -44,7 +46,7 @@ nav input{
 }
 
 nav input:focus{
-    color: var(--highlight);
+    color: var(--fclr);
     cursor:grab;
 }
 nav input:hover{
@@ -53,6 +55,7 @@ nav input:hover{
 
 main{
     border: .5px solid var(--btnclr);
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 8px 8px 8px;
     width:90%;
     position: relative;
     margin: auto;
@@ -87,12 +90,32 @@ input[type="text"]:focus{
     border-bottom: 2px solid var(--highlight);
 }
 
+input[type="submit"]{
+    background:none;
+    min-width: 2rem;
+    /* width: auto; */
+    float: right;
+    height: 2rem;
+    margin-right: .8rem;
+}
+
+input[type="submit"]:focus{
+    outline-style: none;
+    background-color: var(--highlight);
+}
+
+
+input[type="submit"]:hover{
+    box-shadow: var(--highlight) 0px 2px 2px 2px;
+    /* border: 2px solid var(--highlight_light) ; */
+}
 
 .form_title{
     padding-right: .8rem;
     display:grid;
     grid-template-columns: 3fr 1fr;
 }
+
 #inner_title{
     display: grid;
     margin: 1rem auto;
@@ -110,19 +133,6 @@ input[type="text"]:focus{
     object-fit: cover;
 }
 
-input[type="submit"]{
-    background:none;
-    min-width: 2rem;
-    /* width: auto; */
-    float: right;
-    height: 2rem;
-    margin-right: .8rem;
-}
-
-input[type="submit"]:focus{
-    outline-style: none;
-    background-color: (var(--highlight));
-}
 
 
 .output_window{

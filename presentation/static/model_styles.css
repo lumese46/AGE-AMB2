@@ -19,9 +19,7 @@ body{
     background-color: var(--bgclr);
     /* border: 2px solid red; */
     height: 100vh;
-    padding: 2rem;
-    display: grid;
-    grid-template-rows: .5fr 3fr;
+
 }
 .nav{
     display: flex;
@@ -30,7 +28,7 @@ body{
     margin-top: 2rem;
     position: relative;
     width: 100%;
-    height: 100%;
+    height: 2rem;
 
 }
 

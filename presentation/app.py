@@ -16,9 +16,10 @@ agent = {
         }
 
 comp_type = "SIMPLE"
+input_parameters = []
 
 ################################################ Home ################################################
-
+#Set up site navigation
 @app.route("/", methods=["GET","POST"])
 def home():
     if(request.method=="POST"): 
@@ -37,7 +38,7 @@ def home():
 
 ################################################ Components ################################################
 
-
+#control components though the components window
 @app.route("/component_tab", methods=["POST", "GET"])
 def add_components():
         #get input from user
@@ -45,6 +46,7 @@ def add_components():
         component["Name_of_component"]=request.form["Name_of_component"]
         button_clicked = request.form["submit_results"]
         match (button_clicked):
+            #if user wants to add attributes to a component
             case "Add attribute":
                 attributes.append(helperMethods.add_attributes(
                 request.form["att_name"],
@@ -52,6 +54,8 @@ def add_components():
                 request.form["att_default_value"]
                 )
                 )
+
+            #if user wants to save/add component to component's list
             case "Add component":
                 #add last attribute
                 attributes.append(helperMethods.add_attributes(
@@ -65,15 +69,39 @@ def add_components():
                 helperMethods.add_to_json(component, "component") #add component to json
                 attributes.clear()
                 component_name=""
+                #call create components method here
                 
+            case _:
+                component_to_edit = helperMethods.get_component(request.form["edit_component"])
+                allAttsNames = []
+                for att in component_to_edit[0]["Component_attributes"]:
+                    allAttsNames.append(att["name"])
+                print(component_to_edit)
+                return render_template("edit_component.html", compName=request.form["edit_component"], all_components=allAttsNames, all_agents = helperMethods.get_components_by_name("agent"))
         return render_template("add_component_tab.html", compName=component_name, all_components=helperMethods.get_components_by_name("component"), all_agents = helperMethods.get_components_by_name("agent"))
 
 
+
+############################################### Edit Component ###################################
+# @app.route("/edit_component", methods=["POST"])
+# def edit_component():
+#     #get component to be edited
+#     action = request.form["edit_component"]
+#     match(action):
+#         case("edit_component"):
+#             component_to_edit = helperMethods.get_component(request.form["edit_component"])
+#             allAttsNames = []
+#             for att in component_to_edit[0]["Component_attributes"]:
+#                 allAttsNames.append(att["name"])
+#             print(component_to_edit)
+#             return render_template("edit_component.html", compName=request.form["edit_component"], all_components=allAttsNames, all_agents = helperMethods.get_components_by_name("agent"))
+#     return render_template("add_component_tab.html", compName=request.form["edit_component"], all_components=allAttsNames, all_agents = helperMethods.get_components_by_name("agent"))
 
 
 
 ############################################################AGENT ROUTES#############################################################
 
+#control agents through the agents tab
 @app.route("/agents", methods=["POST", "GET"])
 def add_agent():
     agent_action = request.form["add_to_agent"]
@@ -84,13 +112,14 @@ def add_agent():
             agent["Name_of_agent"] = name
             agent["Type_of_agent"] = comp_type
             agent["Class_component_name"] = request.form["agent_class_componet_name"]
-            components_to_add_by_name = (request.form.getlist("component_to_add")) #get detailed components using their names 
-            components_summary = helperMethods.get_components_summary(components_to_add_by_name)    #get component summary list
+            components_to_add_by_name = (request.form.getlist("component_to_add")) #get  list of component the user wants to add to their agent
+            components_summary = helperMethods.get_components_summary(components_to_add_by_name)#get component summary list
             agent["Components"].append(components_summary)
             helperMethods.add_to_json(agent,"agent")
             agent["Components"].clear()
             name=""
             #clear screen
+
         case "Simple":
             comp_type = "SIMPLE"
             print(agent_action)
@@ -129,6 +158,27 @@ def add_system():
             case "Run":
                 print(dummyCode)
     return render_template("add_system_tab.html",all_systems=helperMethods.get_components_by_name("system"), sys_name=name, sys_code =dummyCode)
+
+
+###################################################### Model Routes ############################################3
+
+@app.route("/model", methods=["GET", "POST"])
+def add_model():
+    print("in model")
+    action = request.form["submit_action"]
+    new_param = {
+        "Name": "",
+        "dataType": ""
+    }
+    print(action)
+    match(action):
+        case ("Save input parameters"):
+            new_param["Name"]=request.form["name"]
+            new_param["dataType"] = request.form["data_type"]
+            input_parameters.append(new_param)
+    
+    print(input_parameters)
+    return render_template("add_model_tab.html", all_components=helperMethods.get_components_by_name("component"),all_agents = helperMethods.get_components_by_name("agent"), all_systems=helperMethods.get_components_by_name("system"))
 
 
 # def run_me():
