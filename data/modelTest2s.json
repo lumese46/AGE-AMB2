@@ -1,0 +1,22 @@
+[
+    {
+        "Name_of_system": "",
+        "code": ""
+    },
+    {
+        "input_parameters": [
+            {
+                "name": "seed",
+                "dataType": "int"
+            },
+            {
+                "name": "sheep_gain",
+                "dataType": "int"
+            },
+            {
+                "name": "sheep_reproduce",
+                "dataType": "int"
+            }
+        ]
+    }
+]
