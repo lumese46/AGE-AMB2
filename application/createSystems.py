@@ -4,7 +4,7 @@
 
 #     def execute(self):
 
-class CreateSystems:
+class createSystems:
     def __init__(self, Name):
         self.Name = Name
     # generate the system code based on attributes

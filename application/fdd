@@ -1,0 +1,13 @@
+agent = {
+        "Name_of_agent": "",      
+        "Class_component_name":"",
+        "Components":[],
+        "Type": "",
+        }
+
+
+agent = {
+        "Name_of_agent": "",
+        "Class_component_name":"",
+        "Components":[],
+}
