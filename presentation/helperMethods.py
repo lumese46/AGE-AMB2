@@ -24,7 +24,7 @@ def add_attributes(att_name,  att_desc, att_val):
     attribute["default_value"]=att_val
     return attribute
 
-#get all components by name (ie all components, agents, systems and environments)
+#get all components by name (ie all components, agents, systems and model)
 def get_components_by_name(fname):
     saved_comps= read_json(fname)
     results =[]
@@ -67,6 +67,7 @@ def get_all_agents():
     for agent in all_agents:
         result.append(agent)
     return result
+
 #supply the type of agents you want to add, get all agents of that type in that list in an array of their names
 def get_agents_by_type(agent_type):
     result = []

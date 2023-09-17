@@ -3,6 +3,7 @@
     --fclr: #000000;
     --highlight: #5E17EB;
     --btnclr:  #231F20;
+    --warning: rgb(255, 0, 0);
 
 }
 
@@ -108,3 +109,7 @@ input[type="text"]:focus{
   .dropdown-content input:hover {background-color: #ddd;}
   
   .dropdown:hover .dropdown-content {display: flex;}
+
+  .error_message{
+    color: var(--warning);
+  }
