@@ -5,15 +5,39 @@
     {
         "input_parameters": [
             {
-                "name": "seed",
+                "name": "size",
+                "dataType": "int"
+            },
+            {
+                "name": "init_sheep",
+                "dataType": "int"
+            },
+            {
+                "name": "init_wolf",
+                "dataType": "int"
+            },
+            {
+                "name": "regrow_rate",
                 "dataType": "int"
             },
             {
                 "name": "sheep_gain",
-                "dataType": "int"
+                "dataType": "float"
+            },
+            {
+                "name": "wolf_gain",
+                "dataType": "float"
             },
             {
                 "name": "sheep_reproduce",
+                "dataType": "float"
+            },
+            {
+                "name": "wolf_reproduce",
+                "dataType": "float"
+            },
+            {
+                "name": "seed",
                 "dataType": "int"
             }
         ]
