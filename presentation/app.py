@@ -1,5 +1,5 @@
 from flask import Flask, render_template, redirect, request, url_for
-import helperMethods
+import helperMethods, modelhelperMethods
 
 
 app = Flask(__name__)
@@ -17,6 +17,7 @@ agent = {
 
 comp_type = "SIMPLE"
 input_parameters = []
+class_components =[] #For complex agent can add multiple ones
 
 ################################################ Home ################################################
 #Set up site navigation
@@ -31,7 +32,7 @@ def home():
             case "Systems":
                 return render_template("add_system_tab.html",all_systems=helperMethods.get_components_by_name("system"),all_agents = helperMethods.get_components_by_name("agent"))
             case "Models":
-                return render_template("add_model_tab.html", all_components=helperMethods.get_components_by_name("component"),all_agents = helperMethods.get_components_by_name("agent"), all_systems=helperMethods.get_components_by_name("system"))
+                return render_template("add_model_tab.html", view=1, step=1)
     else:
         return(render_template("add_component_tab.html"))
     
@@ -164,21 +165,173 @@ def add_system():
 
 @app.route("/model", methods=["GET", "POST"])
 def add_model():
-    print("in model")
+
+    # Logic
+    # select type of model you are dealing with
+    # enable input parameters button
+    ##Input parameters
+    # select add input parameters button
+    # enter input parameters details
+    # get input parameters and save them in input_parameters list
+    # select save input parameters
+    # save input_parameters list
+    # enable class components button
+    ##Class components
+    # select class components button
+    # add class components details (according to SIMPLE or COMPLEX agent and input parameters)
+    # select add class component datails
+    # add class components details
+    # select save class components
+    # enable add agents button
+    ##Add agents
+    # select agents from all agents list
+    # get agents selected
+    # save selected agents to agents list
+    # select number of agents from input parameters
+    # select save agent
+    # add agent to agents list
+    # save environment as GRIDWORLD if  model is COMPLEX, save it as DEFAULT if model is SIMPLE
+    # enable add systems button
+    ##Add systems
+    # select system name from all systems list
+    # add system ID
+    # select system variables from input parameters list
+    # select add system
+    # select system name from all systems list
+    # add system ID
+    # select system variables from input parameters list
+    # select save systems
+    # save systems to all systems
+    # save input parameters, class components, agents and systems to the models json file
+    
+
+
+    new_model_name=""
     action = request.form["submit_action"]
     new_param = {
         "Name": "",
         "dataType": ""
     }
+    # Logic implementation
+    # select type of model you are dealing with
+    chosen_model_type = "COMPLEX"
+    #change view according to model type
+    # match chosen_model_type:
+    #     case "COMPLEX":
+    #         return redirect(url_for("model_setup", step=1, model_type=chosen_model_type))
+    #     case "SIMPLE":
+    #         pass
+    # enable input parameters button
+    ##Input parameters
+    # select add input parameters button
+    # enter input parameters details
+    # get input parameters and save them in input_parameters list
+    # select save input parameters
     print(action)
+    #check if action is in the agents lists and change it to add agent
+    #check if action is in the components lists and change it to add component
+
+    # if(action in  )
     match(action):
-        case ("Save input parameters"):
+        
+        case "Add parameter":
             new_param["Name"]=request.form["name"]
             new_param["dataType"] = request.form["data_type"]
             input_parameters.append(new_param)
+            new_model_name = request.form["model_name"]
+            return render_template("add_model_tab.html", view=1,model_name=new_model_name, model_type=chosen_model_type)
+        
+        case "Save input parameters":
+            new_param["Name"]=request.form["name"]
+            new_param["dataType"] = request.form["data_type"]
+            input_parameters.append(new_param)
+            new_model_name = request.form["model_name"]
+            agents = helperMethods.get_agents_by_type(chosen_model_type)
+            components = helperMethods.get_components_by_name("component")
+            new_input_parameters =input_parameters
+            return render_template("add_model_tab.html",view=2, model_type=chosen_model_type, step=2, model_name = new_model_name, all_components=components, all_agents = agents, input_params = new_input_parameters)
+        
+        case "Add class component":
+            # class_component = {
+            #     "Name_of_agent": "",
+            #     "Name_of_component": "",
+            #     "component_atributes_names": []
+            # }
+            # class_component["Name_of_agent"]=
+            print("In Add component") 
+
+        
+    # save input_parameters list
+    # enable class components button
+    ##Class components
+    # select class components button
+    # add class components details (according to SIMPLE or COMPLEX agent and input parameters)
+    # select add class component datails
+    # add class components details
+    # select save class components
+    # enable add agents button
+    ##Add agents
+    # select agents from all agents list
+    # get agents selected
+    # save selected agents to agents list
+    # select number of agents from input parameters
+    # select save agent
+    # add agent to agents list
+    # save environment as GRIDWORLD if  model is COMPLEX, save it as DEFAULT if model is SIMPLE
+    # enable add systems button
+    ##Add systems
+    # select system name from all systems list
+    # add system ID
+    # select system variables from input parameters list
+    # select add system
+    # select system name from all systems list
+    # add system ID
+    # select system variables from input parameters list
+    # select save systems
+    # save systems to all systems
+    # save input parameters, class components, agents and systems to the models json file
+    return render_template("add_model_tab.html",view=1, model_type=chosen_model_type, step=1)
+
     
-    print(input_parameters)
-    return render_template("add_model_tab.html", all_components=helperMethods.get_components_by_name("component"),all_agents = helperMethods.get_components_by_name("agent"), all_systems=helperMethods.get_components_by_name("system"))
+    # print(action)
+    # match(action):
+    #     #if user wants to add a parameter
+    #     case ("Add input parameters"):
+    #         view_section = "input parameters"     #change view to show only input parameter fields
+        
+    #     case ("Add class components"):
+    #         view_section = "class components"
+
+    #     case ("Add parameter"):
+    #         new_param["Name"]=request.form["name"]
+    #         new_param["dataType"] = request.form["data_type"]
+    #         print(new_param)
+    #         input_parameters.append(new_param)
+    #         new_model_name = request.form["model_name"]
+    #         return render_template("add_model_tab.html", model_name=new_model_name, view=view_section)
+        
+    #     case ("Save input parameters"):
+    #         new_param["Name"]=request.form["name"]
+    #         new_param["dataType"] = request.form["data_type"]
+    #         print(new_param)
+    #         input_parameters.append(new_param)
+    #         model_input_parameters = modelhelperMethods.add_input_parameters(input_parameters)
+    #         helperMethods.add_to_json(model_input_parameters, "model")
+    #         input_parameters.clear()
+    #         new_model_name=""
+    #         return render_template("add_model_tab.html", model_name=new_model_name, view=view_section)
+
+
+
+
+# @app.route("/model_setup", methods=["GET", "POST"])
+# def model_setup():
+#         print("in model setup")
+#         if request.form["submit_action"]: #if user wants to move into the first step and add input parameters
+#             print ("got into the model type")     
+#             return render_template("add_model_tab.html", step=1, view=1)
+#         else:
+#             return render_template("add_model_tab.html", step=1, view=1)
 
 
 # def run_me():

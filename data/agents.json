@@ -21,7 +21,7 @@
         ]
     },
     {
-        "Name_of_agent": "Sheep",
+        "Name_of_agent": "WOLF",
         "Class_component_name": "energy_component",
         "Type_of_agent": "SIMPLE",
         "Components": [

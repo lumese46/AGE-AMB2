@@ -59,3 +59,19 @@ def get_components_summary(compList):
             pass
     print("Summary created")
     return results
+
+#get all agents
+def get_all_agents():
+    result = []
+    all_agents = read_json("agent")
+    for agent in all_agents:
+        result.append(agent)
+    return result
+#supply the type of agents you want to add, get all agents of that type in that list in an array of their names
+def get_agents_by_type(agent_type):
+    result = []
+    all_agents = get_all_agents()
+    for agent in all_agents:
+        if agent["Type_of_agent"]==agent_type:
+            result.append(agent["Name_of_agent"])
+    return (result)
