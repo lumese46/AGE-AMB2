@@ -23,34 +23,55 @@ body{
     height: 100vh;
     padding: 2rem;
     display: grid;
-    grid-template-rows: .5fr 3fr;
+    grid-template-rows: .5fr 3.5fr;
 }
-.nav{
+
+nav{
+    /* border: 2px solid red; */
+    display: grid;
+    grid-template-rows: 1fr 1fr;
+    /* align-items: center; */
+    margin: auto;
+    width: 100%;
+    gap: 1rem;
+
+}
+
+.main_nav{
+    /* border: 2px solid orange; */
+    margin: auto;
+    align-items: center;
+    width: 100%;
+}
+
+.main_nav form{
     display: flex;
     flex-direction: row;
-    /* border: 2px solid green; */
-    margin-top: 2rem;
-    position: relative;
-    width: 100%;
-    height: 100%;
-
+    gap: 2rem;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
 }
 
-
-nav input{
-    width: 20%;
-    margin: 0 5%;
-    height: 100%;
+.nav_form input{
     background: none;
+    margin: auto;
     border: none;
 }
 
-nav input:focus{
-    color: var(--fclr);
-    cursor:grab;
+.sub_nav{
+    /* border: 2px solid purple; */
+    background: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
 }
-nav input:hover{
-    cursor:pointer;
+
+.sub_nav input{
+    border: none;
+    background: none;
+}
+.sub_nav #save_model_type{
+    font-style: italic;
 }
 
 main{
@@ -63,6 +84,8 @@ main{
     height: 80%;
     display: grid;
     grid-template-columns: 6fr 4fr;
+    overflow: auto;
+
 
 }
 
@@ -71,12 +94,13 @@ main section{
 
 }
 
-form{
+.input_fields_section form{
     height: 100%;
     display: grid;
     flex-direction: column;
     grid-template-rows: .5fr 2fr 1fr;
 }
+
 
 form input[type="text"]{
     background: none;
@@ -90,24 +114,15 @@ input[type="text"]:focus{
     border-bottom: 2px solid var(--highlight);
 }
 
-input[type="submit"]{
-    background:none;
-    min-width: 2rem;
-    /* width: auto; */
-    float: right;
-    height: 2rem;
-    margin-right: .8rem;
-}
 
-input[type="submit"]:focus{
+form input[type="submit"]:focus{
     outline-style: none;
     background-color: var(--highlight);
 }
 
 
-input[type="submit"]:hover{
+form input[type="submit"]:hover{
     box-shadow: var(--highlight) 0px 2px 2px 2px;
-    /* border: 2px solid var(--highlight_light) ; */
 }
 
 .form_title{
@@ -133,8 +148,6 @@ input[type="submit"]:hover{
     object-fit: cover;
 }
 
-
-
 .output_window{
     display: grid;
     background-color: var(--btnclr);
@@ -144,11 +157,14 @@ input[type="submit"]:hover{
     height: 90%;
     margin-left: 5%;
     object-fit: cover;
+    overflow: auto;
 }
 
 .output_window .title{
     border: none;
-    border-bottom: 2px solid white;
+    text-decoration: underline;
+    text-decoration-thickness: 2px;
+    /* border-bottom: 2px solid white; */
     margin: auto;
     margin-bottom: 1rem;
 }
@@ -164,34 +180,7 @@ input[type="submit"]:hover{
     border: none;
     border-bottom: 2px solid black;
   }
-  
-  .dropdown {
-    position: relative;
-  }
-  
-  .dropdown-content {
-    display: none;
-    position: absolute;
-    background-color: var(--bgclr);
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-    z-index: 1;
-    flex-direction: column;
-  }
-  
-  .dropdown-content input {
-    width: 100%;
-  }
-  
-  .dropdown-content input:hover {background-color: #ddd;}
-  
-  .dropdown:hover .dropdown-content {display: flex;}
-  
-.simple{
-    visibility: hidden;
-}
-.complex{
-    visibility: visible;
-}
+
 .checkbox_section{
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -215,10 +204,14 @@ input[type="submit"]:hover{
   background-color: #5E17EB;
   outline: 1px solid #000000;
 }
+
+
+
 #checkbox_input{
     display: grid;
     grid-template-columns: 1fr 3fr;
     margin: .2rem;
+    border: 2px solid purple;
 }
 #submit_agent{
     align-self: center;
@@ -239,3 +232,32 @@ input[type="submit"]:hover{
     margin: 1rem;
     
 }
+
+
+.dropdown {
+    position: relative;
+  }
+  
+  .dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: var(--bgclr);
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+    flex-direction: column;
+  }
+  
+  .dropdown-content input {
+    width: 100%;
+  }
+  
+  .dropdown-content input:hover {background-color: #ddd;}
+  
+  .dropdown:hover .dropdown-content {display: flex;}
+
+  .error_message{
+    color: var(--warning);
+  }
+
+
+/* Model Styles */

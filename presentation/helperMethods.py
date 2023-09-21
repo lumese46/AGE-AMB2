@@ -17,6 +17,17 @@ def add_to_json(contents,outfile):
     with open(f"./data/{outfile}s.json", "w") as iof:
         iof.writelines(jsonObj) #write to file
 
+#enter an array of json params and add the names to an array. Returns an array of names
+def param_summary(json_str_arr):
+    result=[]
+    print(json_str_arr[0]+" to be converted to string")
+    # print(json.dumps(json_str_arr[0]))
+    for js in json_str_arr:
+        js = js.replace("\'", "\"")
+        js_json = json.loads(js)
+        result.append(js_json["Name"])
+    return result
+
 def add_attributes(att_name,  att_desc, att_val):
     attribute = {}
     attribute["name"]=att_name

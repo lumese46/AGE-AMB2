@@ -40,5 +40,27 @@
                 ]
             }
         ]
+    },
+    {
+        "Name_of_agent": "cfgf",
+        "Class_component_name": "",
+        "Components": [
+            [
+                {
+                    "Name_of_component": "876",
+                    "Names_of_component_atributes": [
+                        "7865"
+                    ]
+                },
+                {
+                    "Name_of_component": "test",
+                    "Names_of_component_atributes": [
+                        "at_name",
+                        "#$%"
+                    ]
+                }
+            ]
+        ],
+        "Type_of_agent": "SIMPLE"
     }
 ]

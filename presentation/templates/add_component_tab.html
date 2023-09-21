@@ -12,7 +12,7 @@
     style="color:#5E17EB;"
 {%endblock%}
 {%block input_fields%}
-    <form action="component_tab" method="post">
+    <form action="component_tab" method="post" class="input_param_form">
         <section class="form_title">
                 <label for="Name_of_component">Name of Component</label>
                 <input required type="text" name="Name_of_component" id="Name_of_component" value={{compName}} >
@@ -46,8 +46,8 @@
     <form action="component_tab" method="post">
         <div class="components">
             {%for i in all_components%}
-                <input type="submit" name="submit_results" id="" value={{i}}>
-                <!-- <p>{{i}}</p> -->
+                <!-- <input type="submit" name="submit_results" id="" value={{i}}> -->
+                <p>{{i}}</p>
             {%endfor%}
         </div>
     </form>

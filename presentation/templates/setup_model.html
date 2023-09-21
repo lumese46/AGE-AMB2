@@ -1,0 +1,26 @@
+{%extends "base.html"%}
+
+{%block stylesheet%}
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles.css')}}" >
+{%endblock%}
+
+{%block highlight_model%}
+    style="color:#5E17EB;"
+{%endblock%}
+
+{% block sub_nav%}
+    <section class="type">
+        {%if not model_type %}
+            <form action="model_type" method="post" class="model_type_menu">
+                <section class="model_type">
+                    <label for="model_type">Select model type: </label>
+                    <input type="radio" name="model_type" value="SIMPLE" required>
+                    <label for="complex_model">SIMPLE</label>
+                    <input type="radio" value="COMPLEX" name="model_type" value="COMPLEX" required>
+                    <label for="complex_model">COMPLEX</label>
+                    <input type="submit" name="submit" value="Save type" id="save_model_type">
+                </section>
+            </form>
+        {%endif%}
+    </section>
+{%endblock%}
