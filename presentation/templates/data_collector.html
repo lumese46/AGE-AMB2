@@ -1,54 +1,47 @@
-{%extends "base.html"%}
+{% extends "base.html" %}
 
-{%block title%}
-    Component
-{%endblock%}
+{% block title %}
+Data Collector
+{% endblock %}
 
-{%block stylesheet%}
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles.css')}}" >
-{%endblock%}
+{% block stylesheet %}
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
+{% endblock %}
 
-{%block highlight_comp%}
-    style="color:#5E17EB;"
-{%endblock%}
-{%block input_fields%}
-    <form action="dataCollector" method="post" class="input_param_form">
-        <section class="form_title">
-                <label for="Name_of_component">Data Collector</label>
-                <input required type="text" name="dataCollector_inp1" id="Name_of_component" value={{compName}} >
-        </section>
-        <section class="form_attributes">
-            <label for="Component_attributes_form" id="inner_title">Component Attributes</label>
-                <div id="attribute">
-                    <label for="att_name">Name</label>
-                    <input type="text" name="att_name" id="att_name" required>
-                </div>
-                <div id="attribute">
-                    <label for="att_description">Description</label>
-                    <input type="text" name="att_description" id="att_description">
-                </div>
-                <div id="attribute">
-                    <label for="att_default_value">Default Value</label>
-                    <input type="text" name="att_default_value" id="att_default_value">
-                </div>
-                <!-- <button type="submit" href>Add attribute</button> -->
-                <div class="add_attribute">
-                    <input type="submit"  name="submit_results" id ="add_attribute_button" value="Add attribute">
-                </div>
-        </section>
-        <section class="submit_component">
-            <input type="submit" name="submit_results" id="submit_button" value="Add component">
-        </section>
-    </form>
-{%endblock%}
-{%block output_window%}
-    <h2 class="title">My Components</h2>
-    <form action="component_tab" method="post">
-        <div class="components">
-            {%for i in all_components%}
-                <!-- <input type="submit" name="submit_results" id="" value={{i}}> -->
-                <p>{{i}}</p>
-            {%endfor%}
+{% block highlight_comp %}
+style="color:#5E17EB;"
+{% endblock %}
+
+{% block input_fields %}
+<form action="/dataCollector" method="post" class="input_param_form">
+    <section class="form_title">
+        <label for="Name_of_component">Data Collector</label>
+        <input required type="text" name="dataCollector_inp1" id="Name_of_component" value="{{ compName }}">
+    </section>
+    <section class="form_attributes">
+        <label for="Component_attributes_form" id="inner_title">Select Complex Agents</label>
+        <div id="attribute">
+            {% for agent in complex_agents %}
+            <label>
+                <input type="radio" name="selected_agents" value="{{ agent }}" required>
+                {{ agent }}
+            </label><br>
+            {% endfor %}
         </div>
-    </form>
-{%endblock%}
+    </section>
+    <section class="submit_component">
+        <input type="submit" name="submit_results" id="submit_button" value="Add selected agents">
+    </section>
+</form>
+{% endblock %}
+
+{% block output_window %}
+<h2 class="title">My Components</h2>
+<form action="component_tab" method="post">
+    <div class="components">
+        {% for i in all_components %}
+        <p>{{ i }}</p>
+        {% endfor %}
+    </div>
+</form>
+{% endblock %}

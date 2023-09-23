@@ -1,3 +1,4 @@
+import flask
 from flask import Flask, render_template, redirect, request, url_for, session
 import helperMethods, modelhelperMethods
 
@@ -171,7 +172,27 @@ def add_agent():
 
 @app.route("/dataCollector", methods=["POST","GET"])
 def data_collector():
-    form_data = request.form["dataCollector_inp1"]
+    
+    # Get the data collector input value
+    data_collector_input = request.form["dataCollector_inp1"]
+
+    # Get the selected agents from the radio buttons
+    selected_agents = request.form.getlist("selected_agents")
+
+    # Perform further processing with the selected agents
+    # For now, we'll just print them
+    print("Data Collector Input:", data_collector_input)
+    print("Selected Agents:", selected_agents)
+
+    # You can add additional logic or processing here
+
+    return render_template("datacollector.html", compName=data_collector_input, complex_agents=["Agent1", "Agent2", "Agent3"], all_components=["Component1", "Component2", "Component3"])
+
+
+
+
+
+
 
 ######################################## Systems Tab #######################################################################################################################################################
 @app.route("/systems", methods=["POST","GET"])
