@@ -66,15 +66,6 @@ def get_input_parameters(fname):
             break
     return input_parameters
 
-# Example usage
-
-input_params = get_input_parameters("modelTestReference")
-print(input_params)
-
-# Print the extracted input parameters
-#print("Input Parameters:")
-#for param in input_params:
-#    print(param)
 
 
 #####################################################oratile########################

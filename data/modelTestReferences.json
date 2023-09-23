@@ -15,6 +15,10 @@
             {
                 "name": "sheep_reproduce",
                 "dataType": "int"
+            },
+            {
+                "name": "sheep_reproducing",
+                "dataType": "float"
             }
         ]
     },

@@ -8,6 +8,7 @@
     <section class="form_title">
         <label for="Name_of_component">Configure model input parameters</label>
     </section>
+
     <section class="form_attributes">
         {% set i = 0 %}
         {% for param in input_params %}
@@ -35,6 +36,9 @@
         </div>
         {% set i = i + 1 %}
         {% endfor %}
+        <label for="Iterations">Number of Iterations</label>
+        <input type="number" name="Iterations" placeholder="Enter number of Iterations">
+
     </section>
     <section class="submit_component">
         <input type="submit" name="submit_results" id="submit_button" value="Update">

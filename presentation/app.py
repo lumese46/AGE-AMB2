@@ -56,8 +56,10 @@ def home():
             case "Models":
                 return render_template("setup_model.html", model_type="")
             
-            case "Execute":
-                input_params = [{'name': 'seed', 'dataType': 'int'}, {'name': 'sheep_gain', 'dataType': 'int'}, {'name': 'sheep_reproduce', 'dataType': 'int'}]
+            case "Execute":# Example usage
+
+                input_params = helperMethods.get_input_parameters("modelTestReference")
+                
                 return render_template("execute_model_tab.html",input_params=input_params)
             
             case "Data Collector":
@@ -219,7 +221,8 @@ def add_system():
 ###################################################### execute Route ############################################3
 @app.route("/execute", methods=["POST","GET"])
 def execute_model():
-    input_params = [{'name': 'seed', 'dataType': 'int'}, {'name': 'sheep_gain', 'dataType': 'int'}, {'name': 'sheep_reproduce', 'dataType': 'int'}]
+    input_params = helperMethods.get_input_parameters("modelTestReference")
+   
     if request.method=="POST":
         action = request.form["submit_results"]
 
