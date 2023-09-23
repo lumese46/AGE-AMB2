@@ -42,6 +42,7 @@ def get_components_by_name(fname):
     for comp in saved_comps:
         results.append(comp[f"Name_of_{fname}"])
     return results
+#####################################################oratile########################
 # gets you the name of the complex agents by name 
 def get_complex_agents_by_name(fname):
     data= read_json(fname)
@@ -53,6 +54,32 @@ def create_data_collector_dict(agents_array):
         "Name_of_agents": agents_array
     }
     return data_collector_dict
+
+
+# returns input parameters
+def get_input_parameters(fname):
+    data= read_json(fname)
+    input_parameters = []
+    for item in data:
+        if 'input_parameters' in item:
+            input_parameters = item['input_parameters']
+            break
+    return input_parameters
+
+# Example usage
+
+input_params = get_input_parameters("modelTestReference")
+print(input_params)
+
+# Print the extracted input parameters
+#print("Input Parameters:")
+#for param in input_params:
+#    print(param)
+
+
+#####################################################oratile########################
+
+
 #give component name, get component with it's attributes
 def get_component(component_name):
     results = []

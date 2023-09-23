@@ -57,7 +57,9 @@ def home():
                 return render_template("setup_model.html", model_type="")
             
             case "Execute":
-                return render_template("execute_model_tab.html")
+                input_params = [{'name': 'seed', 'dataType': 'int'}, {'name': 'sheep_gain', 'dataType': 'int'}, {'name': 'sheep_reproduce', 'dataType': 'int'}]
+                return render_template("execute_model_tab.html",input_params=input_params)
+            
             case "Data Collector":
                 return render_template("data_collector.html",complex_agents=helperMethods.get_complex_agents_by_name("agent"))
     else:
@@ -213,6 +215,23 @@ def add_system():
                 return render_template("add_system_tab.html",
                            all_systems=helperMethods.get_components_by_name("system"), 
                            sys_name=name, sys_code =dummyCode)
+
+###################################################### execute Route ############################################3
+@app.route("/execute", methods=["POST","GET"])
+def execute_model():
+    input_params = [{'name': 'seed', 'dataType': 'int'}, {'name': 'sheep_gain', 'dataType': 'int'}, {'name': 'sheep_reproduce', 'dataType': 'int'}]
+    if request.method=="POST":
+        action = request.form["submit_results"]
+
+        #take value of button in templete
+        match (action):
+            case "Execute":
+                print("Hello exec")
+            case "Update":
+                print("Update")
+    return render_template("execute_model_tab.html",input_params=input_params)
+
+
 
 
 ###################################################### Model Routes ############################################3

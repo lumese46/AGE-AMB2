@@ -1,14 +1,13 @@
-:root{
+:root {
     --bgclr: #ece6e0;
     --fclr: #000000;
     --highlight: #5E17EB;
     --highlight_light: #5e17eb62;
-    --btnclr:  #231F20;
+    --btnclr: #231F20;
     --editclr: #4AFF00
-
 }
 
-*{
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -17,7 +16,8 @@
     text-transform: none;
     font-weight: bold;
 }
-body{
+
+body {
     background-color: var(--bgclr);
     /* border: 2px solid red; */
     height: 100vh;
@@ -26,7 +26,7 @@ body{
     grid-template-rows: .5fr 3.5fr;
 }
 
-nav{
+nav {
     /* border: 2px solid red; */
     display: grid;
     grid-template-rows: 1fr 1fr;
@@ -37,27 +37,27 @@ nav{
 
 }
 
-.main_nav{
+.main_nav {
     /* border: 2px solid orange; */
     margin: auto;
     align-items: center;
     width: 100%;
 }
 
-.main_nav form{
+.main_nav form {
     display: flex;
     flex-direction: row;
     gap: 2rem;
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
 }
 
-.nav_form input{
+.nav_form input {
     background: none;
     margin: auto;
     border: none;
 }
 
-.sub_nav{
+.sub_nav {
     /* border: 2px solid purple; */
     background: none;
     display: flex;
@@ -66,18 +66,19 @@ nav{
     gap: 1rem;
 }
 
-.sub_nav input{
+.sub_nav input {
     border: none;
     background: none;
 }
-.sub_nav #save_model_type{
+
+.sub_nav #save_model_type {
     font-style: italic;
 }
 
-main{
+main {
     border: .5px solid var(--btnclr);
     box-shadow: rgba(0, 0, 0, 0.24) 0px 8px 8px 8px;
-    width:90%;
+    width: 90%;
     position: relative;
     margin: auto;
     padding: 2rem;
@@ -89,12 +90,12 @@ main{
 
 }
 
-main section{
+main section {
     align-self: center;
 
 }
 
-.input_fields_section form{
+.input_fields_section form {
     height: 100%;
     display: grid;
     flex-direction: column;
@@ -102,36 +103,37 @@ main section{
 }
 
 
-form input[type="text"]{
+form input[type="text"] {
     background: none;
-    border:none;
+    border: none;
     border-bottom: 2px solid black;
     width: 100%;
 }
-input[type="text"]:focus{
+
+input[type="text"]:focus {
     outline-style: none;
     background-color: none;
     border-bottom: 2px solid var(--highlight);
 }
 
 
-form input[type="submit"]:focus{
+form input[type="submit"]:focus {
     outline-style: none;
     background-color: var(--highlight);
 }
 
 
-form input[type="submit"]:hover{
+form input[type="submit"]:hover {
     box-shadow: var(--highlight) 0px 2px 2px 2px;
 }
 
-.form_title{
+.form_title {
     padding-right: .8rem;
-    display:grid;
+    display: grid;
     grid-template-columns: 3fr 1fr;
 }
 
-#inner_title{
+#inner_title {
     display: grid;
     margin: 1rem auto;
     text-decoration: underline;
@@ -139,16 +141,17 @@ form input[type="submit"]:hover{
 }
 
 
-#attribute{
+#attribute {
     display: grid;
     grid-template-columns: 3fr 1fr;
     padding: 0.4rem .8rem;
 }
-.input_fields_section{
+
+.input_fields_section {
     object-fit: cover;
 }
 
-.output_window{
+.output_window {
     display: grid;
     background-color: var(--btnclr);
     grid-template-rows: .3fr 3fr;
@@ -160,7 +163,7 @@ form input[type="submit"]:hover{
     overflow: auto;
 }
 
-.output_window .title{
+.output_window .title {
     border: none;
     text-decoration: underline;
     text-decoration-thickness: 2px;
@@ -169,7 +172,7 @@ form input[type="submit"]:hover{
     margin-bottom: 1rem;
 }
 
-.output_window .components{
+.output_window .components {
     margin-left: 5%;
 }
 
@@ -179,9 +182,9 @@ form input[type="submit"]:hover{
 .dropbtn {
     border: none;
     border-bottom: 2px solid black;
-  }
+}
 
-.checkbox_section{
+.checkbox_section {
     display: grid;
     grid-template-columns: 1fr 1fr;
     /* border: 2px solid blueviolet; */
@@ -189,7 +192,7 @@ form input[type="submit"]:hover{
     margin-top: 1rem;
     max-height: 10rem;
     overflow: auto;
-    
+
 }
 
 ::-webkit-scrollbar {
@@ -201,25 +204,26 @@ form input[type="submit"]:hover{
 }
 
 ::-webkit-scrollbar-thumb {
-  background-color: #5E17EB;
-  outline: 1px solid #000000;
+    background-color: #5E17EB;
+    outline: 1px solid #000000;
 }
 
 
 
-#checkbox_input{
+#checkbox_input {
     display: grid;
     grid-template-columns: 1fr 3fr;
     margin: .2rem;
     border: 2px solid purple;
 }
-#submit_agent{
+
+#submit_agent {
     align-self: center;
 }
 
 
 /* system tab styles */
-.text_editor{
+.text_editor {
     width: 100%;
     height: 100%;
     background-color: #000000;
@@ -227,37 +231,47 @@ form input[type="submit"]:hover{
     align-items: start;
 }
 
-#generate_code_button{
-    color:green;
+#generate_code_button {
+    color: green;
     margin: 1rem;
-    
+
 }
 
 
 .dropdown {
     position: relative;
-  }
-  
-  .dropdown-content {
+}
+
+.dropdown-content {
     display: none;
     position: absolute;
     background-color: var(--bgclr);
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
     z-index: 1;
     flex-direction: column;
-  }
-  
-  .dropdown-content input {
-    width: 100%;
-  }
-  
-  .dropdown-content input:hover {background-color: #ddd;}
-  
-  .dropdown:hover .dropdown-content {display: flex;}
+}
 
-  .error_message{
+.dropdown-content input {
+    width: 100%;
+}
+
+.dropdown-content input:hover {
+    background-color: #ddd;
+}
+
+.dropdown:hover .dropdown-content {
+    display: flex;
+}
+
+.error_message {
     color: var(--warning);
-  }
+}
 
 
 /* Model Styles */
+
+.form_attributes .input_params {
+    border: 2px solid red;
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+}
