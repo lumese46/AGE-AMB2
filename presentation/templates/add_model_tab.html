@@ -173,7 +173,7 @@
             <div id="checbox_container">
                 {%for i in input_params %}
                 <div id="checkbox_input">
-                    <input type="checkbox" name="params_to_add" id={{i}} value="{{i}}">
+                    <input type="radio" name="params_to_add" id={{i}} value="{{i}}">
                     <label for="comp1">{{i["Name"]}}</label>
                 </div>
                 {%endfor%}

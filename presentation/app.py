@@ -1,6 +1,6 @@
 import flask
 from flask import Flask, render_template, redirect, request, url_for, session
-import helperMethods, modelhelperMethods
+import helperMethods
 import copy
 app = Flask(__name__)
 components = []
@@ -16,12 +16,6 @@ agent = {
         }
 
 comp_type = "SIMPLE"
-class_component ={
-        "Name_of_agent": "",
-        "Name_of_component":"",
-        "component_atributes_names": []
-    }
-class_components =[] #For complex agent can add multiple ones
 model_agent = {
                 "Name_of_agent": "",
                 "number_of_agents": ""
@@ -34,6 +28,7 @@ model_system={
             }
 model_systems = []
 complete_model =[]
+
 ################################################ Home ################################################
 #Set up site navigation
 
@@ -53,6 +48,7 @@ def home():
                                        all_systems=helperMethods.get_components_by_name("system"),
                                        all_agents = helperMethods.get_components_by_name("agent"))
             case "Models":
+                session.clear()
                 return render_template("setup_model.html", model_type="")
             
             case "Execute":
@@ -229,6 +225,10 @@ def add_model_type():
         model_type = request.form["model_type"]
         chosen_model_type = model_type
         session["model_type"] = model_type
+
+        if "input_parameters" not in session:
+            session['input_parameters'] = []
+
         #print (chosen_model_type)
         return render_template("add_model_tab.html", view=1,
                                model_type=chosen_model_type,
@@ -279,18 +279,34 @@ def add_model():
     # save input parameters, class components, agents and systems to the models json file
 
 
-    
+    #Setup session
     new_model_name=""
     action = request.form["submit_action"]
+
+    if "model_name" not in session:
+        session['model_name'] = ""
 
     if "input_parameters" not in session:
         session['input_parameters'] = []
 
 
+    if "model_agent" not in session:
+        session["model_agent"] =  {
+                "Name_of_agent": "",
+                "number_of_agents": ""
+            }
+        
     if "model_agents" not in session:
         session['model_agents'] = []
     
     if (session["model_type"] == "COMPLEX"):
+        if "class_component" not in session:
+            session['class_component'] = {
+                "Name_of_agent": "",
+                "Name_of_component":"",
+                "component_atributes_names": []
+            }
+
         if "class_components" not in session:
             session["class_components"] = []
 
@@ -341,11 +357,11 @@ def add_model():
                 saved_input_params.append(new_param)
                 session["input_parameters"] = saved_input_params
 
-            new_model_name = request.form["model_name"]
+            session["model_name"] = request.form["model_name"]
             return render_template("add_model_tab.html",
                                    view=1,
                                    input_params = session["input_parameters"],
-                                   model_name=new_model_name,
+                                   model_name=session["model_name"],
                                    model_type=session["model_type"])
         
         case "Save input parameters":
@@ -357,62 +373,72 @@ def add_model():
                 saved_input_params.append(new_param)
                 session["input_parameters"] = saved_input_params
             
-            new_model_name = request.form["model_name"]
+            session["model_name"] = request.form["model_name"]
             agents = helperMethods.get_agents_by_type(chosen_model_type)
             components = helperMethods.get_components_by_name("component")
             return render_template("add_model_tab.html",
                                    view=2, 
                                    model_type=session["model_type"],
-                                   model_name = new_model_name,
-                                   all_class_components = class_components,
+                                   model_name = session["model_name"],
+                                   all_class_components = session["class_components"],
                                    all_components=components, 
                                    all_agents = agents,
                                    input_params = session["input_parameters"])
         
         case "Add class component Name_of_agent":
             #print(input_parameters)
-            class_component["Name_of_agent"]=request.form["submit_action"]
-            new_model_name  = request.form["model_name"]
+            current_class_component = copy.deepcopy(session["class_component"])
+            current_class_component["Name_of_agent"] = request.form["submit_action"]
+            print(current_class_component)
+            session["class_component"] = current_class_component
+            session["model_name"]  = request.form["model_name"]
 
-        
+                    
             return render_template("add_model_tab.html",
                                    view=2, 
                                    model_type=session["model_type"], 
-                                   model_name = new_model_name, 
-                                   all_class_components = class_components,
+                                   model_name = session["model_name"], 
+                                   all_class_components = session['class_components'],
                                    all_components=all_components, 
                                    all_agents = helperMethods.get_agents_by_type(chosen_model_type), 
                                    input_params=session["input_parameters"])
 
         case "Add class component Name_of_component":
-            class_component["Name_of_component"]=request.form["submit_action"]
-            new_model_name = request.form["model_name"]
-            summary = helperMethods.get_components_summary([class_component["Name_of_component"]])
+            current_class_component = copy.deepcopy(session["class_component"])
+            current_class_component["Name_of_component"]=request.form["submit_action"]
+            print(current_class_component)
+            session["class_component"] = current_class_component
+            session['model_name'] = request.form["model_name"]
+            summary = helperMethods.get_components_summary([current_class_component["Name_of_component"]])
+
             # len(summary["Names_of_component_atributes"])
             return render_template("add_model_tab.html",
                                    view=2, 
                                    model_type=session["model_type"], 
-                                   model_name = new_model_name,
-                                   all_class_components = class_components,
+                                   model_name = session["model_name"],
+                                   all_class_components = session['class_components'],
                                    all_components=all_components, 
                                    all_agents = helperMethods.get_agents_by_type(chosen_model_type), 
-                                   input_params=session['input_parameters'], error_message=f"Select {len(summary[0]['Names_of_component_atributes'])} parameter(s)")
+                                   input_params=session['input_parameters'],
+                                   error_message=f"Select {len(summary[0]['Names_of_component_atributes'])} parameter(s)")
 
         case "Add class component":
-            new_model_name = request.form["model_name"]
+            current_class_component = copy.deepcopy(session["class_component"])
+            print(f"Working with current class component {current_class_component}")
+            session["model_name"] = request.form["model_name"]
             selected_params = request.form.getlist("params_to_add")
-            #print("input params")
-            #print(selected_params) 
-            class_component_summary = helperMethods.get_components_summary([class_component["Name_of_component"]])
+            session["class_component"]
+            class_component_summary = helperMethods.get_components_summary([current_class_component["Name_of_component"]])
             att_summary = class_component_summary[0]["Names_of_component_atributes"]
             params_summary = helperMethods.param_summary(selected_params)
 
-            #print(( f"Params summary {params_summary}"))
             if(len(selected_params)==len(att_summary)):
-                class_component["component_atributes_names"] = params_summary
-                #print(f"Class component {class_component}")
+                current_class_component["component_atributes_names"] = params_summary
+                print(current_class_component)
                 saved_class_components = copy.deepcopy(session['class_components'])
-                saved_class_components.append(class_component)
+                if( current_class_component not in saved_class_components):
+                    saved_class_components.append(current_class_component)
+
                 session['class_components'] = saved_class_components
 
                 print (f"Saved class components in session are {session['class_components']}")
@@ -420,8 +446,8 @@ def add_model():
                 return render_template("add_model_tab.html",
                                        view=2, 
                                        model_type=session["model_type"], 
-                                       model_name = new_model_name,
-                                       all_class_components = class_components,
+                                       model_name = session['model_name'],
+                                       all_class_components = session["class_components"],
                                        all_components=all_components, 
                                        all_agents = helperMethods.get_agents_by_type(chosen_model_type), 
                                        input_params=session['input_parameters'])
@@ -436,28 +462,34 @@ def add_model():
                                        error_message=f"Pick {len(att_summary)} parameter(s)")
             
         case "Save class components":
-            new_model_name = request.form["model_name"]
+            current_class_component = copy.deepcopy(session["class_component"])
+            print(f"Working with current class component {current_class_component}")
+            session["model_name"] = request.form["model_name"]
             selected_params = request.form.getlist("params_to_add")
-            # print("input params")
-            # print(selected_params) 
-            class_component_summary = helperMethods.get_components_summary([class_component["Name_of_component"]])
+            session["class_component"]
+            class_component_summary = helperMethods.get_components_summary([current_class_component["Name_of_component"]])
             att_summary = class_component_summary[0]["Names_of_component_atributes"]
             params_summary = helperMethods.param_summary(selected_params)
 
-            # print(( f"Params summary {params_summary}"))
             if(len(selected_params)==len(att_summary)):
-                class_component["component_atributes_names"] = params_summary
-                #print(f"Class component {class_component}")
-                class_components.append(class_component)
-                #print(class_components)
+                current_class_component["component_atributes_names"] = params_summary
+                print(current_class_component)
+                saved_class_components = copy.deepcopy(session['class_components'])
+                if( current_class_component not in saved_class_components):
+                    saved_class_components.append(current_class_component)
+
+                session['class_components'] = saved_class_components
+
+                print (f"Saved class components in session are {session['class_components']}")
+
                 return render_template("add_model_tab.html",
                                        view=3, 
                                        model_type=session["model_type"], 
-                                       model_name = new_model_name,
-                                       all_class_components = class_components,
+                                       model_name = session['model_name'],
+                                       all_class_components = session["class_components"],
                                        all_components=all_components, 
-                                       all_agents = helperMethods.get_components_by_name("agent"), 
-                                       input_params=input_parameters)
+                                       all_agents = helperMethods.get_agents_by_type(chosen_model_type), 
+                                       input_params=session['input_parameters'])
             else:
                 #print("error occured")
                 return render_template("add_model_tab.html",view=2, 
@@ -465,8 +497,9 @@ def add_model():
                                        model_name = new_model_name, 
                                        all_components=all_components, 
                                        all_agents = helperMethods.get_agents_by_type(chosen_model_type),
-                                       input_params=input_parameters,
+                                       input_params=session['input_parameters'],
                                        error_message=f"Pick {len(att_summary)} parameter(s)")
+ 
             
             
         case "Add model agent":
@@ -576,7 +609,7 @@ def add_model():
                                    model_type=session["model_type"], 
                                    model_name = new_model_name, 
                                    all_systems=all_current_systems, 
-                                   input_params=input_parameters)
+                                   input_params=session["input_parameters"])
         
         case "Save systems and execute model":
             new_model_name = request.form["model_name"]
