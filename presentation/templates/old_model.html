@@ -1,0 +1,174 @@
+{% extends "model_base.html" %}
+
+{% block view_section %}
+    <p>Model type:  {{model_type}}</p>
+    <p class="error_message">{{error_message}}</p>
+    {% if model_type == "COMPLEX" %}
+
+        {% if view == 1 %}
+        <input type="submit" name="submit_action" value="1. Add input parameters" !disabled >
+        <input type="submit" name="submit_action" value="2. Add class components" disabled >
+        <input type="submit" name="submit_action" value="3. Add agents" disabled>
+        <input type="submit" name="submit_action" value="4. Add systems" disabled>
+        
+        <form action="/model" method="post">
+            <input name="state" value = {{view}}>
+            <label for="model_name">Name</label>
+            <input type="text" name="model_name" required value={{model_name}}>
+            <section class="input_parameters">
+                <br>
+                <section >
+                    <label for="input_parameters">Add input parameters</label>
+                </section>
+                <label for="name_of_model">Name</label>
+                <input type="text" name="name" id="">
+                <br>
+                <label for="name_of_model">Data type</label>
+                <input type="text" name="data_type" id="">
+                <input type="submit" name="submit_action" value ="Add parameter">
+                <input type="submit" name="submit_action" value ="Save input parameters">
+            </section>
+        </form>
+        {% endif %}
+
+        {% if view == 2 %}
+        <input type="submit" name="submit_action" value="1. Add input parameters" !disabled >
+        <input type="submit" name="submit_action" value="2. Add class components" !disabled >
+        <input type="submit" name="submit_action" value="3. Add agents" disabled>
+        <input type="submit" name="submit_action" value="4. Add systems" disabled>
+            <form action="/model" method="post">
+                <input name="state" value = {{view}}>
+                <label for="model_name">Name</label>
+                <input type="text" name="model_name" required value={{model_name}}>
+                <section class="input_parameters">
+                    <label for="class_components">Add class components</label>
+                    <div id="class_agent">
+                        <label for="name_of_agent">Name of agent</label>
+                        <!-- Drop down to select agents -->
+                        <div class="dropdown">
+                            <label class="dropbtn">Choose agent<label>
+                            <div class="dropdown-content">
+                                {% for i in all_agents %}
+                                    <input type="submit" name="submit_action" id="agent_type" value={{i}}>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                    <div id="class_components">
+                        <label for="name_of_component">Name of component</label>
+                        <!-- Drop down to select agents -->
+                        <div class="dropdown">
+                            <label class="dropbtn">Choose component<label>
+                            <div class="dropdown-content">
+                                {% for i in all_components %}
+                                    <input type="submit" name="submit_action" id="agent_type" value={{i}}>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="choose_params">
+                        <label for="params_to_choose"> Select input parameters to associate with class component</label>
+                        {% for i in input_params %}
+                        <div id="checkbox_input">
+                            <input type="checkbox" name="checkbox_list" id={{i}} value="{{i}}">
+                            <label for="comp1">{{i["Name"]}}</label>
+                        </div>
+                        {%endfor%}
+                    </div>
+                    <input type="submit" name="submit_action" value ="Add class component">
+                    <input type="submit" name="submit_action" value ="Save class components">
+                </section>
+            </form>
+            
+        {% endif %}
+
+        {% if view == 3 %}
+        <input type="submit" name="submit_action" value="1. Add input parameters" !disabled >
+        <input type="submit" name="submit_action" value="2. Add class components" !disabled >
+        <input type="submit" name="submit_action" value="3. Add agents" !disabled>
+        <input type="submit" name="submit_action" value="4. Add systems" disabled>
+            <form action="/model" method="post">
+                <input name="state" value = {{view}}>
+                <label for="model_name">Name</label>
+                <input type="text" name="model_name" required value={{model_name}}>
+                <section class="input_parameters">
+                    <label for="class_components">Add agents</label>
+                    <br>
+                    <div id="class_agent">
+                        <label for="name_of_agent">Name of agent</label>
+                        <!-- Drop down to select agents -->
+                        <div class="dropdown">
+                            <label class="dropbtn">Choose agent<label>
+                            <div class="dropdown-content">
+                                {% for i in all_agents %}
+                                    <input type="submit" name="submit_action" id="agent_type" value={{i}}>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="choose_params">
+                        <label for="params_to_choose"> Select input parameter to associate with agent </label>
+                        {% for i in input_params %}
+                        <div id="checkbox_input">
+                            <input type="radio" name="checkbox_list" id={{i}} value="{{i}}">
+                            <label for="comp1">{{i["Name"]}}</label>
+                        </div>
+                        {%endfor%}
+                    </div>
+                    <input type="submit" name="submit_action" value ="Add agent to model">
+                    <input type="submit" name="submit_action" value ="Save agents">
+                </section>
+            </form>
+        {% endif %}
+
+        {% if view == 4 %}
+        <input type="submit" name="submit_action" value="1. Add input parameters" !disabled >
+        <input type="submit" name="submit_action" value="2. Add class components" !disabled >
+        <input type="submit" name="submit_action" value="3. Add agents" !disabled>
+        <input type="submit" name="submit_action" value="4. Add systems" !disabled>
+            <form action="/model" method="post">
+                <input name="state" value = {{view}}>
+                <label for="model_name">Name</label>
+                <input type="text" name="model_name" required value={{model_name}}>
+                <section class="input_parameters">
+                    <label for="systems">Add systems</label>
+                    <br>
+                    <div id="system">
+                        <label for="name_of_system">Name of system</label>
+                        <!-- Drop down to select agents -->
+                        <div class="dropdown">
+                            <label class="dropbtn">Choose system<label>
+                            <div class="dropdown-content">
+                                {% for i in all_systems %}
+                                    <input type="submit" name="submit_action" id="agent_type" value={{i}}>
+                                {% endfor %}
+                            </div>
+                        </div>
+                        <label for="sys_id">System ID</label>
+                        <input type="text" name="system_id" id="">
+                    </div>
+                    <div class="choose_params">
+                        <label for="params_to_choose"> Select input parameter to associate with system </label>
+                        {% for i in input_params %}
+                        <div id="checkbox_input">
+                            <input type="checkbox" name="param_list" id={{i}} value="{{i}}">
+                            <label for="comp1">{{i["Name"]}}</label>
+                        </div>
+                        {%endfor%}
+                    </div>
+                    <input type="submit" name="submit_action" value ="Add system">
+                    <input type="submit" name="submit_action" value ="Save systems and execute model">
+                </section>
+            </form>
+        {% endif %}
+
+    {% endif %}
+
+    {% if model_type == "SIMPLE" %}
+        <p>To be added</p>
+    {% endif %}
+
+   
+{% endblock %}
+
+

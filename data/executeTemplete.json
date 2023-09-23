@@ -1,0 +1,44 @@
+[
+    {
+        "name_model": "PredatorPreyModel"
+    },
+    {
+        "input_parameters": [
+            {
+                "name": "size",
+                "input": 50
+            },
+            {
+                "name": "init_sheep",
+                "input": 100
+            },
+            {
+                "name": "init_wolf",
+                "input": 50
+            },
+            {
+                "name": "regrow_rate",
+                "input": 30
+            },
+            {
+                "name": "sheep_gain",
+                "input": 4
+            },
+            {
+                "name": "wolf_gain",
+                "input": 25
+            },
+            {
+                "name": "sheep_reproduce",
+                "input": 0.04
+            },
+            {
+                "name": "wolf_reproduce",
+                "input": 0.06
+            }
+        ]
+    },
+    {
+        "iterations": 1000
+    }
+]

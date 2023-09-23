@@ -37,6 +37,16 @@ class codeGenerator:
                 agent = agentFactory.createAgentS(Type_of_agent)
                 # generate agent code
                 print(agent.generateAgent())
+     def generateSystem():
+            # get the data from json file 
+            data = json_load('systems.json')
+            # get the approriate data types for 
+            for obj in data:
+                Name_of_system = obj.get("Name_of_system")
+                code = obj.get("code")
+                print(code)
+
+
 code = codeGenerator
 print(code.generateAgent())
 

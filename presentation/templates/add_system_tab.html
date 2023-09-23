@@ -1,22 +1,41 @@
 {%extends "base.html"%}
-{%block title%}System{%endblock%}
+
+{%block title%}
+    System
+{%endblock%} 
+
+{%block stylesheet%}
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles.css')}}" >
+    
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='codemirror-5.65.15/lib/codemirror.css')}}" >
+    <script src="{{ url_for('static',filename='codemirror-5.65.15lib/codemirror.js')}}" ></script>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='codemirror-5.65.15/theme/the-matrix.css')}}" >
+    <script src="{{ url_for('static',filename='codemirror-5.65.15/mode/python/python.js')}}"></script>
+
+{%endblock%}
+
 {%block highlight_system%}style="color:#5E17EB;"{%endblock%}
 
 {%block input_fields%}
-<form action="/systems" method="post">
-    <section class="form_title">
-        <label for="sys_name">System name</label>
-        <input type="text" name="sys_name" id="sys_name">
-    </section>
-    <section class="form_attributes">
-        <textarea  name="editor" class="text_editor"> #add python code here</textarea>
-    </section>
-    <section class="submit">
-        <input type="submit" value="Save System">
-    </section>
-</form>
+    <form action="/systems" method="post">
+        <section class="form_title">
+            <label for="sys_name">System name</label>
+            <input type="text" name="sys_name" id="sys_name" value="{{sys_name}}" required>
+            <input type="submit" name="submit_code" id="generate_code_button" value="Create system">
+        </section>
+        <section class="form_attributes">
+            <textarea  name="editor_code" class="text_editor" id="editor"> {{sys_code}}</textarea>
+            <!-- <input type="submit" name="submit_code" value="Run"> -->
+        </section>
+        <section class="submit">        
+            <input type="submit" name="submit_code" value="Save system">
+        </section>
+    </form>
 {%endblock%}
 {%block output_window%}
+    <!-- <section class="shell">
+        <p>Run results will go here</p>
+    </section> -->
     <h2 class="title">My Systems</h2>
     <div class="components">
         {%for i in all_systems%}
@@ -24,3 +43,12 @@
         {%endfor%}
     </div>
 {%endblock%}
+<script type="text/javascript">
+    var editor = CodeMirror.fromTextArea(
+        document.getElementById("editor"),
+        {
+            mode:"python",
+            theme: "the-matrix"
+        }
+    );
+</script>

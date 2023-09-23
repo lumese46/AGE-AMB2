@@ -1,20 +1,31 @@
 
-<link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles.css')}}" >
+{%block stylesheet%}{%endblock%}
 
 <title>{%block title%}{%endblock%}</title>
 
 <body>
     <nav>
-        <form action="/" method="post" class="nav">
-            <input type="submit" name="browse" value="Components" {%block highlight_comp%}{%endblock%}>
-            <input type="submit" name="browse" value="Agents" {%block highlight_agent%}{%endblock%}>
-            <input type="submit" name="browse" value="Systems" {%block highlight_system%}{%endblock%}>
-            <input type="submit" name="browse" value="Models">
-        </form>
+        <section class="main_nav">
+            <form action="/" method="post" class="nav_form">
+                <input type="submit" name="browse" value="Components" {%block highlight_comp%}{%endblock%}>
+                <input type="submit" name="browse" value="Agents" {%block highlight_agent%}{%endblock%}>
+                <input type="submit" name="browse" value="Systems" {%block highlight_system%}{%endblock%}>
+                <input type="submit" name="browse" value="Models" {%block highlight_model%}{%endblock%}>
+                <input type="submit" name="browse" id="" value="Execute" {%block highlight_execute%}{%endblock%}>
+                <input type="submit" name="browse" id="" value="Data Collector" {%block data_collector%}{%endblock%}>
+
+            </form>
+        </section>
+        <section class="sub_nav">
+            {% block sub_nav%}
+            {%endblock%}
+        </section>
     </nav>
     <main>
         <section class="input_fields_section">
             {%block input_fields%}
+            {%endblock%}
+            {%block model_fields%}
             {%endblock%}
         </section>
         <section class="output_window ">

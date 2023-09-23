@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{%block stylesheet%} 
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles.css')}}" >
+{%endblock%}
+
+{%block input_fields%}
+<form action="execute" method="post">
+    <section class="form_title">
+            <label for="Name_of_component">Configure model input parameters</label>
+    </section>
+    <section class="form_attributes">
+        {% for i in range(10) %}
+            <label for="input_param">InputParam{{i}}</label>
+            <input type="text" name={{i}} placeholder="value">
+        {% endfor %}
+    </section>
+    <section class="submit_component">
+        <input type="submit" name="submit_results" id="submit_button" value="Update">
+        <input type="submit" name="submit_results" id="submit_button" value="Execute">
+    </section>
+</form>
+
+{%endblock%}
