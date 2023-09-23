@@ -1,4 +1,3 @@
-import flask
 from flask import Flask, render_template, redirect, request, url_for, session
 import helperMethods, modelhelperMethods
 
@@ -60,7 +59,7 @@ def home():
             case "Execute":
                 return render_template("execute_model_tab.html")
             case "Data Collector":
-                return render_template("data_collector.html")
+                return render_template("data_collector.html",complex_agents=helperMethods.get_complex_agents_by_name("agent"))
     else:
         return(render_template("add_component_tab.html"))
     
@@ -170,28 +169,21 @@ def add_agent():
 ######################################## Data Collector Tab #######################################################################################################################################################
 
 
-@app.route("/dataCollector", methods=["POST","GET"])
+@app.route("/dataCollector", methods=["POST", "GET"])
 def data_collector():
+    submit_disabled = False
+    if request.method == "POST":
+        # Get the selected agents from the radio buttons
+        selected_agents = request.form.getlist("selected_agents")
+        
+        # You can add additional logic or processing here
+        contents = helperMethods.create_data_collector_dict(selected_agents)
+        helperMethods.add_to_json(contents,"dataCollector")
+        submit_disabled = True
+
     
-    # Get the data collector input value
-    data_collector_input = request.form["dataCollector_inp1"]
 
-    # Get the selected agents from the radio buttons
-    selected_agents = request.form.getlist("selected_agents")
-
-    # Perform further processing with the selected agents
-    # For now, we'll just print them
-    print("Data Collector Input:", data_collector_input)
-    print("Selected Agents:", selected_agents)
-
-    # You can add additional logic or processing here
-
-    return render_template("datacollector.html", compName=data_collector_input, complex_agents=["Agent1", "Agent2", "Agent3"], all_components=["Component1", "Component2", "Component3"])
-
-
-
-
-
+    return render_template("data_collector.html", complex_agents=helperMethods.get_complex_agents_by_name("agent"), submit_disabled=submit_disabled)
 
 
 ######################################## Systems Tab #######################################################################################################################################################

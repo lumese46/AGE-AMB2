@@ -23,7 +23,7 @@
     {
         "Name_of_agent": "WOLF",
         "Class_component_name": "energy_component",
-        "Type_of_agent": "SIMPLE",
+        "Type_of_agent": "COMPLEX",
         "Components": [
             {
                 "Name_of_component": "EnergyComponent",

@@ -47,6 +47,12 @@ def get_complex_agents_by_name(fname):
     data= read_json(fname)
     complex_agents = [agent["Name_of_agent"] for agent in data if agent.get("Type_of_agent") == "COMPLEX"]
     return complex_agents
+# this create a data collector dict 
+def create_data_collector_dict(agents_array):
+    data_collector_dict = {
+        "Name_of_agents": agents_array
+    }
+    return data_collector_dict
 #give component name, get component with it's attributes
 def get_component(component_name):
     results = []

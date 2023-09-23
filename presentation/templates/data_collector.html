@@ -16,23 +16,24 @@ style="color:#5E17EB;"
 <form action="/dataCollector" method="post" class="input_param_form">
     <section class="form_title">
         <label for="Name_of_component">Data Collector</label>
-        <input required type="text" name="dataCollector_inp1" id="Name_of_component" value="{{ compName }}">
     </section>
     <section class="form_attributes">
         <label for="Component_attributes_form" id="inner_title">Select Complex Agents</label>
-        <div id="attribute">
+        <div id="checkbox_container">
             {% for agent in complex_agents %}
-            <label>
-                <input type="radio" name="selected_agents" value="{{ agent }}" required>
-                {{ agent }}
-            </label><br>
+            <div id="checkbox_input">
+                <input type="checkbox" name="selected_agents" id={{agent}} value="{{agent}}">
+                <label for="comp1">{{agent}}</label>
+            </div>
             {% endfor %}
         </div>
     </section>
     <section class="submit_component">
-        <input type="submit" name="submit_results" id="submit_button" value="Add selected agents">
+        <input type="submit" name="submit_results" id="submit_button" value="Add selected agents" {% if submit_disabled
+            %}disabled{% endif %}>
     </section>
 </form>
+
 {% endblock %}
 
 {% block output_window %}
