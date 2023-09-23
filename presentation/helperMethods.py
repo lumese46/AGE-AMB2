@@ -42,7 +42,11 @@ def get_components_by_name(fname):
     for comp in saved_comps:
         results.append(comp[f"Name_of_{fname}"])
     return results
-
+# gets you the name of the complex agents by name 
+def get_complex_agents_by_name(fname):
+    data= read_json(fname)
+    complex_agents = [agent["Name_of_agent"] for agent in data if agent.get("Type_of_agent") == "COMPLEX"]
+    return complex_agents
 #give component name, get component with it's attributes
 def get_component(component_name):
     results = []
@@ -87,3 +91,6 @@ def get_agents_by_type(agent_type):
         if agent["Type_of_agent"]==agent_type:
             result.append(agent["Name_of_agent"])
     return (result)
+
+
+
