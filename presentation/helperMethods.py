@@ -68,7 +68,7 @@ def get_components_summary(compList):
             results.append(comp_summary)
         else:
             pass
-    print("Summary created")
+    # print("Summary created")
     return results
 
 #get all agents

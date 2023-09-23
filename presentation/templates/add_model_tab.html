@@ -153,7 +153,11 @@
                 <label for="name_of_component">Name of agent</label>
                 <!-- Drop down to select agents -->
                 <div class="dropdown">
-                    <label class="dropbtn">Choose agent<label>
+                    {% if chosen_agent%}
+                        <label class="dropbtn">{{chosen_agent}}<label>
+                    {% else %}
+                        <label class="dropbtn">Choose agent<label>
+                    {% endif %}
                     <div class="dropdown-content">
                         {% for i in all_agents %}
                             <input type="submit" name="submit_action" id="agent_type" value={{i}}>
