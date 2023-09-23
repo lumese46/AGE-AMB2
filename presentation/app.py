@@ -214,6 +214,7 @@ def add_model_type():
     else:
         return render_template("setup_model.html")
     
+
 @app.route("/model", methods=["GET", "POST"])
 def add_model():
 
@@ -283,6 +284,7 @@ def add_model():
         elif state[0]=="3":
             #print("initial action "+ action)
             print("Agent chosen to be added to model is "+ action)
+            print(f"Current agents are {model_agents}")
             agent_to_add_to_model = action
             action="Add model agent"
 
