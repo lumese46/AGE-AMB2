@@ -148,7 +148,7 @@
                 <input type="text" name="model_name" required value={{model_name}}>
         </section>
         <section class="form_attributes">
-            <label for="Component_attributes_form" id="inner_title">Add agents</label>
+            <label for="Component_attributes_form" id="inner_title">Add Agents</label>
             <div id="attribute">
                 <label for="name_of_component">Name of agent</label>
                 <!-- Drop down to select agents -->
@@ -185,6 +185,59 @@
         </section>
     </form> 
     {%endif%}
+
+    {% if view == 4 %}
+    <form action="/model" method="post" class="model_form">
+        <section class="form_title">
+                <input name="state" value = {{view}} hidden>
+                <label for="model_name">Name</label>
+                <input type="text" name="model_name" required value={{model_name}}>
+        </section>
+        <section class="form_attributes">
+            <label for="Component_attributes_form" id="inner_title">Add Systems</label>
+
+            <div id="attribute">
+                <label for="system_id">System ID</label>
+                    <input required type="text" name="system_id" id="" value={{system_id}} >
+            </div>
+
+            <div id="attribute">
+                <label for="name_of_component">Name of system</label>
+                <!-- Drop down to select agents -->
+                <div class="dropdown">
+                    {% if chosen_system%}
+                        <label class="dropbtn">{{chosen_system}}<label>
+                    {% else %}
+                        <label class="dropbtn">Choose system<label>
+                    {% endif %}
+                    <div class="dropdown-content">
+                        {% for i in all_systems %}
+                            <input type="submit" name="submit_action" id="agent_type" value={{i}}>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="checkbox_section">
+            <label for="checkbox" id="inner_title">Select input parameter(s) to associate with {{chosen_agent}} System</label>
+                <!-- Drop down to select agents -->
+            <div id="checbox_container">
+                {%for i in input_params %}
+                <div id="checkbox_input">
+                    <input type="checkbox" name="params_to_add" id={{i}} value="{{i}}">
+                    <label for="comp1">{{i["Name"]}}</label>
+                </div>
+                {%endfor%}
+            </div>
+        </section>
+        <section class="submit_component">
+            <input type="submit" name="submit_action" value ="Save System">
+            <input type="submit" name="submit_action" value ="Save systems and execute model">
+        </section>
+    </form> 
+    {%endif%}
+
 {% endblock %}
 
 {%block output_window%}
@@ -219,5 +272,16 @@
         {%endfor%}
     </div>
     {% endif %}
+
+    {% if view == 4%}
+    <h2 class="title"> Systems for model {{model_name}}</h2>
+    <div class="components">
+        {%for i in saved_systems%}
+            <!-- <input type="submit" name="submit_results" id="" value={{i}}> -->
+            <p>{{i["system_id"]}}</p>
+        {%endfor%}
+    </div>
+    {% endif %}
+    
 
 {% endblock %}
