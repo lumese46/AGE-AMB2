@@ -41,7 +41,8 @@ def home():
                 return render_template("setup_model.html", model_type="")
             
             case "Execute":
-                return render_template("execute_model_tab.html")
+                return render_template("execute_model_tab.html",
+                                       input_params = session["input_parameters"] )
             
             case "Data Collector":
                 return render_template("data_collector.html")
@@ -704,13 +705,8 @@ def add_model():
                 helperMethods.add_to_json(complete_model, "model")
                 
                     
-                return render_template("add_model_tab.html",
-                                   view=4, 
-                                   model_type=session["model_type"], 
-                                   model_name = session["model_name"],
-                                   all_systems=all_current_systems, 
-                                   saved_systems = session["model_systems"],
-                                   input_params=session["input_parameters"])
+                return render_template("execute_model_tab.html",
+                                    input_params = session["input_parameters"] )
             
             else:
                return render_template("add_model_tab.html",

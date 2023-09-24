@@ -106,7 +106,7 @@ form input[type="text"]{
     background: none;
     border:none;
     border-bottom: 2px solid black;
-    width: 100%;
+    width: fit-content;
 }
 input[type="text"]:focus{
     outline-style: none;
@@ -143,6 +143,8 @@ form input[type="submit"]:hover{
     display: grid;
     grid-template-columns: 3fr 1fr;
     padding: 0.4rem .8rem;
+    gap: 1fr;
+
 }
 .input_fields_section{
     object-fit: cover;

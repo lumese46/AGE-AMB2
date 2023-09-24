@@ -9,10 +9,12 @@
             <label for="Name_of_component">Configure model input parameters</label>
     </section>
     <section class="form_attributes">
-        {% for i in range(10) %}
-            <label for="input_param">InputParam{{i}}</label>
-            <input type="text" name={{i}} placeholder="value">
-        {% endfor %}
+        <div id="attribute">
+            {% for i in input_params %}
+                <label for="input_param">{{i["Name"]}}</label>
+                <input type="text" name={{i}} placeholder="value of type {{i['dataType']}}">
+            {% endfor %}
+        </div>
     </section>
     <section class="submit_component">
         <input type="submit" name="submit_results" id="submit_button" value="Update">
