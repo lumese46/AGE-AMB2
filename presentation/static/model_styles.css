@@ -233,20 +233,20 @@ form input[type="submit"]:hover{
 /* Model Styles */
 
 .model_form{
-    border: 2px solid red;
+    /* border: 2px solid red; */
     display: grid;
     grid-template-rows: 1fr 2fr 2fr 1fr;
 }
-.model_form section{
-    border: 2px solid green;
-}
+/* .model_form section{
+    /* border: 2px solid green; */
+/* } 
 .model_form .checkbox_section{
     border: 2px solid red;
-}
+} */
 
 
 .model_form .checkbox_section div{
-    border: 2px solid orange;
+    /* border: 2px solid orange; */
     margin-top: 10px;
     height:5rem;
     display: grid;
@@ -258,6 +258,6 @@ form input[type="submit"]:hover{
     display: grid;
     grid-template-columns: 1fr 3fr;
     margin: .2rem;
-    border: 2px solid maroon;
+    /* border: 2px solid maroon; */
     height: fit-content;
 }

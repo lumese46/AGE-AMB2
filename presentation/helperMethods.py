@@ -28,7 +28,11 @@ def param_summary(json_str_arr):
         result.append(js_json["Name"])
     return result
 
-
+def params_by_name(params):
+    result = []
+    for i in params:
+        result.append(i["Name"])
+    return result
 def add_attributes(att_name,  att_desc, att_val):
     attribute = {}
     attribute["name"]=att_name

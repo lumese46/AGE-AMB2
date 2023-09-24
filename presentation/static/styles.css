@@ -213,7 +213,7 @@ form input[type="submit"]:hover{
     display: grid;
     grid-template-columns: 1fr 3fr;
     margin: .2rem;
-    border: 2px solid purple;
+    /* border: 2px solid purple; */
 }
 #submit_agent{
     align-self: center;

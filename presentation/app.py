@@ -17,7 +17,8 @@ agent = {
 
 comp_type = "SIMPLE"
 
-
+dataTypes = ["Integer", "String", "Float", "Boolean"]
+    
 ################################################ Home ################################################
 #Set up site navigation
 
@@ -97,24 +98,6 @@ def add_components():
         return render_template("add_component_tab.html", 
                                compName=component_name, all_components=helperMethods.get_components_by_name("component"), 
                                all_agents = helperMethods.get_components_by_name("agent"))
-
-
-
-############################################### Edit Component ###################################
-# @app.route("/edit_component", methods=["POST"])
-# def edit_component():
-#     #get component to be edited
-#     action = request.form["edit_component"]
-#     match(action):
-#         case("edit_component"):
-#             component_to_edit = helperMethods.get_component(request.form["edit_component"])
-#             allAttsNames = []
-#             for att in component_to_edit[0]["Component_attributes"]:
-#                 allAttsNames.append(att["name"])
-#             print(component_to_edit)
-#             return render_template("edit_component.html", compName=request.form["edit_component"], all_components=allAttsNames, all_agents = helperMethods.get_components_by_name("agent"))
-#     return render_template("add_component_tab.html", compName=request.form["edit_component"], all_components=allAttsNames, all_agents = helperMethods.get_components_by_name("agent"))
-
 
 
 ############################################################AGENT ROUTES#############################################################
@@ -222,7 +205,8 @@ def add_model_type():
         #print (chosen_model_type)
         return render_template("add_model_tab.html", view=1,
                                model_type=chosen_model_type,
-                               input_params = session["input_parameters"])
+                               input_params = session["input_parameters"],
+                               dataTypes = dataTypes)
     else:
         return render_template("setup_model.html")
     
@@ -268,10 +252,13 @@ def add_model():
     # save systems to all systems
     # save input parameters, class components, agents and systems to the models json file
 
-
+    
     #Setup session
     new_model_name=""
     action = request.form["submit_action"]
+
+    if "dataType" not in session:
+        session["dataType"] = ""
 
     if "model_name" not in session:
         session['model_name'] = ""
@@ -325,6 +312,10 @@ def add_model():
 
     state = (request.form.getlist("state"))
 
+    if (action in dataTypes):
+        print(f"Chosen DataType is {action}")
+        chosen_data_type = action,
+        action = "Choose Data Type"
 
     if ((action in all_agents) and chosen_model_type=="COMPLEX"):
         state = (request.form.getlist("state"))
@@ -346,12 +337,27 @@ def add_model():
    
 
     match(action):
+
+        case "Choose Data Type":
+            session["dataType"] = chosen_data_type[0]
+            session["model_name"] = request.form["model_name"]
+            param_name = (request.form["name"])
+            print(f" to dispay data type as {param_name}")
+            session["param_name"] = param_name
+            return render_template("add_model_tab.html", view=1,
+                               model_type=chosen_model_type,
+                               input_params = session["input_parameters"],
+                               model_name = session["model_name"],
+                               dataTypes = dataTypes,
+                               dataType = session["dataType"],
+                               param_name = session["param_name"]
+                               )
+        
         case "Add parameter":
             new_param["Name"]=request.form["name"]
-            new_param["dataType"] = request.form["data_type"]
+            new_param["dataType"] = session["dataType"]
             saved_input_params = copy.deepcopy(session["input_parameters"])
-
-            if( new_param not in saved_input_params):
+            if( new_param["Name"] not in helperMethods.params_by_name(saved_input_params)):
                 saved_input_params.append(new_param)
                 session["input_parameters"] = saved_input_params
 
@@ -360,20 +366,34 @@ def add_model():
                                    view=1,
                                    input_params = session["input_parameters"],
                                    model_name=session["model_name"],
-                                   model_type=session["model_type"])
+                                   model_type=session["model_type"],
+                                   dataTypes = dataTypes,
+                                   )
         
         case "Save input parameters":
-            new_param["Name"]=request.form["name"]
-            new_param["dataType"] = request.form["data_type"]
-            saved_input_params = copy.deepcopy(session["input_parameters"])
+            session["model_name"] = request.form["model_name"]
+            if (request.form["name"] and session["dataType"] != ""):
+                new_param["Name"]=request.form["name"]
+                new_param["dataType"] = session["dataType"]
+                saved_input_params = copy.deepcopy(session["input_parameters"])
 
-            if( new_param not in saved_input_params):
-                saved_input_params.append(new_param)
-                session["input_parameters"] = saved_input_params
-            
+                if( new_param not in saved_input_params):
+                    saved_input_params.append(new_param)
+                    session["input_parameters"] = saved_input_params
+
+            if (len(session["input_parameters"])==0):
+                return render_template("add_model_tab.html",
+                                   view=1,
+                                   input_params = session["input_parameters"],
+                                   model_name=session["model_name"],
+                                   model_type=session["model_type"],
+                                   dataTypes = dataTypes,
+                                   error_message = "You must save atleat 1 input parameter and pick data type"
+                                   )
             session["model_name"] = request.form["model_name"]
             agents = helperMethods.get_agents_by_type(chosen_model_type)
             components = helperMethods.get_components_by_name("component")
+
             return render_template("add_model_tab.html",
                                    view=2, 
                                    model_type=session["model_type"],
@@ -384,6 +404,7 @@ def add_model():
                                    input_params = session["input_parameters"])
         
         case "Add class component Name_of_agent":
+
             current_class_component = copy.deepcopy(session["class_component"])
             current_class_component["Name_of_agent"] = request.form["submit_action"]
             print(current_class_component)
@@ -398,7 +419,10 @@ def add_model():
                                    all_class_components = session['class_components'],
                                    all_components=all_components, 
                                    all_agents = helperMethods.get_agents_by_type(chosen_model_type), 
-                                   input_params=session["input_parameters"])
+                                   input_params=session["input_parameters"],
+                                   name_of_agent=session["class_component"]["Name_of_agent"],
+                                   name_of_component = session["class_component"]["Name_of_component"]
+                                   )
 
         case "Add class component Name_of_component":
             current_class_component = copy.deepcopy(session["class_component"])
@@ -416,6 +440,8 @@ def add_model():
                                    all_components=all_components, 
                                    all_agents = helperMethods.get_agents_by_type(chosen_model_type), 
                                    input_params=session['input_parameters'],
+                                   name_of_agent=session["class_component"]["Name_of_agent"],
+                                   name_of_component = session["class_component"]["Name_of_component"],
                                    error_message=f"Select {len(summary[0]['Names_of_component_atributes'])} parameter(s)")
 
         case "Add class component":
@@ -450,51 +476,66 @@ def add_model():
             else:
                 return render_template("add_model_tab.html",view=2, 
                                        mmodel_type=session["model_type"], 
-                                       model_name = new_model_name, 
+                                       model_name = session['model_name'], 
                                        all_components=all_components, 
                                        all_agents = helperMethods.get_agents_by_type(chosen_model_type),
                                        input_params=session['input_parameters'],
                                        error_message=f"Pick {len(att_summary)} parameter(s)")
             
         case "Save class components":
-            current_class_component = copy.deepcopy(session["class_component"])
-            print(f"Working with current class component {current_class_component}")
-            session["model_name"] = request.form["model_name"]
-            selected_params = request.form.getlist("params_to_add")
-            session["class_component"]
-            class_component_summary = helperMethods.get_components_summary([current_class_component["Name_of_component"]])
-            att_summary = class_component_summary[0]["Names_of_component_atributes"]
-            params_summary = helperMethods.param_summary(selected_params)
 
-            if(len(selected_params)==len(att_summary)):
-                current_class_component["component_atributes_names"] = params_summary
-                print(current_class_component)
-                saved_class_components = copy.deepcopy(session['class_components'])
-                if( current_class_component not in saved_class_components):
-                    saved_class_components.append(current_class_component)
+            # session['class_component'] = {
+            #     "Name_of_agent": "",
+            #     "Name_of_component":"",
+            #     "component_atributes_names": []
+            # }
 
-                session['class_components'] = saved_class_components
+            if len(request.form.getlist("params_to_add"))!=0 and session['class_component']["Name_of_component"]!="" and session['class_component']["Name_of_agent"]!="":
+                current_class_component = copy.deepcopy(session["class_component"])
+                print(f"Working with current class component {current_class_component}")
+                session["model_name"] = request.form["model_name"]
+                selected_params = request.form.getlist("params_to_add")
+                session["class_component"]
+                class_component_summary = helperMethods.get_components_summary([current_class_component["Name_of_component"]])
+                att_summary = class_component_summary[0]["Names_of_component_atributes"]
+                params_summary = helperMethods.param_summary(selected_params)
 
-                print (f"Saved class components in session are {session['class_components']}")
+                if(len(selected_params)==len(att_summary)):
+                    current_class_component["component_atributes_names"] = params_summary
+                    print(current_class_component)
+                    saved_class_components = copy.deepcopy(session['class_components'])
+                    if( current_class_component not in saved_class_components):
+                        saved_class_components.append(current_class_component)
+                        session['class_components'] = saved_class_components
+                    return render_template("add_model_tab.html",
+                                    view=3, 
+                                    model_type=session["model_type"], 
+                                    model_name = session['model_name'],
+                                    all_class_components = session["class_components"],
+                                    all_components=all_components, 
+                                    all_agents = helperMethods.get_components_by_name("agent"), 
+                                    input_params=session['input_parameters'])
 
-                return render_template("add_model_tab.html",
-                                       view=3, 
-                                       model_type=session["model_type"], 
-                                       model_name = session['model_name'],
-                                       all_class_components = session["class_components"],
-                                       all_components=all_components, 
-                                       all_agents = helperMethods.get_components_by_name("agent"), 
-                                       input_params=session['input_parameters'])
+                
+                else:
+                    return render_template("add_model_tab.html",view=2, 
+                                        mmodel_type=session["model_type"], 
+                                        model_name = session["model_name"], 
+                                        all_components=all_components, 
+                                        all_agents = helperMethods.get_agents_by_type(chosen_model_type),
+                                        input_params=session['input_parameters'],
+                                        error_message=f"Pick {len(att_summary)} parameter(s)")
+ 
             else:
                 return render_template("add_model_tab.html",view=2, 
-                                       mmodel_type=session["model_type"], 
-                                       model_name = new_model_name, 
-                                       all_components=all_components, 
-                                       all_agents = helperMethods.get_agents_by_type(chosen_model_type),
-                                       input_params=session['input_parameters'],
-                                       error_message=f"Pick {len(att_summary)} parameter(s)")
- 
-            
+                                    mmodel_type=session["model_type"], 
+                                    model_name = session["model_name"], 
+                                    all_components=all_components, 
+                                    all_agents = helperMethods.get_agents_by_type(chosen_model_type),
+                                    input_params=session['input_parameters'],
+                                    error_message=f"Pick component attributes to associate with class component")
+
+                
             
         case "Add model agent":
 
@@ -502,7 +543,7 @@ def add_model():
             print("preparing to add agent to model")
             current_model_agent = session["model_agent"]
             current_model_agent["Name_of_agent"] = agent_to_add_to_model
-            session["model_agent"] = current_model_agent
+            session["model_agent"]["Name_of_agent"] = agent_to_add_to_model
             print(f"current session agent is {current_model_agent}")
             current_model_agents = copy.deepcopy(session["model_agents"])
             return render_template("add_model_tab.html",
@@ -510,63 +551,88 @@ def add_model():
                                    all_agents = helperMethods.get_components_by_name("agent"),
                                    input_params = session["input_parameters"],
                                    model_name = session["model_name"],
-                                   current_model_agents = current_model_agents
+                                   current_model_agents = current_model_agents,
+                                   chosen_agent = session["model_agent"]["Name_of_agent"]
                                    )
         
         case "Add agent to model":
-            session['model_name'] = request.form['model_name']
-            chosen_input_param = request.form["params_to_add"]
-            params_summary = helperMethods.param_summary([chosen_input_param])
-            print(f"Param to be added to session agent {params_summary}")
+            if session["model_agent"]["Name_of_agent"]!="" and len(request.form.getlist("params_to_add"))!=0:
+                session['model_name'] = request.form['model_name']
+                chosen_input_param = request.form["params_to_add"]
+                params_summary = helperMethods.param_summary([chosen_input_param])
+                print(f"Param to be added to session agent {params_summary}")
 
-            current_model_agent = copy.deepcopy(session["model_agent"])
-            current_model_agent["number_of_agents"]= params_summary[0]
-            print(f"current model agent {current_model_agent}")
+                current_model_agent = copy.deepcopy(session["model_agent"])
+                current_model_agent["number_of_agents"]= params_summary[0]
+                print(f"current model agent {current_model_agent}")
 
-            current_model_agents = copy.deepcopy(session["model_agents"])
-            
-            if current_model_agent not in current_model_agents:
-                current_model_agents.append(current_model_agent)
-                session['model_agents'] = current_model_agents
-            print(f"current saved model agents {current_model_agents}")
-            # current_model_agent["number_of_agents"] = chosen_input_param[]
-            return render_template("add_model_tab.html",
+                current_model_agents = copy.deepcopy(session["model_agents"])
+                
+                if current_model_agent not in current_model_agents:
+                    current_model_agents.append(current_model_agent)
+                    session['model_agents'] = current_model_agents
+                    session["model_agent"]["Name_of_agent"]
+                    
+                return render_template("add_model_tab.html",
+                                    view=3, 
+                                    model_type=session["model_type"], 
+                                    model_name = session['model_name'],
+                                    model_agent = current_model_agent,
+                                    current_model_agents = current_model_agents,
+                                    all_agents = helperMethods.get_components_by_name("agent"), 
+                                    input_params=session['input_parameters']
+                                    )
+            else:
+                 return render_template("add_model_tab.html",
+                                    view=3, 
+                                    model_type=session["model_type"], 
+                                    model_name = session['model_name'],
+                                    model_agent = session["model_agent"]["Name_of_agent"],
+                                    current_model_agents = session["model_agents"],
+                                    all_agents = helperMethods.get_components_by_name("agent"), 
+                                    input_params=session['input_parameters'],
+                                    error_message = f"Select name of agent and one input parameter",
+
+                                    )
+
+        
+        case "Save agents":
+            if session["model_agent"]["Name_of_agent"]!="" and len(request.form.getlist("params_to_add"))!=0:
+                session['model_name'] = request.form['model_name'] 
+                chosen_input_param = request.form["params_to_add"]
+                params_summary = helperMethods.param_summary([chosen_input_param])
+                print(f"Param to be added to session agent {params_summary}")
+
+                current_model_agent = copy.deepcopy(session["model_agent"])
+                current_model_agent["number_of_agents"]= params_summary[0]
+                print(f"current model agent {current_model_agent}")
+
+                current_model_agents = copy.deepcopy(session["model_agents"])
+                
+                if current_model_agent not in current_model_agents:
+                    current_model_agents.append(current_model_agent)
+                    session['model_agents'] = current_model_agents
+                print(f"current saved model agents {current_model_agents}")
+                # current_model_agent["number_of_agents"] = chosen_input_param[]
+                return render_template("add_model_tab.html",
+                                    view=4, 
+                                    model_type=session["model_type"], 
+                                    model_name = session['model_name'],
+                                    model_agent = current_model_agent,
+                                    current_model_agents = current_model_agents,
+                                    all_systems = helperMethods.get_components_by_name("system"),
+                                    saved_systems = session["model_systems"],
+                                    input_params=session['input_parameters']
+                                    )
+            else:
+                return render_template("add_model_tab.html",
                                    view=3, 
                                    model_type=session["model_type"], 
                                    model_name = session['model_name'],
-                                   model_agent = current_model_agent,
-                                   current_model_agents = current_model_agents,
                                    all_agents = helperMethods.get_components_by_name("agent"), 
-                                   input_params=session['input_parameters']
-                                   )
-        
-        case "Save agents":
-            session['model_name'] = request.form['model_name']
-            chosen_input_param = request.form["params_to_add"]
-            params_summary = helperMethods.param_summary([chosen_input_param])
-            print(f"Param to be added to session agent {params_summary}")
-
-            current_model_agent = copy.deepcopy(session["model_agent"])
-            current_model_agent["number_of_agents"]= params_summary[0]
-            print(f"current model agent {current_model_agent}")
-
-            current_model_agents = copy.deepcopy(session["model_agents"])
-            
-            if current_model_agent not in current_model_agents:
-                current_model_agents.append(current_model_agent)
-                session['model_agents'] = current_model_agents
-            print(f"current saved model agents {current_model_agents}")
-            # current_model_agent["number_of_agents"] = chosen_input_param[]
-            return render_template("add_model_tab.html",
-                                   view=4, 
-                                   model_type=session["model_type"], 
-                                   model_name = session['model_name'],
-                                   model_agent = current_model_agent,
-                                   current_model_agents = current_model_agents,
-                                   all_systems = helperMethods.get_components_by_name("system"),
-                                   saved_systems = session["model_systems"],
-                                   input_params=session['input_parameters']
-                                   )
+                                   input_params=session['input_parameters'],
+                                   error_message = f"Select name of agent and one input parameter"
+                                   )         
         
         case "Add system to model":
             session["model_name"] = request.form["model_name"]
@@ -583,37 +649,46 @@ def add_model():
                                    all_systems=all_current_systems, 
                                    system_id = current_model_system["system_id"],
                                    saved_systems = session["model_systems"],
+                                   chosen_system = session["model_system"]["Name_of_system"],
                                    input_params=session["input_parameters"])
         
         case "Save System":
             if "system_ids" not in session:
                 session["system_ids"] = []
 
-            session["model_name"] = request.form["model_name"]
-            system_id = request.form["system_id"]
             current_model_system = copy.deepcopy(session["model_system"])
-            input_params = request.form.getlist("params_to_add")
-            params_summary = helperMethods.param_summary(input_params)
-
-            current_model_system["system_id"] = system_id
-            current_model_system["system_variables"] = params_summary
-
+            system_id=request.form["system_id"]
             current_model_systems = copy.deepcopy(session["model_systems"])
             current_system_ids = copy.deepcopy(session['system_ids'])
-            if current_model_system["system_id"] not in current_system_ids:
-                print(current_system_ids)
-                current_model_systems.append(current_model_system)
-                current_system_ids.append(system_id)
-                session["system_ids"] = current_system_ids
-                session["model_systems"] = current_model_systems
-                return render_template("add_model_tab.html",
-                                   view=4, 
-                                   model_type=session["model_type"], 
-                                   model_name = session["model_name"],
-                                   all_systems=all_current_systems, 
-                                   saved_systems = session["model_systems"],
-                                   input_params=session["input_parameters"])
-            
+            if len(request.form.getlist("params_to_add"))!=0:
+                session["model_name"] = request.form["model_name"]
+                input_params = request.form.getlist("params_to_add")
+                params_summary = helperMethods.param_summary(input_params)
+                session['model_system']["system_variables"] = params_summary
+
+            if session["model_system"]["Name_of_system"]!="":
+                current_model_system["system_id"] = system_id
+                #      session["model_system"] = {
+                #     "Name_of_system": "",
+                #     "system_id": "",
+                #     "system_variables": []
+                # }
+
+                
+                if current_model_system["system_id"] not in current_system_ids:
+                    print(current_system_ids)
+                    current_model_systems.append(current_model_system)
+                    current_system_ids.append(system_id)
+                    session["system_ids"] = current_system_ids
+                    session["model_systems"] = current_model_systems
+                    return render_template("add_model_tab.html",
+                                    view=4, 
+                                    model_type=session["model_type"], 
+                                    model_name = session["model_name"],
+                                    all_systems=all_current_systems, 
+                                    saved_systems = session["model_systems"],
+                                    input_params=session["input_parameters"])
+                
             else:
                return render_template("add_model_tab.html",
                                    view=4, 
@@ -622,7 +697,7 @@ def add_model():
                                    all_systems=all_current_systems, 
                                    saved_systems = current_model_systems,
                                    input_params=session["input_parameters"],
-                                   error_message = f"System ID {system_id} already exists. Enter a new one"
+                                   error_message = f"System ID  already exists or Name of system not chosen"
                                    )
 
         
