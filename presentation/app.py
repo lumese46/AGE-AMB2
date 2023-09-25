@@ -41,7 +41,7 @@ def home():
                                        all_systems=helperMethods.get_components_by_name("system"),
                                        all_agents = helperMethods.get_components_by_name("agent"))
             case "Models":
-                # session.clear()
+                session.clear()
                 return render_template("setup_model.html", model_type="")
             
             case "Execute":
@@ -237,12 +237,14 @@ def execute_model():
     set_ylabel = request.form.get("set_ylabel")
 
 
-    # input_params_from_user = helperMethods.transform_to_input_parameters(input_params_from_user)
-    # input_params_from_user = {"input_parameters": input_params_from_user}
-    # model_name = helperMethods.get_model_name()
+     #input_params_from_user = helperMethods.transform_to_input_parameters(input_params_from_user)
+     #input_params_from_user = {"input_parameters": input_params_from_user}
+     #model_name = helperMethods.get_model_name()
 
     input_params_from_user = session["input_parameters"]
+    input_params_from_user = {"input_parameters": input_params_from_user}
     model_name = session["model_name"]
+    model_name = {"model_name": model_name}
     visualization_dict = {
     "set_title": set_title,
     "set_xlabel": set_xlabel,
@@ -1052,4 +1054,12 @@ def add_model():
 
 if __name__ == "__main__":
     app.secret_key="be gay, do crime"
+
+    # clear all json
+    helperMethods.clear_json_file("executeTemplete")
+    helperMethods.clear_json_file("agent")
+    helperMethods.clear_json_file("component")
+    helperMethods.clear_json_file("system")
+    helperMethods.clear_json_file("model")
+    helperMethods.clear_json_file("dataCollector")
     app.run(host='0.0.0.0', debug=True)

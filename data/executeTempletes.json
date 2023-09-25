@@ -1,45 +1,25 @@
 [
     {
-        "name_model": "PredatorPreyModel"
+        "model_name": "predator"
     },
     {
         "input_parameters": [
             {
-                "name": "seed",
-                "input": ""
+                "Name": "size",
+                "dataType": "Integer"
             },
             {
-                "name": "sheep_gain",
-                "input": ""
-            },
-            {
-                "name": "sheep_reproduce",
-                "input": ""
-            },
-            {
-                "name": "sheep_reproducing",
-                "input": ""
-            },
-            {
-                "name": "set_title",
-                "input": ""
-            },
-            {
-                "name": "set_xlabel",
-                "input": ""
-            },
-            {
-                "name": "set_ylabel",
-                "input": ""
+                "Name": "Lumese",
+                "dataType": "String"
             }
         ]
     },
     {
-        "input_parameters": ""
+        "input_parameters": "20"
     },
     {
-        "set_title": "",
-        "set_xlabel": "",
-        "set_ylabel": ""
+        "set_title": "knmmm",
+        "set_xlabel": "mknmm",
+        "set_ylabel": "kkkmk"
     }
 ]
