@@ -28,7 +28,7 @@ class createModel:
     def addEnvironment(self):
 
         if self.environment == "GRIDWORLD":
-            codeString = "      self.environment = GridWorld(self, size, size)\n"
+            codeString = "        self.environment = GridWorld(self, size, size)\n"
         return codeString
 
 
@@ -77,7 +77,7 @@ class createModel:
             dataType = self.input_parameters[i]["dataType"] 
             stringdef = stringdef +f"{name}: {dataType}, "
         stringdef = stringdef + f"seed: int = None):\n"
-        stringinit = "       super().__init__(seed=seed)\n"
+        stringinit = "        super().__init__(seed=seed)\n"
         codeString = stringdef + stringinit
 
         return codeString

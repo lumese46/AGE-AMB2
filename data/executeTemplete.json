@@ -47,7 +47,7 @@
     },
     {
         "visualization": {
-            "set_title": "Sheep and Wolf Populations in \nSimple Predator Prey Model",
+            "set_title": "Sheep and Wolf Populations in Simple Predator Prey Model",
             "set_xlabel": "Iterations",
             "set_ylabel": "Population"
         }

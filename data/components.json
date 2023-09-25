@@ -1,41 +1,41 @@
 [
     {
-        "Name_of_component": "876",
+        "Name_of_component": "EnergyComponent",
         "Component_attributes": [
             {
-                "name": "7865",
-                "description": "654",
-                "default_value": "56"
+                "name": "energy",
+                "description": "# The creatures remaining energy",
+                "default_value": "NONE"
             }
         ]
     },
     {
-        "Name_of_component": "test",
+        "Name_of_component": "SpeciesComponent",
         "Component_attributes": [
             {
-                "name": "at_name",
-                "description": "at_desc",
-                "default_value": "at_val"
+                "name": "prefix",
+                "description": "# id prefix",
+                "default_value": "NONE"
             },
             {
-                "name": "#$%",
-                "description": "#$%",
-                "default_value": "#$%"
-            }
-        ]
-    },
-    {
-        "Name_of_component": "comp_name",
-        "Component_attributes": [
-            {
-                "name": "at_name",
-                "description": "at_desc",
-                "default_value": "at_val"
+                "name": "gain",
+                "description": "# Energy gain for consuming food item",
+                "default_value": "NONE"
             },
             {
-                "name": "at_name",
-                "description": "at_desc",
-                "default_value": "at_val"
+                "name": "reproduce_rate",
+                "description": "# Reproduction rate of Species",
+                "default_value": "NONE"
+            },
+            {
+                "name": "reproduce_rate",
+                "description": "# Reproduction rate of Species",
+                "default_value": "NONE"
+            },
+            {
+                "name": "counter",
+                "description": "# Used to ensure agents have unique id per species",
+                "default_value": "0"
             }
         ]
     }

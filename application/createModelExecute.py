@@ -26,7 +26,8 @@ class createModelExecute:
             if counter == 0 :
                 modelinnitString = modelinnitString + f"{Name}"
                 counter = counter + 1
-            modelinnitString = modelinnitString + f" ,{Name}"
+            else:
+                modelinnitString = modelinnitString + f" ,{Name}"
         modelinnitString = modelinnitString + ")\n"
         return modelinnitString
     

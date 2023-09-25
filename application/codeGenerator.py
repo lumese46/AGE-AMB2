@@ -10,9 +10,10 @@ from json_loader import json_load
 class codeGenerator:
      def __init__(self):
          pass
-     def generateComponent():
+     def generateComponent(self):
         # get the data from json file 
         data = json_load('components.json')
+        componentString = ""
         # get the approriate data types for 
         for obj in data:
             global name_of_component
@@ -21,13 +22,14 @@ class codeGenerator:
             component_attributes = obj.get("Component_atributes", [])
 
             component = CreateComponents(Name=name_of_component,POD=component_attributes)
-            return component.generateComponent()
-     
-     def generateAgent():
+            componentString = componentString + "\n" + component.generateComponent()
+        return componentString
+     def generateAgent(self):
 
             # get the data from json file 
             data = json_load('agents.json')
-            # get the approriate data types for 
+            # get the approriate data types for
+            agentCode = "" 
             for obj in data:
                 Name_of_agent = obj.get("Name_of_agent")
                 Class_component_name = obj.get("Class_component_name")
@@ -39,8 +41,9 @@ class codeGenerator:
                 # create agent using the factory
                 agent = agentFactory.createAgentS(Type_of_agent)
                 # generate agent code
-                return agent.generateAgent()
-     def generateSystem():
+                agentCode = agentCode + f"\n\n#{Name_of_agent} Agent\n" + agent.generateAgent()
+            return agentCode
+     def generateSystem(self):
             # get the data from json file 
             data = json_load('systems.json')
             finalCode = ""
@@ -48,11 +51,11 @@ class codeGenerator:
             for obj in data:
                 Name_of_system = obj.get("Name_of_system")
                 code = obj.get("code")
-                finalCode = finalCode + "/n" +  code
+                finalCode = finalCode +  code
             return finalCode
-     def generateModel():
+     def generateModel(self):
             # get the data from json file 
-            data = json_load('modelTestReferences.json')
+            data = json_load('model.json')
             for obj in data:
                 if "input_parameters" in obj:
                     input_parameters = obj["input_parameters"]
@@ -70,15 +73,15 @@ class codeGenerator:
             
             model = createModel(name_model = name_model  ,input_parameters = input_parameters,class_components = class_components,Agents=Agents,environment=environment,systems=systems)
             return model.generateModel()
-     def generateDataCollector():
+     def generateDataCollector(self):
             
-            # get the data from json file 
-            data = json_load('dataCollectors.json')
+            # get the data from json file  
+            data = json_load('dataCollectors.json')  
             name_of_agents = data[0]["Name_of_agents"]
             dataCollector = createDataCollector(name_of_agents)
             return dataCollector.generateDataCollector()
     
-     def generateModelExecute():
+     def generateModelExecute(self):
             # get the data from json file 
             data = json_load('executeTemplete.json')
             for obj in data:
@@ -92,8 +95,28 @@ class codeGenerator:
                     visualization = obj["visualization"]
             modelExecute = createModelExecute(name_model = name_model  ,input_parameters = input_parameters,iterations=iterations,visualization=visualization)
             return modelExecute.generateModelExecute()
+     def generateStandAloneModelCode(self):
+          importString = '''
+import numpy
+import ECAgent.Core as Core
+import ECAgent.Tags as Tags
+import ECAgent.Collectors as Collectors
+from ECAgent.Environments import GridWorld, PositionComponent, discrete_grid_pos_to_id
+import matplotlib.pyplot as plt
+'''       
+          generateComponent = self.generateComponent()
+          generateAgent = self.generateAgent()
+          generateSystem = self.generateSystem()
+          generateDataCollector = self.generateDataCollector()
+          generateModel = self.generateModel()
+          generateModelExecute = self.generateModelExecute()
+          return importString + "\n" + generateComponent + "\n" + generateAgent + "\n" + generateSystem + "\n" + generateDataCollector + "\n" + generateModel + "\n" + generateModelExecute
                 
+# # Create an instance of CodeGenerator
+# code = codeGenerator()
 
+# # Call the method on the instance
+# print(code.generateAgent())
 
      
 
