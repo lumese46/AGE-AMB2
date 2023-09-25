@@ -196,20 +196,127 @@ def add_system():
 def add_model_type():
     if request.method=="POST":
         model_type = request.form["model_type"]
-        chosen_model_type = model_type
-        session["model_type"] = model_type
+        if "model_type" not in session:
+            session["model_type"] = ""
+
+        
+        if "dataType" not in session:
+            session["dataType"] = ""
+
+        if "model_name" not in session:
+            session['model_name'] = ""
 
         if "input_parameters" not in session:
             session['input_parameters'] = []
 
+
+        if "model_agent" not in session:
+            session["model_agent"] =  {
+                    "Name_of_agent": "",
+                    "number_of_agents": ""
+                }
+            
+        if "model_agents" not in session:
+            session['model_agents'] = []
+        
+        if "model_system" not in session:
+            session["model_system"] = {
+                    "Name_of_system": "",
+                    "system_id": "",
+                    "system_variables": []
+                }
+            
+        if "model_systems" not in session:
+            session["model_systems"] = []
+            
+        if (session["model_type"] == "COMPLEX"):
+            if "class_component" not in session:
+                session['class_component'] = {
+                    "Name_of_agent": "",
+                    "Name_of_component":"",
+                    "component_atributes_names": []
+                }
+
+            if "class_components" not in session:
+                session["class_components"] = []
+
+        if "input_parameters" not in session:
+            session['input_parameters'] = []
+            
+        session["model_type"] = model_type
         #print (chosen_model_type)
         return render_template("add_model_tab.html", view=1,
-                               model_type=chosen_model_type,
+                               model_type=session["model_type"],
                                input_params = session["input_parameters"],
                                dataTypes = dataTypes)
     else:
         return render_template("setup_model.html")
     
+
+@app.route("/model_nav", methods=["GET", "POST"])
+def model_view():
+    action = request.form["submit_action"]
+    match action:
+        case "1. Add input parameters":
+            return render_template("add_model_tab.html", view=1,
+                            model_type=session["model_type"],
+                            input_params = session["input_parameters"],
+                            dataTypes = dataTypes)
+        case "2. Add class components":
+            return render_template("add_model_tab.html",
+                            view=2, 
+                            model_type=session["model_type"],
+                            model_name = session["model_name"],
+                            all_class_components = session["class_components"],
+                            all_components=helperMethods.get_components_by_name("component"), 
+                            all_agents = helperMethods.get_agents_by_type(session["model_type"]),
+                            input_params = session["input_parameters"])
+        case "3. Add agents":
+            return render_template("add_model_tab.html",
+                            view=3,
+                            all_agents = helperMethods.get_components_by_name("agent"),
+                            input_params = session["input_parameters"],
+                            model_name = session["model_name"],
+                            current_model_agents = session["model_agents"],
+                            chosen_agent = session["model_agent"]["Name_of_agent"]
+                            )
+        case "2. Add agents":
+            return render_template("add_model_tab.html",
+                            view=3,
+                            all_agents = helperMethods.get_components_by_name("agent"),
+                            input_params = session["input_parameters"],
+                            model_name = session["model_name"],
+                            current_model_agents = session["model_agents"],
+                            chosen_agent = session["model_agent"]["Name_of_agent"]
+                            )
+        case "4. Add systems":
+            return render_template("add_model_tab.html",
+                                    view=4, 
+                                    model_type=session["model_type"], 
+                                    model_name = session['model_name'],
+                                    model_agent = session["model_agent"],
+                                    current_model_agents = session["model_agents"],
+                                    all_systems = helperMethods.get_components_by_name("system"),
+                                    saved_systems = session["model_systems"],
+                                    input_params=session['input_parameters']
+                                    )
+        
+        case "3. Add systems":
+            return render_template("add_model_tab.html",
+                                    view=4, 
+                                    model_type=session["model_type"], 
+                                    model_name = session['model_name'],
+                                    model_agent = session["model_agent"],
+                                    current_model_agents = session["model_agents"],
+                                    all_systems = helperMethods.get_components_by_name("system"),
+                                    saved_systems = session["model_systems"],
+                                    input_params=session['input_parameters']
+                                    )
+    return render_template("add_model_tab.html", view=1,
+                            model_type=session["model_type"],
+                            input_params = session["input_parameters"],
+                            dataTypes = dataTypes)
+        
 
 @app.route("/model", methods=["GET", "POST"])
 def add_model():
@@ -253,50 +360,8 @@ def add_model():
     # save input parameters, class components, agents and systems to the models json file
 
     
-    #Setup session
-    new_model_name=""
-    action = request.form["submit_action"]
-
-    if "dataType" not in session:
-        session["dataType"] = ""
-
-    if "model_name" not in session:
-        session['model_name'] = ""
-
-    if "input_parameters" not in session:
-        session['input_parameters'] = []
-
-
-    if "model_agent" not in session:
-        session["model_agent"] =  {
-                "Name_of_agent": "",
-                "number_of_agents": ""
-            }
-        
-    if "model_agents" not in session:
-        session['model_agents'] = []
     
-    if "model_system" not in session:
-        session["model_system"] = {
-                "Name_of_system": "",
-                "system_id": "",
-                "system_variables": []
-            }
-        
-    if "model_systems" not in session:
-        session["model_systems"] = []
-          
-    if (session["model_type"] == "COMPLEX"):
-        if "class_component" not in session:
-            session['class_component'] = {
-                "Name_of_agent": "",
-                "Name_of_component":"",
-                "component_atributes_names": []
-            }
-
-        if "class_components" not in session:
-            session["class_components"] = []
-
+    action = request.form["submit_action"]
     new_param = {
         "Name": "",
         "dataType": ""
@@ -317,7 +382,7 @@ def add_model():
         chosen_data_type = action,
         action = "Choose Data Type"
 
-    if ((action in all_agents) and chosen_model_type=="COMPLEX"):
+    if (action in all_agents):
         state = (request.form.getlist("state"))
 
         if state[0]=="2":
@@ -335,9 +400,8 @@ def add_model():
         system_to_add_to_model = action
         action = "Add system to model"
    
-
+    print(action)
     match(action):
-
         case "Choose Data Type":
             session["dataType"] = chosen_data_type[0]
             session["model_name"] = request.form["model_name"]
@@ -393,15 +457,23 @@ def add_model():
             session["model_name"] = request.form["model_name"]
             agents = helperMethods.get_agents_by_type(chosen_model_type)
             components = helperMethods.get_components_by_name("component")
-
-            return render_template("add_model_tab.html",
-                                   view=2, 
-                                   model_type=session["model_type"],
-                                   model_name = session["model_name"],
-                                   all_class_components = session["class_components"],
-                                   all_components=components, 
-                                   all_agents = agents,
-                                   input_params = session["input_parameters"])
+            if session["model_type"]=="COMPLEX":
+                return render_template("add_model_tab.html",
+                                    view=2, 
+                                    model_type=session["model_type"],
+                                    model_name = session["model_name"],
+                                    all_class_components = session["class_components"],
+                                    all_components=helperMethods.get_components_by_name("component"), 
+                                    all_agents = helperMethods.get_agents_by_type(chosen_model_type),
+                                    input_params = session["input_parameters"])
+            elif session["model_type"]=="SIMPLE":
+                return render_template("add_model_tab.html",
+                                    view=3, 
+                                    model_type=session["model_type"], 
+                                    model_name = session['model_name'],
+                                    all_components=all_components, 
+                                    all_agents = helperMethods.get_components_by_name("agent"), 
+                                    input_params=session['input_parameters'])
         
         case "Add class component Name_of_agent":
 

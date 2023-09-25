@@ -9,49 +9,64 @@
 {%endblock%}
 
 {% block sub_nav%}
-    <section class="steps">
+
+    <section >
         {% if model_type == "COMPLEX" %}
             {% if view == 1 %}
+            <form action="/model_nav" method="post">
                 <input type="submit" name="submit_action" value="1. Add input parameters" >
                 <input type="submit" name="submit_action" value="2. Add class components" disabled >
                 <input type="submit" name="submit_action" value="3. Add agents" disabled>
                 <input type="submit" name="submit_action" value="4. Add systems" disabled>
+            </form>
             {%endif%}
             {% if view == 2 %}
-                <input type="submit" name="submit_action" value="1. Add input parameters" >
-                <input type="submit" name="submit_action" value="2. Add class components" >
-                <input type="submit" name="submit_action" value="3. Add agents" disabled>
-                <input type="submit" name="submit_action" value="4. Add systems" disabled>
+                <form action="/model_nav" method="post">
+                    <input type="submit" name="submit_action" value="1. Add input parameters" >
+                    <input type="submit" name="submit_action" value="2. Add class components" >
+                    <input type="submit" name="submit_action" value="3. Add agents" disabled>
+                    <input type="submit" name="submit_action" value="4. Add systems" disabled>
+                </form>
             {%endif%}
             {% if view == 3 %}
-                <input type="submit" name="submit_action" value="1. Add input parameters" >
-                <input type="submit" name="submit_action" value="2. Add class components" >
-                <input type="submit" name="submit_action" value="3. Add agents" >
-                <input type="submit" name="submit_action" value="4. Add systems" disabled>
+                <form action="/model_nav" method="post">
+                    <input type="submit" name="submit_action" value="1. Add input parameters" >
+                    <input type="submit" name="submit_action" value="2. Add class components" >
+                    <input type="submit" name="submit_action" value="3. Add agents" >
+                    <input type="submit" name="submit_action" value="4. Add systems" disabled>
+                </form>
             {%endif%}
             {% if view == 4 %}
-                <input type="submit" name="submit_action" value="1. Add input parameters" >
-                <input type="submit" name="submit_action" value="2. Add class components" >
-                <input type="submit" name="submit_action" value="3. Add agents" >
-                <input type="submit" name="submit_action" value="4. Add systems" >
+                <form action="/model_nav" method="post">
+                    <input type="submit" name="submit_action" value="1. Add input parameters" >
+                    <input type="submit" name="submit_action" value="2. Add class components" >
+                    <input type="submit" name="submit_action" value="3. Add agents" >
+                    <input type="submit" name="submit_action" value="4. Add systems" >
+                </form>
             {%endif%}
         {%endif%}
 
         {%if model_type == "SIMPLE" %}
             {% if view == 1 %}
-                <input type="submit" name="submit_action" value="1. Add input parameters" >
-                <input type="submit" name="submit_action" value="2. Add agents" disabled>
-                <input type="submit" name="submit_action" value="3. Add systems" disabled>
+                <form action="/model_nav" method="post">
+                    <input type="submit" name="submit_action" value="1. Add input parameters" >
+                    <input type="submit" name="submit_action" value="2. Add agents" disabled>
+                    <input type="submit" name="submit_action" value="3. Add systems" disabled>
+                </form>
             {%endif%}
-            {% if view == 2 %}
-                <input type="submit" name="submit_action" value="1. Add input parameters" >
-                <input type="submit" name="submit_action" value="2. Add agents" disabled>
-                <input type="submit" name="submit_action" value="3. Add systems" disabled>
+            {% if view == 3 or view==2 %}
+                <form action="/model_nav" method="post">
+                    <input type="submit" name="submit_action" value="1. Add input parameters" >
+                    <input type="submit" name="submit_action" value="2. Add agents" disabled>
+                    <input type="submit" name="submit_action" value="3. Add systems" disabled>
+                </form>
             {%endif%}
-            {% if view == 3 %}
+            {% if view == 4 %}
+            <form action="/model_nav" method="post">
                 <input type="submit" name="submit_action" value="1. Add input parameters" >
                 <input type="submit" name="submit_action" value="2. Add agents" >
                 <input type="submit" name="submit_action" value="3. Add systems" disabled>
+            </form>
             {%endif%}
         {%endif%}
     </section>
