@@ -17,7 +17,7 @@ style="color:#5E17EB;"
         {% for param in input_params %}
         <div class="input_params">
 
-            <label for="input_param{{ i }}">{{ param.name }}</label>
+            <label for="input_param{{ i }}">{{ param["Name"] }}</label>
             {% if param.dataType == 'int' %}
             <input type="number" name="{{ param.name }}" placeholder="Enter an integer">
             {% elif param.dataType == 'str' %}

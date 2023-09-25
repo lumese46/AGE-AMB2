@@ -107,5 +107,176 @@
                 "system_variables": []
             }
         ]
-    }
+    },
+    [
+        {
+            "name_model": "predatorpray"
+        },
+        {
+            "input_parameters": [
+                {
+                    "Name": "init_sheep",
+                    "dataType": "Integer"
+                },
+                {
+                    "Name": "init_cow",
+                    "dataType": "Integer"
+                },
+                {
+                    "Name": "init_wolf",
+                    "dataType": "Integer"
+                }
+            ]
+        },
+        {
+            "class_components": [
+                {
+                    "Name_of_agent": "Sheep",
+                    "Name_of_component": "EnergyComponent",
+                    "component_atributes_names": [
+                        "init_sheep"
+                    ]
+                }
+            ]
+        },
+        {
+            "Agents": [
+                {
+                    "Name_of_agent": "Sheep",
+                    "number_of_agents": "init_cow"
+                }
+            ]
+        },
+        {
+            "environment": "GRIDWORLD"
+        },
+        {
+            "systems": [
+                {
+                    "Name_of_system": "Lumese",
+                    "system_id": "656",
+                    "system_variables": []
+                }
+            ]
+        }
+    ],
+    [
+        {
+            "name_model": "predatorpray"
+        },
+        {
+            "input_parameters": [
+                {
+                    "Name": "init_sheep",
+                    "dataType": "Integer"
+                },
+                {
+                    "Name": "init_cow",
+                    "dataType": "Integer"
+                },
+                {
+                    "Name": "init_wolf",
+                    "dataType": "Integer"
+                }
+            ]
+        },
+        {
+            "class_components": [
+                {
+                    "Name_of_agent": "Sheep",
+                    "Name_of_component": "EnergyComponent",
+                    "component_atributes_names": [
+                        "init_sheep"
+                    ]
+                }
+            ]
+        },
+        {
+            "Agents": [
+                {
+                    "Name_of_agent": "Sheep",
+                    "number_of_agents": "init_cow"
+                }
+            ]
+        },
+        {
+            "environment": "GRIDWORLD"
+        },
+        {
+            "systems": [
+                {
+                    "Name_of_system": "Lumese",
+                    "system_id": "656",
+                    "system_variables": []
+                },
+                {
+                    "Name_of_system": "Lumese",
+                    "system_id": "ghf",
+                    "system_variables": []
+                }
+            ]
+        }
+    ],
+    [
+        {
+            "name_model": "predatorpray"
+        },
+        {
+            "input_parameters": [
+                {
+                    "Name": "init_sheep",
+                    "dataType": "Integer"
+                },
+                {
+                    "Name": "init_cow",
+                    "dataType": "Integer"
+                },
+                {
+                    "Name": "init_wolf",
+                    "dataType": "Integer"
+                }
+            ]
+        },
+        {
+            "class_components": [
+                {
+                    "Name_of_agent": "Sheep",
+                    "Name_of_component": "EnergyComponent",
+                    "component_atributes_names": [
+                        "init_sheep"
+                    ]
+                }
+            ]
+        },
+        {
+            "Agents": [
+                {
+                    "Name_of_agent": "Sheep",
+                    "number_of_agents": "init_cow"
+                }
+            ]
+        },
+        {
+            "environment": "GRIDWORLD"
+        },
+        {
+            "systems": [
+                {
+                    "Name_of_system": "Lumese",
+                    "system_id": "656",
+                    "system_variables": []
+                },
+                {
+                    "Name_of_system": "Lumese",
+                    "system_id": "ghf",
+                    "system_variables": []
+                },
+                {
+                    "Name_of_system": "Lumese",
+                    "system_id": "fdfghj",
+                    "system_variables": []
+                }
+            ]
+        }
+    ]
 ]
