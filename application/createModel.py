@@ -85,19 +85,19 @@ class createModel:
     def generateModel(self):
         codeString = ""
         stringclass  = f"class {self.name_model}(Core.Model):\n"
-        stringparameters = self.inputPrameters(self.input_parameters)
+        stringparameters = self.inputPrameters()
         codeString = codeString + stringclass +stringparameters
 
-        stringenv = self.addEnvironment(self.environment)
+        stringenv = self.addEnvironment()
         codeString = codeString + "\n    # Create Grid World\n" + stringenv
 
-        stringsys = self.addSystems(self.systems)
+        stringsys = self.addSystems()
         codeString = codeString + "\n    # Add Systems\n" + stringsys
 
-        stringcomps = self.addClassComponents(self.class_components)
+        stringcomps = self.addClassComponents()
         codeString = codeString + "\n    # Add Class Components\n" + stringcomps
 
-        stringagent = self.addAgents(self.Agents)
+        stringagent = self.addAgents()
         codeString = codeString + "\n    # Create Agents at random locations\n" + stringagent
 
         

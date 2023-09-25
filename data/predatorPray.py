@@ -200,7 +200,7 @@ class BirthSystem(Core.System):
                     new_agent, *agent[PositionComponent].xy()
                 )
 
-import ECAgent.Collectors as Collectors
+
 
 class DataCollector(Collectors.Collector):
     def __init__(self, id: str, model):
@@ -262,5 +262,52 @@ class PredatorPreyModel(Core.Model):
     # Method that will execute Model for t timesteps
     def run(self, t: int):
         self.execute(t)
+
+# Input Parameters
+
+ENV_SIZE = 50
+INIT_SHEEP = 100
+INIT_WOLF = 50
+REGROW_RATE = 30
+SHEEP_GAIN = 4
+WOLF_GAIN = 25
+SHEEP_REPRODUCTION = 0.04
+WOLF_REPRODUCTION = 0.06
+
+# Change this to change length of simulation
+ITERATIONS = 8
+SEED = 345968  # For pseudo-random number generator
+
+model = PredatorPreyModel(
+        ENV_SIZE,
+        INIT_SHEEP,
+        INIT_WOLF,
+        REGROW_RATE,
+        SHEEP_GAIN,
+        WOLF_GAIN,
+        SHEEP_REPRODUCTION,
+        WOLF_REPRODUCTION,
+        SEED)
+
+# Execute model (May take some time based on input params used)
+model.run(ITERATIONS)
+
+# Get population levels from data collector
+records = model.systems['collector'].records
+
+# Create Matplotlib Plots
+fig, ax = plt.subplots()
+ax.set_title('Sheep and Wolf Populations in \nSimple Predator Prey Model')
+ax.set_xlabel('Iterations')
+ax.set_ylabel('Population')
+
+iterations = numpy.arange(ITERATIONS)
+
+for species in records:
+    ax.plot(iterations, records[species], label=species)
+
+ax.legend(loc='lower right')
+ax.set_aspect('auto')
+plt.show()
 
 

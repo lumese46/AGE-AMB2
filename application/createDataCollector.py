@@ -31,8 +31,5 @@ class createDataCollector:
         return codeString
 
 
-    
-oratile = createDataCollector(["ORATILE","LUMESE"])
-print(oratile.generateDataCollector())
 
 
