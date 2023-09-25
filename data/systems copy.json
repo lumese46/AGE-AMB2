@@ -1,0 +1,10 @@
+[
+    {
+        "Name_of_system": "LUMESE",
+        "code": "agent = {\r\n        \"Name_of_agent\": \"\",\r\n        \"Class_component_name\":\"\",\r\n        \"Components\":[],\r\n        \"Type\": \"\",\r\n        }\r\n\r\n"
+    },
+    {
+        "Name_of_system": "ORATILE",
+        "code": "agent = {\r\n        \"Name_of_agent\": \"\",\r\n        \"Class_component_name\":\"\",\r\n        \"Components\":[],\r\n        \"Type\": \"\",\r\n        }\r\n\r\n"
+    }
+]

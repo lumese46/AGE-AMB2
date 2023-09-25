@@ -1,0 +1,37 @@
+[
+    {
+        "Name_of_component": "energy_component",
+        "Component_attributes": [
+            {
+                "name": "speed",
+                "description": "speed of car",
+                "default_value": "\"NONE\""
+            },
+            {
+                "name": "dirrection",
+                "description": "dirrection of car",
+                "default_value": "NONE"
+            }
+        ]
+    },
+    {
+        "Name_of_component": "health_component",
+        "Component_attributes": [
+            {
+                "name": "current_health",
+                "description": "health of agent",
+                "default_value": "Name"
+            },
+            {
+                "name": "max_health",
+                "description": "max health of agent",
+                "default_value": "45"
+            },
+            {
+                "name": "min_health",
+                "description": "minimum health of agents",
+                "default_value": "0"
+            }
+        ]
+    }
+]

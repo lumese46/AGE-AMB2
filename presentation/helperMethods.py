@@ -38,6 +38,11 @@ def param_summary(json_str_arr):
         result.append(js_json["Name"])
     return result
 
+def params_by_name(params):
+    result = []
+    for i in params:
+        result.append(i["Name"])
+    return result
 def add_attributes(att_name,  att_desc, att_val):
     attribute = {}
     attribute["name"]=att_name
@@ -128,7 +133,7 @@ def get_components_summary(compList):
             results.append(comp_summary)
         else:
             pass
-    print("Summary created")
+    # print("Summary created")
     return results
 
 #get all agents

@@ -1,0 +1,135 @@
+[
+    {
+        "input_parameters": [
+            {
+                "Name": "1",
+                "dataType": "2"
+            },
+            {
+                "Name": "2",
+                "dataType": "2"
+            },
+            {
+                "Name": "3",
+                "dataType": "3"
+            }
+        ]
+    },
+    {
+        "input_parameters": [
+            {
+                "Name": "",
+                "dataType": ""
+            }
+        ]
+    },
+    {
+        "input_parameters": [
+            {
+                "Name": "",
+                "dataType": ""
+            }
+        ]
+    },
+    {
+        "input_parameters": [
+            {
+                "Name": "",
+                "dataType": ""
+            }
+        ]
+    },
+    {
+        "input_parameters": [
+            {
+                "Name": "",
+                "dataType": ""
+            }
+        ]
+    },
+    {
+        "input_parameters": [
+            {
+                "Name": "",
+                "dataType": ""
+            }
+        ]
+    },
+    [
+        {
+            "name_model": "predatorpray"
+        },
+        {
+            "input_parameters": [
+                {
+                    "Name": "new param",
+                    "dataType": "int"
+                },
+                {
+                    "Name": "new param 2",
+                    "dataType": "int"
+                },
+                {
+                    "Name": "new param 3",
+                    "dataType": "int"
+                },
+                {
+                    "Name": "",
+                    "dataType": ""
+                }
+            ]
+        },
+        {
+            "class_components": [
+                {
+                    "Name_of_agent": "Sheep",
+                    "Name_of_component": "comp_name",
+                    "component_atributes_names": [
+                        "new param",
+                        "new param 2"
+                    ]
+                },
+                {
+                    "Name_of_agent": "Sheep",
+                    "Name_of_component": "876",
+                    "component_atributes_names": [
+                        "new param"
+                    ]
+                }
+            ]
+        },
+        {
+            "Agents": [
+                {
+                    "Name_of_agent": "Sheep",
+                    "number_of_agents": "new param"
+                },
+                {
+                    "Name_of_agent": "WOLF",
+                    "number_of_agents": "new param 2"
+                }
+            ]
+        },
+        {
+            "environment": "GRIDWORLD"
+        },
+        {
+            "systems": [
+                {
+                    "Name_of_system": "LUMESE",
+                    "system_id": "eat",
+                    "system_variables": [
+                        "new param"
+                    ]
+                },
+                {
+                    "Name_of_system": "ORATILE",
+                    "system_id": "phil",
+                    "system_variables": [
+                        "new param"
+                    ]
+                }
+            ]
+        }
+    ]
+]

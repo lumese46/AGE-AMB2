@@ -1,0 +1,66 @@
+[
+    {
+        "Name_of_agent": "Sheep",
+        "Class_component_name": "",
+        "Components": [
+            [
+                {
+                    "Name_of_component": "energy_component",
+                    "Names_of_component_atributes": [
+                        "speed",
+                        "dirrection"
+                    ]
+                }
+            ]
+        ],
+        "Type_of_agent": "SIMPLE"
+    },
+    {
+        "Name_of_agent": "Wolf",
+        "Class_component_name": "energy_component",
+        "Components": [
+            [
+                {
+                    "Name_of_component": "energy_component",
+                    "Names_of_component_atributes": [
+                        "speed",
+                        "dirrection"
+                    ]
+                },
+                {
+                    "Name_of_component": "health_component",
+                    "Names_of_component_atributes": [
+                        "current_health",
+                        "max_health",
+                        "min_health"
+                    ]
+                }
+            ]
+        ],
+        "Type_of_agent": "COMPLEX"
+    },
+    {
+        "Name_of_agent": "Cow",
+        "Class_component_name": "health_component",
+        "Components": [
+            [
+                {
+                    "Name_of_component": "energy_component",
+                    "Names_of_component_atributes": [
+                        "speed",
+                        "dirrection"
+                    ]
+                },
+                {
+                    "Name_of_component": "health_component",
+                    "Names_of_component_atributes": [
+                        "current_health",
+                        "max_health",
+                        "min_health"
+                    ]
+                }
+            ]
+        ],
+        "Type_of_agent": "COMPLEX"
+    }
+]
