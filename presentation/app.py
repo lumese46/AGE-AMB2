@@ -59,7 +59,7 @@ def home():
             case "Execute":# Example usage
 
                 input_params = helperMethods.get_input_parameters("modelTestReference")
-                
+               
                 return render_template("execute_model_tab.html",input_params=input_params)
             
             case "Data Collector":
@@ -222,6 +222,33 @@ def add_system():
 @app.route("/execute", methods=["POST","GET"])
 def execute_model():
     input_params = helperMethods.get_input_parameters("modelTestReference")
+    # Get the selected agents from the radio buttons
+    selected_agents = request.form.getlist("selected_agents")
+
+    # Get the input parameters
+    input_params_from_user = {}
+    for param in request.form:
+        if param != "submit_results" and param != "Iterations":
+            input_params_from_user[param] = request.form[param]
+
+    # Get the number of iterations
+    iterations = request.form.get("Iterations")
+    iterations = {"input_parameters": iterations}
+    # get data for visualizations
+    set_title = request.form.get("set_title")
+    set_xlabel = request.form.get("set_xlabel")
+    set_ylabel = request.form.get("set_ylabel")
+
+
+    input_params_from_user = helperMethods.transform_to_input_parameters(input_params_from_user)
+    input_params_from_user = {"input_parameters": input_params_from_user}
+    model_name = helperMethods.get_model_name()
+    visualization_dict = {
+    "set_title": set_title,
+    "set_xlabel": set_xlabel,
+    "set_ylabel": set_ylabel
+}
+    
    
     if request.method=="POST":
         action = request.form["submit_results"]
@@ -229,8 +256,15 @@ def execute_model():
         #take value of button in templete
         match (action):
             case "Execute":
+                helperMethods.run_model("predatorPray")
                 print("Hello exec")
             case "Update":
+                helperMethods.clear_json_file("executeTemplete")
+                helperMethods.add_to_json(model_name,"executeTemplete")
+                helperMethods.add_to_json(input_params_from_user,"executeTemplete")
+                helperMethods.add_to_json(iterations,"executeTemplete")
+                helperMethods.add_to_json(visualization_dict,"executeTemplete")
+                
                 print("Update")
     return render_template("execute_model_tab.html",input_params=input_params)
 

@@ -1,0 +1,45 @@
+[
+    {
+        "name_model": "PredatorPreyModel"
+    },
+    {
+        "input_parameters": [
+            {
+                "name": "seed",
+                "input": ""
+            },
+            {
+                "name": "sheep_gain",
+                "input": ""
+            },
+            {
+                "name": "sheep_reproduce",
+                "input": ""
+            },
+            {
+                "name": "sheep_reproducing",
+                "input": ""
+            },
+            {
+                "name": "set_title",
+                "input": ""
+            },
+            {
+                "name": "set_xlabel",
+                "input": ""
+            },
+            {
+                "name": "set_ylabel",
+                "input": ""
+            }
+        ]
+    },
+    {
+        "input_parameters": ""
+    },
+    {
+        "set_title": "",
+        "set_xlabel": "",
+        "set_ylabel": ""
+    }
+]

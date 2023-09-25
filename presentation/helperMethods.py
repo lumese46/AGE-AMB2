@@ -1,4 +1,6 @@
 import json
+import subprocess
+import os
 def read_json(fname):
     result = []
     try:
@@ -8,6 +10,14 @@ def read_json(fname):
         with open(f"./data/{fname}s.json", "w") as jfile:    #create new file
             pass
     return result
+def clear_json_file(fname):
+    with open(f"./data/{fname}s.json", 'w') as file:
+        # Truncate the file (remove all content)
+        file.truncate()
+
+# Example usage: Clear a JSON file named 'example.json'
+clear_json_file('example.json')
+
 
 def add_to_json(contents,outfile):
     saved_components = read_json(outfile) #read saved outfile.json
@@ -66,6 +76,28 @@ def get_input_parameters(fname):
             break
     return input_parameters
 
+# for execute 
+def transform_to_input_parameters(input_params_from_user):
+    input_parameters = []
+
+    for param_name, param_value in input_params_from_user.items():
+        parameter = {"name": param_name, "input": param_value}
+        input_parameters.append(parameter)
+
+    return input_parameters
+def get_model_name():
+    # Load the JSON data
+    components = read_json("model")
+
+    # Fetch the first component
+    model_name = components[0]
+    return model_name
+
+def run_model(fname):
+    # Assuming model.py is in the 'models' directory
+    script_path = f"./data/{fname}.py"
+    # Run the script using subprocess
+    subprocess.run(["python", script_path])
 
 
 #####################################################oratile########################

@@ -16,12 +16,9 @@ class codeGenerator:
         componentString = ""
         # get the approriate data types for 
         for obj in data:
-            global name_of_component
-            global component_attributes
-            name_of_component = obj.get("Name_of_component")
-            component_attributes = obj.get("Component_atributes", [])
-
-            component = CreateComponents(Name=name_of_component,POD=component_attributes)
+            name = obj['Name_of_component']
+            attributes = obj['Component_attributes']
+            component = CreateComponents(name, attributes)
             componentString = componentString + "\n" + component.generateComponent()
         return componentString
      def generateAgent(self):
@@ -112,11 +109,11 @@ import matplotlib.pyplot as plt
           generateModelExecute = self.generateModelExecute()
           return importString + "\n" + generateComponent + "\n" + generateAgent + "\n" + generateSystem + "\n" + generateDataCollector + "\n" + generateModel + "\n" + generateModelExecute
                 
-# # Create an instance of CodeGenerator
-# code = codeGenerator()
+# Create an instance of CodeGenerator
+code = codeGenerator()
 
-# # Call the method on the instance
-# print(code.generateAgent())
+# Call the method on the instance
+print(code.generateComponent())
 
      
 

@@ -36,13 +36,32 @@
         </div>
         {% set i = i + 1 %}
         {% endfor %}
+        <br>
+        <h4>MODEL Iterations</h4>
         <label for="Iterations">Number of Iterations</label>
         <input type="number" name="Iterations" placeholder="Enter number of Iterations">
+        <br>
+        <br>
+        <h4>MODEL VISUALIZATION</h4>
+        <div id="attribute">
+            <label for="set_title">Graph Title</label>
+            <input type="text" name="set_title" placeholder="Enter Graph Title">
+            <label for="set_xlabel">Graph x axis</label>
+            <input type="text" name="set_xlabel" placeholder="Enter Graph x axis">
 
+
+            <label for="set_ylabel">Graph y axis</label>
+            <input type="text" name="set_ylabel" placeholder="Enter Graph y axis">
     </section>
     <section class="submit_component">
         <input type="submit" name="submit_results" id="submit_button" value="Update">
         <input type="submit" name="submit_results" id="submit_button" value="Execute">
     </section>
+    </div>
+
+
+
+
+
 </form>
 {% endblock %}

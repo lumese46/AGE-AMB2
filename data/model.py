@@ -8,12 +8,17 @@ import matplotlib.pyplot as plt
 
 
 class EnergyComponent(Core.Component):
-    def __init__(self, agent, model):
+    def __init__(self, agent, model, energy):
         super().__init__(agent, model)
+        self.energy = energy # The creatures remaining energy
 
 class SpeciesComponent(Core.Component):
-    def __init__(self, agent, model):
+    def __init__(self, agent, model, prefix, gain, reproduce_rate):
         super().__init__(agent, model)
+        self.prefix = prefix # id prefix
+        self.gain = gain # Energy gain for consuming food item
+        self.reproduce_rate = reproduce_rate # Reproduction rate of Species
+        self.counter = 0 # Used to ensure agents have unique id per species
 
 
 

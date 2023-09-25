@@ -1,57 +1,110 @@
 [
     {
+        "name_model": "PredatorPreyModel"
+    },
+    {
         "input_parameters": [
             {
-                "Name": "1",
-                "dataType": "2"
+                "name": "size",
+                "dataType": "int"
             },
             {
-                "Name": "2",
-                "dataType": "2"
+                "name": "init_sheep",
+                "dataType": "int"
             },
             {
-                "Name": "3",
-                "dataType": "3"
+                "name": "init_wolf",
+                "dataType": "int"
+            },
+            {
+                "name": "regrow_rate",
+                "dataType": "int"
+            },
+            {
+                "name": "sheep_gain",
+                "dataType": "float"
+            },
+            {
+                "name": "wolf_gain",
+                "dataType": "float"
+            },
+            {
+                "name": "sheep_reproduce",
+                "dataType": "float"
+            },
+            {
+                "name": "wolf_reproduce",
+                "dataType": "float"
+            },
+            {
+                "name": "seed",
+                "dataType": "int"
             }
         ]
     },
     {
-        "input_parameters": [
+        "class_components": [
             {
-                "Name": "",
-                "dataType": ""
+                "Name_of_agent": "Sheep",
+                "Name_of_component": "SpeciesComponent",
+                "component_atributes_names": [
+                    "sheep_gain",
+                    "sheep_reproduce"
+                ]
+            },
+            {
+                "Name_of_agent": "Wolf",
+                "Name_of_component": "SpeciesComponent",
+                "component_atributes_names": [
+                    "wolf_gain",
+                    "wolf_reproduce"
+                ]
             }
         ]
     },
     {
-        "input_parameters": [
+        "Agents": [
             {
-                "Name": "",
-                "dataType": ""
+                "Name_of_agent": "Sheep",
+                "number_of_agents": "init_sheep"
+            },
+            {
+                "Name_of_agent": "Wolf",
+                "number_of_agents": "init_wolf"
             }
         ]
     },
     {
-        "input_parameters": [
-            {
-                "Name": "",
-                "dataType": ""
-            }
-        ]
+        "environment": "GRIDWORLD"
     },
     {
-        "input_parameters": [
+        "systems": [
             {
-                "Name": "",
-                "dataType": ""
-            }
-        ]
-    },
-    {
-        "input_parameters": [
+                "Name_of_system": "MovementSystem",
+                "system_id": "move",
+                "system_variables": []
+            },
             {
-                "Name": "",
-                "dataType": ""
+                "Name_of_system": "ResourceConsumptionSystem",
+                "system_id": "food",
+                "system_variables": [
+                    "regrow_rate"
+                ]
+            },
+            {
+                "Name_of_system": "BirthSystem",
+                "system_id": "birth",
+                "system_variables": []
+            },
+            {
+                "Name_of_system": "DeathSystem",
+                "system_id": "death",
+                "system_variables": []
+            },
+            {
+                "Name_of_system": "DataCollector",
+                "system_id": "collector",
+                "system_variables": []
             }
         ]
     }
