@@ -1,10 +1,6 @@
 [
     {
-        "Name_of_system": "oratile",
-        "code": " class oratile(System):\r\n    def __init__(self, id, model):\r\n        super().__init__(id, model)\r\n    def execute(self):"
-    },
-    {
-        "Name_of_system": "ppipo",
-        "code": " class ppipo(System):\r\n    def __init__(self, id, model):\r\n        super().__init__(id, model)\r\n    def execute(self):\r\n        pass"
+        "Name_of_system": "Lumese",
+        "code": " class Lumese(System):\r\n    def __init__(self, id, model):\r\n        super().__init__(id, model)\r\n    def execute(self):"
     }
 ]

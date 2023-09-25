@@ -213,7 +213,12 @@ def add_system():
 ###################################################### execute Route ############################################3
 @app.route("/execute", methods=["POST","GET"])
 def execute_model():
-    input_params = helperMethods.get_input_parameters("model")
+
+    if "input_parameters" not in session:
+        session["input_parameters"] = []
+
+    input_params = session["input_parameters"]
+    # input_params = helperMethods.get_input_parameters("modelTestReference")
     # Get the selected agents from the radio buttons
     selected_agents = request.form.getlist("selected_agents")
 
@@ -232,9 +237,12 @@ def execute_model():
     set_ylabel = request.form.get("set_ylabel")
 
 
-    input_params_from_user = helperMethods.transform_to_input_parameters(input_params_from_user)
-    input_params_from_user = {"input_parameters": input_params_from_user}
-    model_name = helperMethods.get_model_name()
+    # input_params_from_user = helperMethods.transform_to_input_parameters(input_params_from_user)
+    # input_params_from_user = {"input_parameters": input_params_from_user}
+    # model_name = helperMethods.get_model_name()
+
+    input_params_from_user = session["input_parameters"]
+    model_name = session["model_name"]
     visualization_dict = {
     "set_title": set_title,
     "set_xlabel": set_xlabel,
@@ -679,7 +687,6 @@ def add_model():
             
         case "Save class components":
 
-
             if len(request.form.getlist("params_to_add"))!=0 and session['class_component']["Name_of_component"]!="" and session['class_component']["Name_of_agent"]!="":
                 current_class_component = copy.deepcopy(session["class_component"])
                 print(f"Working with current class component {current_class_component}")
@@ -898,13 +905,13 @@ def add_model():
             session["model_name"] = request.form["model_name"]
             system_id = request.form["system_id"]
             current_model_system = copy.deepcopy(session["model_system"])
-            input_params = request.form.getlist("params_to_add")
-            # print(input_params+ "From Current saved model")
-            params_summary=[]
-            if len(input_params) !=0: 
-                params_summary = helperMethods.param_summary(input_params)
-                print(params_summary)
+            params_summary = []
 
+            input_params = request.form.getlist("params_to_add")
+            
+            if len(input_params)!=0:
+                params_summary = helperMethods.param_summary(input_params)
+                
 
             current_model_system["system_id"] = system_id
             if len(params_summary)!=0:
