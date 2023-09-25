@@ -2,7 +2,9 @@
 {%block stylesheet%} 
     <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles.css')}}" >
 {%endblock%}
-
+{%block highlight_execute%}
+    style="color:#5E17EB;"
+{%endblock%}
 {%block input_fields%}
 <form action="execute" method="post">
     <section class="form_title">
@@ -14,6 +16,10 @@
                 <label for="input_param">{{i["Name"]}}</label>
                 <input type="text" name={{i}} placeholder="value of type {{i['dataType']}}">
             {% endfor %}
+        </div>
+        <div id="attribute">
+            <label for="iterations">number of iterations</label>
+            <input type="number" name="submit_action" >
         </div>
     </section>
     <section class="submit_component">

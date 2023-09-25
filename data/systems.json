@@ -1,10 +1,10 @@
 [
     {
-        "Name_of_system": "LUMESE",
-        "code": "agent = {\r\n        \"Name_of_agent\": \"\",\r\n        \"Class_component_name\":\"\",\r\n        \"Components\":[],\r\n        \"Type\": \"\",\r\n        }\r\n\r\n"
+        "Name_of_system": "Lumese",
+        "code": " agent = {\r\n        \"Name_of_agent\": \"Sheep\",\r\n        \"Class_component_name\":\"\",\r\n        \"Components\":[\r\n                   [\r\n                      {\r\n                      \"Name_of_component\": \"energy_component\",\r\n                       \"Names_of_component_atributes\": [\r\n                         \"speed\",\r\n                         \"dirrection\"\r\n                    ]\r\n                }\r\n            ]\r\n         ],\r\n        \"Type\": \"\",\r\n        }\r\n\r\n"
     },
     {
-        "Name_of_system": "ORATILE",
-        "code": "agent = {\r\n        \"Name_of_agent\": \"\",\r\n        \"Class_component_name\":\"\",\r\n        \"Components\":[],\r\n        \"Type\": \"\",\r\n        }\r\n\r\n"
+        "Name_of_system": "Phindile",
+        "code": " agent = {\r\n        \"Name_of_agent\": \"Cow\",\r\n        \"Class_component_name\":\"health_component\",\r\n        \"Components\":[\r\n                     [\r\n                {\r\n                    \"Name_of_component\": \"energy_component\",\r\n                    \"Names_of_component_atributes\": [\r\n                        \"speed\",\r\n                        \"dirrection\"\r\n                    ]\r\n                },\r\n                {\r\n                    \"Name_of_component\": \"health_component\",\r\n                    \"Names_of_component_atributes\": [\r\n                        \"current_health\",\r\n                        \"max_health\",\r\n                        \"min_health\"\r\n                    ]\r\n                }\r\n            ]\r\n         ],\r\n        \"Type\": \"COMPLEX\",\r\n        }\r\n\r\n"
     }
 ]

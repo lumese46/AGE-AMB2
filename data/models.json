@@ -1,60 +1,4 @@
 [
-    {
-        "input_parameters": [
-            {
-                "Name": "1",
-                "dataType": "2"
-            },
-            {
-                "Name": "2",
-                "dataType": "2"
-            },
-            {
-                "Name": "3",
-                "dataType": "3"
-            }
-        ]
-    },
-    {
-        "input_parameters": [
-            {
-                "Name": "",
-                "dataType": ""
-            }
-        ]
-    },
-    {
-        "input_parameters": [
-            {
-                "Name": "",
-                "dataType": ""
-            }
-        ]
-    },
-    {
-        "input_parameters": [
-            {
-                "Name": "",
-                "dataType": ""
-            }
-        ]
-    },
-    {
-        "input_parameters": [
-            {
-                "Name": "",
-                "dataType": ""
-            }
-        ]
-    },
-    {
-        "input_parameters": [
-            {
-                "Name": "",
-                "dataType": ""
-            }
-        ]
-    },
     [
         {
             "name_model": "predatorpray"
@@ -62,38 +6,36 @@
         {
             "input_parameters": [
                 {
-                    "Name": "new param",
-                    "dataType": "int"
+                    "Name": "init_sheep",
+                    "dataType": "Integer"
                 },
                 {
-                    "Name": "new param 2",
-                    "dataType": "int"
+                    "Name": "init_cow",
+                    "dataType": "Integer"
                 },
                 {
-                    "Name": "new param 3",
-                    "dataType": "int"
-                },
-                {
-                    "Name": "",
-                    "dataType": ""
+                    "Name": "init_wolf",
+                    "dataType": "Integer"
                 }
             ]
         },
         {
             "class_components": [
                 {
-                    "Name_of_agent": "Sheep",
-                    "Name_of_component": "comp_name",
+                    "Name_of_agent": "Wolf",
+                    "Name_of_component": "energy_component",
                     "component_atributes_names": [
-                        "new param",
-                        "new param 2"
+                        "init_sheep",
+                        "init_cow"
                     ]
                 },
                 {
-                    "Name_of_agent": "Sheep",
-                    "Name_of_component": "876",
+                    "Name_of_agent": "Cow",
+                    "Name_of_component": "health_component",
                     "component_atributes_names": [
-                        "new param"
+                        "init_sheep",
+                        "init_cow",
+                        "init_wolf"
                     ]
                 }
             ]
@@ -102,11 +44,15 @@
             "Agents": [
                 {
                     "Name_of_agent": "Sheep",
-                    "number_of_agents": "new param"
+                    "number_of_agents": "init_sheep"
                 },
                 {
-                    "Name_of_agent": "WOLF",
-                    "number_of_agents": "new param 2"
+                    "Name_of_agent": "Wolf",
+                    "number_of_agents": "init_cow"
+                },
+                {
+                    "Name_of_agent": "Cow",
+                    "number_of_agents": "init_cow"
                 }
             ]
         },
@@ -116,17 +62,24 @@
         {
             "systems": [
                 {
-                    "Name_of_system": "LUMESE",
-                    "system_id": "eat",
+                    "Name_of_system": "Phindile",
+                    "system_id": "manage_environment",
+                    "system_variables": []
+                },
+                {
+                    "Name_of_system": "Lumese",
+                    "system_id": "manage_agents",
                     "system_variables": [
-                        "new param"
+                        "init_sheep",
+                        "init_cow",
+                        "init_wolf"
                     ]
                 },
                 {
-                    "Name_of_system": "ORATILE",
-                    "system_id": "phil",
+                    "Name_of_system": "Lumese",
+                    "system_id": "setup_default_values",
                     "system_variables": [
-                        "new param"
+                        "init_cow"
                     ]
                 }
             ]
