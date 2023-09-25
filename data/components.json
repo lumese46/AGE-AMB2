@@ -5,12 +5,17 @@
             {
                 "name": "speed",
                 "description": "speed of car",
-                "default_value": "\"NONE\""
+                "default_value": "0"
+            },
+            {
+                "name": "speed",
+                "description": "speed of car",
+                "default_value": "0"
             },
             {
                 "name": "dirrection",
                 "description": "dirrection of car",
-                "default_value": "NONE"
+                "default_value": "0"
             }
         ]
     },
@@ -20,16 +25,6 @@
             {
                 "name": "current_health",
                 "description": "health of agent",
-                "default_value": "Name"
-            },
-            {
-                "name": "max_health",
-                "description": "max health of agent",
-                "default_value": "45"
-            },
-            {
-                "name": "min_health",
-                "description": "minimum health of agents",
                 "default_value": "0"
             }
         ]
