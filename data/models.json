@@ -107,5 +107,422 @@
                 "system_variables": []
             }
         ]
-    }
+    },
+    [
+        {
+            "name_model": "predator"
+        },
+        {
+            "input_parameters": [
+                {
+                    "Name": "size",
+                    "dataType": "Integer"
+                },
+                {
+                    "Name": "rate",
+                    "dataType": "Float"
+                },
+                {
+                    "Name": "age",
+                    "dataType": "Integer"
+                }
+            ]
+        },
+        {
+            "class_components": [
+                {
+                    "Name_of_agent": "wolf",
+                    "Name_of_component": "EnergyComponent",
+                    "component_atributes_names": [
+                        "size",
+                        "rate",
+                        "age"
+                    ]
+                }
+            ]
+        },
+        {
+            "Agents": [
+                {
+                    "Name_of_agent": "wolf",
+                    "number_of_agents": "size"
+                },
+                {
+                    "Name_of_agent": "sheep",
+                    "number_of_agents": "size"
+                }
+            ]
+        },
+        {
+            "environment": "GRIDWORLD"
+        },
+        {
+            "systems": [
+                {
+                    "Name_of_system": "oratile",
+                    "system_id": "lumese",
+                    "system_variables": []
+                },
+                {
+                    "Name_of_system": "ppipo",
+                    "system_id": "sd",
+                    "system_variables": []
+                }
+            ]
+        }
+    ],
+    [
+        {
+            "name_model": "predator"
+        },
+        {
+            "input_parameters": [
+                {
+                    "Name": "size",
+                    "dataType": "Integer"
+                },
+                {
+                    "Name": "rate",
+                    "dataType": "Float"
+                },
+                {
+                    "Name": "age",
+                    "dataType": "Integer"
+                }
+            ]
+        },
+        {
+            "class_components": [
+                {
+                    "Name_of_agent": "wolf",
+                    "Name_of_component": "EnergyComponent",
+                    "component_atributes_names": [
+                        "size",
+                        "rate",
+                        "age"
+                    ]
+                }
+            ]
+        },
+        {
+            "Agents": [
+                {
+                    "Name_of_agent": "wolf",
+                    "number_of_agents": "size"
+                },
+                {
+                    "Name_of_agent": "sheep",
+                    "number_of_agents": "size"
+                }
+            ]
+        },
+        {
+            "environment": "GRIDWORLD"
+        },
+        {
+            "systems": [
+                {
+                    "Name_of_system": "oratile",
+                    "system_id": "lumese",
+                    "system_variables": []
+                },
+                {
+                    "Name_of_system": "ppipo",
+                    "system_id": "sd",
+                    "system_variables": []
+                },
+                {
+                    "Name_of_system": "oratile",
+                    "system_id": "l",
+                    "system_variables": []
+                }
+            ]
+        }
+    ],
+    [
+        {
+            "name_model": "predator"
+        },
+        {
+            "input_parameters": [
+                {
+                    "Name": "size",
+                    "dataType": "Integer"
+                },
+                {
+                    "Name": "rate",
+                    "dataType": "Float"
+                },
+                {
+                    "Name": "age",
+                    "dataType": "Integer"
+                }
+            ]
+        },
+        {
+            "class_components": [
+                {
+                    "Name_of_agent": "wolf",
+                    "Name_of_component": "EnergyComponent",
+                    "component_atributes_names": [
+                        "size",
+                        "rate",
+                        "age"
+                    ]
+                }
+            ]
+        },
+        {
+            "Agents": [
+                {
+                    "Name_of_agent": "wolf",
+                    "number_of_agents": "size"
+                },
+                {
+                    "Name_of_agent": "sheep",
+                    "number_of_agents": "size"
+                }
+            ]
+        },
+        {
+            "environment": "GRIDWORLD"
+        },
+        {
+            "systems": [
+                {
+                    "Name_of_system": "oratile",
+                    "system_id": "lumese",
+                    "system_variables": []
+                },
+                {
+                    "Name_of_system": "ppipo",
+                    "system_id": "sd",
+                    "system_variables": []
+                },
+                {
+                    "Name_of_system": "oratile",
+                    "system_id": "l",
+                    "system_variables": []
+                },
+                {
+                    "Name_of_system": "oratile",
+                    "system_id": "3",
+                    "system_variables": [
+                        "rate"
+                    ]
+                }
+            ]
+        }
+    ],
+    [
+        {
+            "name_model": "predator"
+        },
+        {
+            "input_parameters": [
+                {
+                    "Name": "size",
+                    "dataType": "Integer"
+                },
+                {
+                    "Name": "rate",
+                    "dataType": "Float"
+                },
+                {
+                    "Name": "age",
+                    "dataType": "Integer"
+                },
+                {
+                    "Name": "Lumese",
+                    "dataType": "Integer"
+                }
+            ]
+        },
+        {
+            "class_components": [
+                {
+                    "Name_of_agent": "wolf",
+                    "Name_of_component": "EnergyComponent",
+                    "component_atributes_names": [
+                        "size",
+                        "rate",
+                        "age"
+                    ]
+                },
+                {
+                    "Name_of_agent": "sheep",
+                    "Name_of_component": "EnergyComponent2",
+                    "component_atributes_names": [
+                        "size",
+                        "Lumese"
+                    ]
+                }
+            ]
+        },
+        {
+            "Agents": [
+                {
+                    "Name_of_agent": "wolf",
+                    "number_of_agents": "size"
+                },
+                {
+                    "Name_of_agent": "sheep",
+                    "number_of_agents": "size"
+                }
+            ]
+        },
+        {
+            "environment": "GRIDWORLD"
+        },
+        {
+            "systems": [
+                {
+                    "Name_of_system": "oratile",
+                    "system_id": "lumese",
+                    "system_variables": []
+                },
+                {
+                    "Name_of_system": "ppipo",
+                    "system_id": "sd",
+                    "system_variables": []
+                },
+                {
+                    "Name_of_system": "oratile",
+                    "system_id": "l",
+                    "system_variables": []
+                },
+                {
+                    "Name_of_system": "oratile",
+                    "system_id": "3",
+                    "system_variables": [
+                        "rate"
+                    ]
+                },
+                {
+                    "Name_of_system": "ppipo",
+                    "system_id": "jk",
+                    "system_variables": []
+                },
+                {
+                    "Name_of_system": "ppipo",
+                    "system_id": "ghjhg",
+                    "system_variables": []
+                }
+            ]
+        }
+    ],
+    [
+        {
+            "name_model": "predator"
+        },
+        {
+            "input_parameters": [
+                {
+                    "Name": "size",
+                    "dataType": "Integer"
+                },
+                {
+                    "Name": "rate",
+                    "dataType": "Float"
+                },
+                {
+                    "Name": "age",
+                    "dataType": "Integer"
+                },
+                {
+                    "Name": "Lumese",
+                    "dataType": "Integer"
+                },
+                {
+                    "Name": "size",
+                    "dataType": "String"
+                }
+            ]
+        },
+        {
+            "class_components": [
+                {
+                    "Name_of_agent": "wolf",
+                    "Name_of_component": "EnergyComponent",
+                    "component_atributes_names": [
+                        "size",
+                        "rate",
+                        "age"
+                    ]
+                },
+                {
+                    "Name_of_agent": "sheep",
+                    "Name_of_component": "EnergyComponent2",
+                    "component_atributes_names": [
+                        "size",
+                        "Lumese"
+                    ]
+                },
+                {
+                    "Name_of_agent": "sheep",
+                    "Name_of_component": "EnergyComponent2",
+                    "component_atributes_names": [
+                        "rate",
+                        "size"
+                    ]
+                }
+            ]
+        },
+        {
+            "Agents": [
+                {
+                    "Name_of_agent": "wolf",
+                    "number_of_agents": "size"
+                },
+                {
+                    "Name_of_agent": "sheep",
+                    "number_of_agents": "size"
+                }
+            ]
+        },
+        {
+            "environment": "GRIDWORLD"
+        },
+        {
+            "systems": [
+                {
+                    "Name_of_system": "oratile",
+                    "system_id": "lumese",
+                    "system_variables": []
+                },
+                {
+                    "Name_of_system": "ppipo",
+                    "system_id": "sd",
+                    "system_variables": []
+                },
+                {
+                    "Name_of_system": "oratile",
+                    "system_id": "l",
+                    "system_variables": []
+                },
+                {
+                    "Name_of_system": "oratile",
+                    "system_id": "3",
+                    "system_variables": [
+                        "rate"
+                    ]
+                },
+                {
+                    "Name_of_system": "ppipo",
+                    "system_id": "jk",
+                    "system_variables": []
+                },
+                {
+                    "Name_of_system": "ppipo",
+                    "system_id": "ghjhg",
+                    "system_variables": []
+                },
+                {
+                    "Name_of_system": "ppipo",
+                    "system_id": "ed",
+                    "system_variables": []
+                }
+            ]
+        }
+    ]
 ]

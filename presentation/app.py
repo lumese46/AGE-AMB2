@@ -41,7 +41,7 @@ def home():
                                        all_systems=helperMethods.get_components_by_name("system"),
                                        all_agents = helperMethods.get_components_by_name("agent"))
             case "Models":
-                session.clear()
+                # session.clear()
                 return render_template("setup_model.html", model_type="")
             
             case "Execute":
@@ -213,7 +213,7 @@ def add_system():
 ###################################################### execute Route ############################################3
 @app.route("/execute", methods=["POST","GET"])
 def execute_model():
-    input_params = helperMethods.get_input_parameters("modelTestReference")
+    input_params = helperMethods.get_input_parameters("model")
     # Get the selected agents from the radio buttons
     selected_agents = request.form.getlist("selected_agents")
 
@@ -899,10 +899,18 @@ def add_model():
             system_id = request.form["system_id"]
             current_model_system = copy.deepcopy(session["model_system"])
             input_params = request.form.getlist("params_to_add")
-            params_summary = helperMethods.param_summary(input_params)
+            # print(input_params+ "From Current saved model")
+            params_summary=[]
+            if len(input_params) !=0: 
+                params_summary = helperMethods.param_summary(input_params)
+                print(params_summary)
+
 
             current_model_system["system_id"] = system_id
-            current_model_system["system_variables"] = params_summary
+            if len(params_summary)!=0:
+                current_model_system["system_variables"] = params_summary
+            else:
+                current_model_system["system_variables"] = []
 
             current_model_systems = copy.deepcopy(session["model_systems"])
             current_system_ids = copy.deepcopy(session['system_ids'])

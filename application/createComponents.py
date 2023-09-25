@@ -25,9 +25,9 @@ class CreateComponents:
         for attribute in self.component_attributes:
             default_value = attribute['default_value']
             if default_value == "NONE":
-                attributes_string += f"        self.{attribute['name']} = {attribute['name']} {attribute['description']}\n"
+                attributes_string += f"        self.{attribute['name']} = {attribute['name']} #{attribute['description']}\n"
             else:
-                attributes_string += f"        self.{attribute['name']} = {default_value} {attribute['description']}\n"
+                attributes_string += f"        self.{attribute['name']} = {default_value} #{attribute['description']}\n"
         return attributes_string
 
 
