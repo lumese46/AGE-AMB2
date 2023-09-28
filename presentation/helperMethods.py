@@ -1,20 +1,28 @@
 import json
+import subprocess
+import os
 def read_json(fname):
     result = []
     try:
-        with open(f"./data/{fname}s.json") as jfile: #read old file if it exists
+        with open(f"data/{fname}s.json") as jfile: #read old file if it exists
             result = json.load(jfile)
     except:
-        with open(f"./data/{fname}s.json", "w") as jfile:    #create new file
+        with open(f"data/{fname}s.json", "w") as jfile:    #create new file
             pass
     return result
+def clear_json_file(fname):
+    with open(f"data/{fname}s.json", 'w') as file:
+        # Truncate the file (remove all content)
+        file.truncate()
+
+
 
 def add_to_json(contents,outfile):
     saved_components = read_json(outfile) #read saved outfile.json
     saved_components.append(contents) #add newcontetes to file
     jsonObj = json.dumps(saved_components , indent=4)
 
-    with open(f"./data/{outfile}s.json", "w") as iof:
+    with open(f"data/{outfile}s.json", "w") as iof:
         iof.writelines(jsonObj) #write to file
 
 #enter an array of json params and add the names to an array. Returns an array of names
@@ -28,6 +36,11 @@ def param_summary(json_str_arr):
         result.append(js_json["Name"])
     return result
 
+def params_by_name(params):
+    result = []
+    for i in params:
+        result.append(i["Name"])
+    return result
 def add_attributes(att_name,  att_desc, att_val):
     attribute = {}
     attribute["name"]=att_name
@@ -42,6 +55,64 @@ def get_components_by_name(fname):
     for comp in saved_comps:
         results.append(comp[f"Name_of_{fname}"])
     return results
+#####################################################oratile########################
+# gets you the name of the complex agents by name 
+def get_complex_agents_by_name(fname):
+    data= read_json(fname)
+    complex_agents = [agent["Name_of_agent"] for agent in data if agent.get("Type_of_agent") == "COMPLEX"]
+    return complex_agents
+# this create a data collector dict 
+def create_data_collector_dict(agents_array):
+    data_collector_dict = {
+        "Name_of_agents": agents_array
+    }
+    return data_collector_dict
+
+
+# returns input parameters
+def get_input_parameters(fname):
+    data= read_json(fname)
+    input_parameters = []
+    for item in data:
+        if 'input_parameters' in item:
+            input_parameters = item['input_parameters']
+            break
+    return input_parameters
+
+# for execute 
+def transform_to_input_parameters(input_params_from_user):
+    input_parameters = []
+
+    for param_name, param_value in input_params_from_user.items():
+        parameter = {"name": param_name, "input": param_value}
+        input_parameters.append(parameter)
+
+    return input_parameters
+def get_model_name():
+    # Load the JSON data
+    components = read_json("model")
+
+    # Fetch the first component
+    model_name = components[0]
+    return model_name
+
+def run_model(fname):
+    # Get the current working directory (assuming your application folder is the working directory)
+    current_directory = os.getcwd()
+
+    # Define the path to the JSON file relative to the "data" folder
+    json_file_path = os.path.join(current_directory, 'data', fname)
+     # Run the subprocess
+    try:
+        subprocess.run(["python", f"{json_file_path}.py"])
+    except FileNotFoundError:
+        print("Python path",json_file_path )
+   
+
+
+
+#####################################################oratile########################
+
 
 #give component name, get component with it's attributes
 def get_component(component_name):
@@ -68,7 +139,7 @@ def get_components_summary(compList):
             results.append(comp_summary)
         else:
             pass
-    print("Summary created")
+    # print("Summary created")
     return results
 
 #get all agents
@@ -87,3 +158,6 @@ def get_agents_by_type(agent_type):
         if agent["Type_of_agent"]==agent_type:
             result.append(agent["Name_of_agent"])
     return (result)
+
+
+

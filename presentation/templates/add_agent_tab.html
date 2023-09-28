@@ -17,14 +17,31 @@
             <input type="text" name="agent_name" id="agent_name" required value="{{agent_name}}">
             <label for="type">Type*</label>
             <div class="dropdown">
-                <label class="dropbtn">Agent type</label>
+                {% if agent_type!="" %}
+                <label class="dropbtn">{{agent_type}}</label>
+                {% elif agent_type == "" %}
+                    <label class="dropbtn">Agent type</label>
+                {% endif %}
                 <div class="dropdown-content">
                     <input type="submit" name="add_to_agent" id="agent_type" value="Simple">
                     <input type="submit" name="add_to_agent" id="agent_type" value="Complex">
                 </div>
             </div>
+            {% if agent_type =="COMPLEX"%}
             <label for="class_component" class={{agent_type}}>class component name</label>
-            <input type="text" class="{{agent_type}}" name="agent_class_componet_name">
+            <div class="dropdown">
+                {%if class_component_name == ""%}
+                <label class="dropbtn">Choose class component</label>
+                {% else %}
+                    <label class="dropbtn">{{class_component_name}}</label>
+                {% endif %}
+                <div class="dropdown-content">
+                    {% for i in all_components%}
+                        <input type="submit" name="add_to_agent" value={{i}}>
+                    {% endfor %}
+                </div>
+            </div>            
+            {%endif%}
         </section>
         <section class="form_attributes">
             <label for="components" id="inner_title" >Select components to be associated with this agent</label>
@@ -39,6 +56,7 @@
         </section>
         <!-- <input type="submit" name="add_to_agent" value="Add Components"> -->
         <input type="submit" id="submit_agent" name="add_to_agent" value="Add Agent">
+        <input type="submit" name="add_to_agent" id="submit_button" value="Submit Agents">
     </form>
 {%endblock%}
 {%block output_window%}

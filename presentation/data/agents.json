@@ -1,0 +1,32 @@
+[
+    {
+        "Name_of_agent": "Sheep",
+        "Class_component_name": "comp_name",
+        "Components": [
+            [
+                {
+                    "Name_of_component": "comp_name",
+                    "Names_of_component_atributes": [
+                        "at_name"
+                    ]
+                }
+            ]
+        ],
+        "Type_of_agent": "COMPLEX"
+    },
+    {
+        "Name_of_agent": "Sheep",
+        "Class_component_name": "comp_name",
+        "Components": [
+            [
+                {
+                    "Name_of_component": "comp_name",
+                    "Names_of_component_atributes": [
+                        "at_name"
+                    ]
+                }
+            ]
+        ],
+        "Type_of_agent": "COMPLEX"
+    }
+]

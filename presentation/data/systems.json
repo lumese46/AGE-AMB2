@@ -1,0 +1,6 @@
+[
+    {
+        "Name_of_system": "Lumese",
+        "code": "\n#this is Lumese System\r\nclass Lumese(Core.System):\r\n    def __init__(self, id, model):\r\n        super().__init__(id, model)\r\n    def execute(self):\r\n        pass\r\n\r\n\n"
+    }
+]

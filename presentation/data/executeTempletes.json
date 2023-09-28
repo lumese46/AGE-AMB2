@@ -1,0 +1,23 @@
+[
+    {
+        "name_model": "predatorpray"
+    },
+    {
+        "input_parameters": [
+            {
+                "name": "new param",
+                "input": "1"
+            }
+        ]
+    },
+    {
+        "iterations": "1"
+    },
+    {
+        "visualization": {
+            "set_title": "gvhfhg",
+            "set_xlabel": "hegdyeud",
+            "set_ylabel": "hyfdtuwedf"
+        }
+    }
+]

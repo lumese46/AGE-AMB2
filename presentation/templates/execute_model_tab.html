@@ -1,23 +1,71 @@
 {% extends "base.html" %}
-{%block stylesheet%} 
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles.css')}}" >
-{%endblock%}
+{% block stylesheet %}
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
+{% endblock %}
 
-{%block input_fields%}
+{%block highlight_execute%}
+style="color:#5E17EB;"
+{%endblock%}
+{% block input_fields %}
 <form action="execute" method="post">
     <section class="form_title">
-            <label for="Name_of_component">Configure model input parameters</label>
+        <label for="Name_of_component">Configure model input parameters</label>
     </section>
+
     <section class="form_attributes">
-        {% for i in range(10) %}
-            <label for="input_param">InputParam{{i}}</label>
-            <input type="text" name={{i}} placeholder="value">
+        {% set i = 0 %}
+        {% for param in input_params %}
+        <div class="input_params">
+
+            <label for="input_param{{ i }}">{{ param["Name"] }}</label>
+            {% if param.dataType == 'int' %}
+            <input type="number" name="{{ param.Name }}" placeholder="Enter an integer">
+            {% elif param.dataType == 'str' %}
+            <input type="text" name="{{ param.Name }}" placeholder="Enter a string">
+            {% elif param.dataType == 'float' %}
+            <input type="number" step="0.01" name="{{ param.Name }}" placeholder="Enter a float">
+            {% elif param.dataType == 'bool' %}
+            <label>
+                <input type="radio" name="{{ param.Name }}" value="True"> True
+            </label>
+            <label>
+                <input type="radio" name="{{ param.Name }}" value="False"> False
+            </label>
+            {% else %}
+            <!-- Add more cases for other data types if needed -->
+            <input type="text" name="{{ param.Name }}" placeholder="Enter a value">
+            <input type="text" name = "test_input">
+            {% endif %}
+
+        </div>
+        {% set i = i + 1 %}
         {% endfor %}
+        <br>
+        <h4>MODEL Iterations</h4>
+        <label for="Iterations">Number of Iterations</label>
+        <input type="number" name="Iterations" placeholder="Enter number of Iterations">
+        <br>
+        <br>
+        <h4>MODEL VISUALIZATION</h4>
+        <div id="attribute">
+            <label for="set_title">Graph Title</label>
+            <input type="text" name="set_title" placeholder="Enter Graph Title">
+            <label for="set_xlabel">Graph x axis</label>
+            <input type="text" name="set_xlabel" placeholder="Enter Graph x axis">
+
+
+            <label for="set_ylabel">Graph y axis</label>
+            <input type="text" name="set_ylabel" placeholder="Enter Graph y axis">
     </section>
     <section class="submit_component">
         <input type="submit" name="submit_results" id="submit_button" value="Update">
         <input type="submit" name="submit_results" id="submit_button" value="Execute">
     </section>
-</form>
+    </div>
 
-{%endblock%}
+
+
+
+
+</form>
+{% endblock %}
