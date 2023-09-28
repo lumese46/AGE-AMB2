@@ -4,6 +4,8 @@ import copy
 import application.createDataCollector as CreateDataCollector 
 import application.createSystems as CreateSystem
 import application.codeGenerator as CodeGenerator 
+from application.modelSaver import save_to_model 
+import subprocess
 
 from pygments import highlight
 from pygments.lexers import PythonLexer
@@ -31,6 +33,7 @@ dataTypes = ["int", "str", "float", "bool"]
 
 @app.route("/", methods=["GET","POST"])
 def home():
+
     if(request.method=="POST"): 
         match request.form['browse']:
             case "Components":
@@ -82,6 +85,7 @@ def home():
                 
                 if "model_execute_code" not in session:
                     session["model_execute_code"] = ""
+
 
                 return render_template('editor.html', highlighted_code=highlighted_code,
                                        component_code = session["component_code"],
@@ -275,6 +279,26 @@ def index():
     highlighted_code = ''
     if request.method == 'POST':
         file_content = request.form['file_content']
+        
+        action = request.form.get("submit_results")
+        
+        match action:
+            case "Run":
+                save_to_model(file_content)
+
+                
+
+        
+                try:
+                    result = subprocess.run(["python3", "data/model.py"], text=True, capture_output=True)
+                    return result.stdout
+                except Exception as e:
+                    return str(e)
+
+                
+        # Get the contents of the text area named "file_contsent"
+        # For example, you can print it
+        print("Text area content:", file_content)
         highlighted_code = highlight(file_content, PythonLexer(), HtmlFormatter())
 
     return render_template('editor.html', highlighted_code=highlighted_code, component_code = session["component_code"], agent_code=session["agent_code"])
@@ -1222,10 +1246,10 @@ if __name__ == "__main__":
     app.secret_key="be gay, do crime"
 
     # clear all json
-    helperMethods.clear_json_file("executeTemplete")
+    # helperMethods.clear_json_file("executeTemplete")
     # helperMethods.clear_json_file("agent")
     # helperMethods.clear_json_file("component")
-    #helperMethods.clear_json_file("system")
-    #helperMethods.clear_json_file("model")
-    #helperMethods.clear_json_file("dataCollector")
+    # helperMethods.clear_json_file("system")
+    # helperMethods.clear_json_file("model")
+    # helperMethods.clear_json_file("dataCollector")
     app.run(host='0.0.0.0', debug=True)

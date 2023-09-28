@@ -1,6 +1,6 @@
 import os
-from codeGenerator import codeGenerator
-def save_to_model(content, file_name='modelTests.py'):
+from .codeGenerator import codeGenerator
+def save_to_model(content, file_name='model.py'):
     
     # Get the current working directory (assuming your application folder is the working directory)
     current_directory = os.getcwd()

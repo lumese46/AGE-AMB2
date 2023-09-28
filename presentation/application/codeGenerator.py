@@ -14,7 +14,15 @@ class codeGenerator:
      def generateComponent(self):
         # get the data from json file 
         data = json_load('component')
-        componentString = ""
+        importString = '''
+import numpy
+import ECAgent.Core as Core
+import ECAgent.Tags as Tags
+import ECAgent.Collectors as Collectors
+from ECAgent.Environments import GridWorld, PositionComponent, discrete_grid_pos_to_id
+import matplotlib.pyplot as plt
+''' 
+        componentString = importString +"\n\n"
         # get the approriate data types for 
         for obj in data:
             name = obj['Name_of_component']

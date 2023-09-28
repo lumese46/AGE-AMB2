@@ -83,10 +83,10 @@ class createModel:
         return codeString
 
     def generateModel(self):
-        codeString = "\n\n#This Model code\n"
+        comentString = "\n\n#This Model code\n"
         stringclass  = f"class {self.name_model}(Core.Model):\n"
         stringparameters = self.inputPrameters()
-        codeString = codeString + stringclass +stringparameters
+        codeString =  stringclass +stringparameters
 
         stringenv = self.addEnvironment()
         codeString = codeString + "\n    # Create Grid World\n" + stringenv
@@ -106,7 +106,7 @@ class createModel:
         codeString = codeString + "        self.execute(t)\n"
 
 
-        return codeString
+        return comentString  + codeString
     
     
 
