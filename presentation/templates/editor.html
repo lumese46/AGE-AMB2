@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+
+{% block title %}
+    Text Editor
+{% endblock %}
+
+{% block stylesheet %}
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
+{% endblock %}
+
+{% block highlight_editor %}
+    style="color: #5E17EB;"
+{% endblock %}
+
+{% block input_fields %}
+
+<form action="/editor" method="post">
+    <section class="form_title">
+        <label for="sys_name">Text Editor</label>
+    </section>
+    <section class="form_attributes">
+        <textarea name="file_content" id="file-content" placeholder="Enter Python code..." rows="15" cols="80">{{component_code}}{{agent_code}}{{system_code}}{{data_collector}}{{model_code}}{{model_execute_code}}
+        
+        </textarea>
+            <br>
+            <button id="downloadButton">Download</button>
+
+            <button type="submit" form="text-editor-form">Submit</button>
+
+    </section>
+    <section class="submit">        
+        
+    </section>
+        </form>
+
+
+    <script>
+        const downloadButton = document.getElementById('downloadButton');
+
+        downloadButton.addEventListener('click', () => {
+            const fileContent = document.getElementById('file-content').value;
+            const blob = new Blob([fileContent], { type: 'text/plain' });
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'text_content.txt';
+            a.click();
+            window.URL.revokeObjectURL(url);
+        });
+    </script>
+{% endblock %}
+
+{% block output_window %}
+    <h2 class="title">My Components</h2>
+    <form action="component_tab" method="post">
+        <div class="components">
+            {% for i in all_components %}
+                <p>{{ i }}</p>
+            {% endfor %}
+        </div>
+    </form>
+{% endblock %}

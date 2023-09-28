@@ -18,22 +18,23 @@ style="color:#5E17EB;"
         <div class="input_params">
 
             <label for="input_param{{ i }}">{{ param["Name"] }}</label>
-            {% if param.dataType == 'Integer' %}
-            <input type="number" name="{{ param.name }}" placeholder="Enter an integer">
-            {% elif param.dataType == 'String' %}
-            <input type="text" name="{{ param.name }}" placeholder="Enter a string">
-            {% elif param.dataType == 'Float' %}
-            <input type="number" step="0.01" name="{{ param.name }}" placeholder="Enter a float">
-            {% elif param.dataType == 'Boolean' %}
+            {% if param.dataType == 'int' %}
+            <input type="number" name="{{ param.Name }}" placeholder="Enter an integer">
+            {% elif param.dataType == 'str' %}
+            <input type="text" name="{{ param.Name }}" placeholder="Enter a string">
+            {% elif param.dataType == 'float' %}
+            <input type="number" step="0.01" name="{{ param.Name }}" placeholder="Enter a float">
+            {% elif param.dataType == 'bool' %}
             <label>
-                <input type="radio" name="{{ param.name }}" value="True"> True
+                <input type="radio" name="{{ param.Name }}" value="True"> True
             </label>
             <label>
-                <input type="radio" name="{{ param.name }}" value="False"> False
+                <input type="radio" name="{{ param.Name }}" value="False"> False
             </label>
             {% else %}
             <!-- Add more cases for other data types if needed -->
-            <input type="text" name="{{ param.name }}" placeholder="Enter a value">
+            <input type="text" name="{{ param.Name }}" placeholder="Enter a value">
+            <input type="text" name = "test_input">
             {% endif %}
 
         </div>

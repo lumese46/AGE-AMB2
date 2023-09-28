@@ -1,7 +1,13 @@
 from flask import Flask, render_template, redirect, request, url_for, session
 import helperMethods
 import copy
+import application.createDataCollector as CreateDataCollector 
 import application.createSystems as CreateSystem
+import application.codeGenerator as CodeGenerator 
+
+from pygments import highlight
+from pygments.lexers import PythonLexer
+from pygments.formatters import HtmlFormatter
 # import application.createSystems as CreateSystem
 app = Flask(__name__)
 components = []
@@ -18,7 +24,7 @@ agent = {
 
 comp_type = "SIMPLE"
 
-dataTypes = ["Integer", "String", "Float", "Boolean"]
+dataTypes = ["int", "str", "float", "bool"]
     
 ################################################ Home ################################################
 #Set up site navigation
@@ -41,7 +47,7 @@ def home():
                                        all_systems=helperMethods.get_components_by_name("system"),
                                        all_agents = helperMethods.get_components_by_name("agent"))
             case "Models":
-                session.clear()
+                # session.clear()
                 return render_template("setup_model.html", model_type="")
             
             case "Execute":
@@ -49,6 +55,42 @@ def home():
                     session["input_parameters"] = []
                 return render_template("execute_model_tab.html",
                                        input_params = session["input_parameters"])
+            case "Editor":
+                highlighted_code = ''
+                code = CodeGenerator.codeGenerator()
+
+            # Call the method on the instance
+                codeString = code.generateComponent()
+
+                # print(codeString)  # Save to default file path "model.py"
+                if "component_code" not in session:
+                    session["component_code"] = ""
+                
+                session["component_code"] = codeString
+                component_code = session["component_code"]
+                if "agent_code" not in session:
+                    session["agent_code"] = ""
+
+                if "system_code" not in session:
+                    session["system_code"] = ""
+                
+                if "data_collector_code" not in session:
+                    session["data_collector_code"] = ""
+                
+                if "model_code" not in session:
+                    session["model_code"] = ""
+                
+                if "model_execute_code" not in session:
+                    session["model_execute_code"] = ""
+
+                return render_template('editor.html', highlighted_code=highlighted_code,
+                                       component_code = session["component_code"],
+                                       agent_code = session["agent_code"],
+                                       system_code = session["system_code"],
+                                       data_collector = session["data_collector_code"],
+                                       model_code = session["model_code"],
+                                       model_execute_code = session["model_execute_code"]
+                                       )
             
             case "Data Collector":
                 return render_template("data_collector.html",complex_agents=helperMethods.get_complex_agents_by_name("agent"))
@@ -91,15 +133,8 @@ def add_components():
                 component_name=""
                 #call create components method here
                 
-            case _:
-                component_to_edit = helperMethods.get_component(request.form["edit_component"])
-                allAttsNames = []
-                for att in component_to_edit[0]["Component_attributes"]:
-                    allAttsNames.append(att["name"])
-                # print(component_to_edit)
-                return render_template("edit_component.html", 
-                                       compName=request.form["edit_component"], 
-                                       all_components=allAttsNames, all_agents = helperMethods.get_components_by_name("agent"))
+                
+            
         return render_template("add_component_tab.html", 
                                compName=component_name, all_components=helperMethods.get_components_by_name("component"), 
                                all_agents = helperMethods.get_components_by_name("agent"))
@@ -129,6 +164,20 @@ def add_agent():
                 agent["Components"].clear()
                 name=""
                 comp_type = ""
+
+            #     code = CodeGenerator.codeGenerator()
+
+            # # Call the method on the instance
+                codeString = ""
+
+                # print(codeString)  # Save to default file path "model.py"
+                if "agent_code" not in session:
+                    session["agent_code"] = "" +""
+
+                old_code = session["agent_code"]
+                session["agent_code"] = codeString+"\n"+old_code
+                
+                print(print(session["agent_code"]))
                 #clear screen
 
             case "Simple":
@@ -139,6 +188,33 @@ def add_agent():
             case "Complex":
                 comp_type = "COMPLEX"
                 # print(agent_action)
+
+            case "Submit Agents":
+                agent["Name_of_agent"] = name
+                agent["Type_of_agent"] = comp_type
+                agent["Class_component_name"] = session["class_component_name"]
+                components_to_add_by_name = (request.form.getlist("component_to_add")) #get  list of component the user wants to add to their agent
+                components_summary = helperMethods.get_components_summary(components_to_add_by_name)#get component summary list
+                agent["Components"].append(components_summary)
+                helperMethods.add_to_json(agent,"agent")
+                agent["Components"].clear()
+                name=""
+                comp_type = ""
+                # # Create an instance of CodeGenerator
+                code = CodeGenerator.codeGenerator()
+
+                # Call the method on the instance
+                codeString = code.generateAgent()
+
+                # print(codeString)  # Save to default file path "model.py"
+                if "agent_code" not in session:
+                    session["agent_code"] = ""
+                
+                session["agent_code"] = codeString
+                print (codeString)
+
+
+
             case _:
                 session["class_component_name"] = agent_action
 
@@ -158,18 +234,51 @@ def add_agent():
 @app.route("/dataCollector", methods=["POST", "GET"])
 def data_collector():
     submit_disabled = False
+    action = request.form["submit_results"]
     if request.method == "POST":
-        # Get the selected agents from the radio buttons
-        selected_agents = request.form.getlist("selected_agents")
+
+        match action:
+            case "Track agent(s)":
+                # Get the selected agents from the radio buttons
+                selected_agents = request.form.getlist("selected_agents")
+                
+                # You can add additional logic or processing here
+                contents = helperMethods.create_data_collector_dict(selected_agents)
+                helperMethods.add_to_json(contents,"dataCollector")
+                submit_disabled = True
+
+            case "Submit Data Collector":
+                code = CodeGenerator.codeGenerator()
+
+                # Call the method on the instance
+                codeString = code.generateDataCollector()
+
+                # print(codeString)  # Save to default file path "model.py"
+                if "data_collector_code" not in session:
+                    session["data_collector_code"] = ""
+                
+                session["data_collector_code"] = codeString
+                print (codeString)
+
         
-        # You can add additional logic or processing here
-        contents = helperMethods.create_data_collector_dict(selected_agents)
-        helperMethods.add_to_json(contents,"dataCollector")
-        submit_disabled = True
+        
 
     
 
     return render_template("data_collector.html", complex_agents=helperMethods.get_complex_agents_by_name("agent"), submit_disabled=submit_disabled)
+
+####################################### Editor Tab #######################################################################################################################################################
+
+
+@app.route('/editor', methods=['GET', 'POST'])
+def index():
+    highlighted_code = ''
+    if request.method == 'POST':
+        file_content = request.form['file_content']
+        highlighted_code = highlight(file_content, PythonLexer(), HtmlFormatter())
+
+    return render_template('editor.html', highlighted_code=highlighted_code, component_code = session["component_code"], agent_code=session["agent_code"])
+
 
 
 ######################################## Systems Tab #######################################################################################################################################################
@@ -179,7 +288,7 @@ def add_system():
         "Name_of_system":"",
         "code": ""
     }
-    dummyCode = ""
+    dummyCode = "\n"
     if request.method=="POST":
         name=request.form["sys_name"]
         action=request.form["submit_code"]
@@ -194,10 +303,10 @@ def add_system():
                            all_systems=helperMethods.get_components_by_name("system"), 
                            sys_name=name, sys_code =dummyCode)
 
-            case "Save system":
+            case "Add system":
                 #Write system to json
                 system["Name_of_system"] = request.form["sys_name"]
-                system["code"]=request.form["editor_code"]
+                system["code"]="\n"+request.form["editor_code"]+"\n"
                 helperMethods.add_to_json(system, "system")
                 return render_template("add_system_tab.html",
                            all_systems=helperMethods.get_components_by_name("system"), 
@@ -209,6 +318,26 @@ def add_system():
                 return render_template("add_system_tab.html",
                            all_systems=helperMethods.get_components_by_name("system"), 
                            sys_name=name, sys_code =dummyCode)
+            case "Submit System":
+                system["Name_of_system"] = request.form["sys_name"]
+                system["code"]="\n"+request.form["editor_code"]+"\n"
+                helperMethods.add_to_json(system, "system")
+        
+                code = CodeGenerator.codeGenerator()
+
+                # Call the method on the instance
+                codeString = "\n"+code.generateSystem()
+
+                # print(codeString)  # Save to default file path "model.py"
+                if "system_code" not in session:
+                    session["system_code"] = ""
+                
+                session["system_code"] = codeString
+                # print (codeString)
+                return render_template("add_system_tab.html",
+                           all_systems=helperMethods.get_components_by_name("system"), 
+                           sys_name="", sys_code =dummyCode)
+
 
 ###################################################### execute Route ############################################3
 @app.route("/execute", methods=["POST","GET"])
@@ -224,32 +353,43 @@ def execute_model():
 
     # Get the input parameters
     input_params_from_user = {}
-    for param in request.form:
-        if param != "submit_results" and param != "Iterations":
-            input_params_from_user[param] = request.form[param]
+
+    all_actions = request.form
+    print(all_actions)
+    input_params_from_user = []
+    for pram in input_params:
+        param_name = pram ["Name"]
+        param_value = request.form.get(pram ["Name"])
+        parameter = {"name": param_name, "input": param_value}
+        input_params_from_user.append(parameter)
+    #print(input_params_from_user)
+        
+
+            
 
     # Get the number of iterations
     iterations = request.form.get("Iterations")
-    iterations = {"input_parameters": iterations}
+    iterations = {"iterations": iterations}
     # get data for visualizations
     set_title = request.form.get("set_title")
     set_xlabel = request.form.get("set_xlabel")
     set_ylabel = request.form.get("set_ylabel")
 
 
-     #input_params_from_user = helperMethods.transform_to_input_parameters(input_params_from_user)
-     #input_params_from_user = {"input_parameters": input_params_from_user}
+    #input_params_from_user = helperMethods.transform_to_input_parameters(input_params_from_user)
+    input_params_from_user = {"input_parameters": input_params_from_user}
      #model_name = helperMethods.get_model_name()
 
-    input_params_from_user = session["input_parameters"]
-    input_params_from_user = {"input_parameters": input_params_from_user}
+    #input_params_from_user = session["input_parameters"]
+    #input_params_from_user = {"input_parameters": input_params_from_user}
     model_name = session["model_name"]
-    model_name = {"model_name": model_name}
+    model_name = {"name_model": model_name}
     visualization_dict = {
     "set_title": set_title,
     "set_xlabel": set_xlabel,
     "set_ylabel": set_ylabel
-}
+    }
+    visualization_dict = {"visualization":visualization_dict}
     
    
     if request.method=="POST":
@@ -258,15 +398,32 @@ def execute_model():
         #take value of button in templete
         match (action):
             case "Execute":
-                helperMethods.run_model("predatorPray")
-                print("Hello exec")
+                # helperMethods.run_model("predatorPray.py")
+                code = CodeGenerator.codeGenerator()
+
+                # Call the method on the instance
+                codeString = "\n"+code.generateModel()
+                if "model_code" not in session:
+                    session["model_code"] = ""
+
+                session["model_code"] = codeString
+
+
             case "Update":
                 helperMethods.clear_json_file("executeTemplete")
                 helperMethods.add_to_json(model_name,"executeTemplete")
                 helperMethods.add_to_json(input_params_from_user,"executeTemplete")
                 helperMethods.add_to_json(iterations,"executeTemplete")
                 helperMethods.add_to_json(visualization_dict,"executeTemplete")
-                
+                code = CodeGenerator.codeGenerator()
+
+                # Call the method on the instance
+                codeString = "\n"+code.generateModelExecute()
+                print (codeString)
+                if "model_execute_code" not in session:
+                    session["model_execute_code"] = ""
+
+                session["model_execute_code"] = codeString
                 print("Update")
     return render_template("execute_model_tab.html",input_params=input_params)
 
@@ -648,7 +805,7 @@ def add_model():
                                    name_of_component = session["class_component"]["Name_of_component"],
                                    error_message=f"Select {len(summary[0]['Names_of_component_atributes'])} parameter(s)")
 
-        case "Add class component":
+        case "Add class component to model":
             if len(request.form.getlist("params_to_add"))!=0 and session['class_component']["Name_of_component"]!="" and session['class_component']["Name_of_agent"]!="":
                 current_class_component = copy.deepcopy(session["class_component"])
                 print(f"Working with current class component {current_class_component}")
@@ -985,7 +1142,16 @@ def add_model():
                                 
 
                 helperMethods.add_to_json(complete_model, "model")
+                code = CodeGenerator.codeGenerator()
+
+                # Call the method on the instance
+                codeString = "\n"+code.generateModel()
+
+                # print(codeString)  # Save to default file path "model.py"
+                if "model_code" not in session:
+                    session["model_code"] = ""
                 
+                session["model_code"] = codeString
                     
                 return render_template("execute_model_tab.html",
                                     input_params = session["input_parameters"] )
@@ -1057,9 +1223,9 @@ if __name__ == "__main__":
 
     # clear all json
     helperMethods.clear_json_file("executeTemplete")
-    helperMethods.clear_json_file("agent")
-    helperMethods.clear_json_file("component")
-    helperMethods.clear_json_file("system")
-    helperMethods.clear_json_file("model")
-    helperMethods.clear_json_file("dataCollector")
+    # helperMethods.clear_json_file("agent")
+    # helperMethods.clear_json_file("component")
+    #helperMethods.clear_json_file("system")
+    #helperMethods.clear_json_file("model")
+    #helperMethods.clear_json_file("dataCollector")
     app.run(host='0.0.0.0', debug=True)

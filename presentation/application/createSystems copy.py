@@ -9,8 +9,7 @@ class createSystems:
         self.Name = Name
     # generate the system code based on attributes
     def generateSystem(self):
-        classString = f"#this is {self.Name} System\n"
-        classString = classString + f"class {self.Name}(System):\n"
+        classString = f"\n\nclass {self.Name}(System):\n"
         initString = f"    def __init__(self, id, model):\n"
         superString = f"        super().__init__(id, model)\n"
         executeString = f"    def execute(self):"

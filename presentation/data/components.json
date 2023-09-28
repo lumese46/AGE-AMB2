@@ -1,0 +1,12 @@
+[
+    {
+        "Name_of_component": "comp_name",
+        "Component_attributes": [
+            {
+                "name": "at_name",
+                "description": "at_desc",
+                "default_value": "at_val"
+            }
+        ]
+    }
+]

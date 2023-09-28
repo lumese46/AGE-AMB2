@@ -18,7 +18,7 @@ style="color:#5E17EB;"
         <label for="Name_of_component">Data Collector</label>
     </section>
     <section class="form_attributes">
-        <label for="Component_attributes_form" id="inner_title">Select Complex Agents</label>
+        <label for="Component_attributes_form" id="inner_title">Select Agents</label>
         <div id="checkbox_container">
             {% for agent in complex_agents %}
             <div id="checkbox_input">
@@ -29,8 +29,9 @@ style="color:#5E17EB;"
         </div>
     </section>
     <section class="submit_component">
-        <input type="submit" name="submit_results" id="submit_button" value="Add selected agents" {% if submit_disabled
+        <input type="submit" name="submit_results" id="submit_button" value="Track agent(s)" {% if submit_disabled
             %}disabled{% endif %}>
+        <input type="submit" name="submit_results" id="submit_button" value="Submit Data Collector">
     </section>
 </form>
 

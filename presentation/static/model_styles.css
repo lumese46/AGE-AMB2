@@ -69,9 +69,15 @@ nav{
 .sub_nav input{
     border: none;
     background: none;
+    color: rgb(7, 3, 241);
+    height: 2rem;
+    font-size: 1.5rem;
+
+    
 }
 .sub_nav #save_model_type{
     font-style: italic;
+    color: green;
 }
 .sub_nav section p{
     color: red;

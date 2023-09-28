@@ -1,0 +1,94 @@
+[
+    [
+        {
+            "name_model": "req"
+        },
+        {
+            "input_parameters": [
+                {
+                    "Name": "new param",
+                    "dataType": "float"
+                }
+            ]
+        },
+        {
+            "class_components": [
+                {
+                    "Name_of_agent": "Sheep",
+                    "Name_of_component": "comp_name",
+                    "component_atributes_names": [
+                        "new param"
+                    ]
+                }
+            ]
+        },
+        {
+            "Agents": [
+                {
+                    "Name_of_agent": "Sheep",
+                    "number_of_agents": "new param"
+                }
+            ]
+        },
+        {
+            "environment": "GRIDWORLD"
+        },
+        {
+            "systems": [
+                {
+                    "Name_of_system": "Lumese",
+                    "system_id": "d",
+                    "system_variables": [
+                        "new param"
+                    ]
+                }
+            ]
+        }
+    ],
+    [
+        {
+            "name_model": "req"
+        },
+        {
+            "input_parameters": [
+                {
+                    "Name": "new param",
+                    "dataType": "int"
+                }
+            ]
+        },
+        {
+            "class_components": [
+                {
+                    "Name_of_agent": "Sheep",
+                    "Name_of_component": "comp_name",
+                    "component_atributes_names": [
+                        "new param"
+                    ]
+                }
+            ]
+        },
+        {
+            "Agents": [
+                {
+                    "Name_of_agent": "Sheep2",
+                    "number_of_agents": "new param"
+                }
+            ]
+        },
+        {
+            "environment": "GRIDWORLD"
+        },
+        {
+            "systems": [
+                {
+                    "Name_of_system": "Lumese",
+                    "system_id": "ghf",
+                    "system_variables": [
+                        "new param"
+                    ]
+                }
+            ]
+        }
+    ]
+]

@@ -276,3 +276,9 @@ form input[type="submit"]:hover {
     display: grid;
     grid-template-columns: 1fr 2fr;
 }
+/* Syntax highlighting styles for Python code */
+
+/* Add more Pygments styles based on your preferences */
+textarea{
+    overflow: auto;
+}

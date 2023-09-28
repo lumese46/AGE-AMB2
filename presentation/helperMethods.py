@@ -4,19 +4,17 @@ import os
 def read_json(fname):
     result = []
     try:
-        with open(f"./data/{fname}s.json") as jfile: #read old file if it exists
+        with open(f"data/{fname}s.json") as jfile: #read old file if it exists
             result = json.load(jfile)
     except:
-        with open(f"./data/{fname}s.json", "w") as jfile:    #create new file
+        with open(f"data/{fname}s.json", "w") as jfile:    #create new file
             pass
     return result
 def clear_json_file(fname):
-    with open(f"./data/{fname}s.json", 'w') as file:
+    with open(f"data/{fname}s.json", 'w') as file:
         # Truncate the file (remove all content)
         file.truncate()
 
-# Example usage: Clear a JSON file named 'example.json'
-clear_json_file('example.json')
 
 
 def add_to_json(contents,outfile):
@@ -24,7 +22,7 @@ def add_to_json(contents,outfile):
     saved_components.append(contents) #add newcontetes to file
     jsonObj = json.dumps(saved_components , indent=4)
 
-    with open(f"./data/{outfile}s.json", "w") as iof:
+    with open(f"data/{outfile}s.json", "w") as iof:
         iof.writelines(jsonObj) #write to file
 
 #enter an array of json params and add the names to an array. Returns an array of names
@@ -99,10 +97,18 @@ def get_model_name():
     return model_name
 
 def run_model(fname):
-    # Assuming model.py is in the 'models' directory
-    script_path = f"./data/{fname}.py"
-    # Run the script using subprocess
-    subprocess.run(["python", script_path])
+    # Get the current working directory (assuming your application folder is the working directory)
+    current_directory = os.getcwd()
+
+    # Define the path to the JSON file relative to the "data" folder
+    json_file_path = os.path.join(current_directory, 'data', fname)
+     # Run the subprocess
+    try:
+        subprocess.run(["python", f"{json_file_path}.py"])
+    except FileNotFoundError:
+        print("Python path",json_file_path )
+   
+
 
 
 #####################################################oratile########################
